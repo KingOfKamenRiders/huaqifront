@@ -13,7 +13,8 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import red from '@material-ui/core/colors/red';
 import Typography from '@material-ui/core/Typography'
 import {withStyles} from '@material-ui/core/styles'
-
+import LoginModal from './loginModal'
+import SignUpModal from './signUpModal'
 
 const routes=['/','/rank','/transaction','/combination']
 const style={
@@ -39,7 +40,9 @@ class NavTop extends React.Component{
         super()
         this.state={
             user:props.user,
-            tabValue:0
+            tabValue:0,
+            isLoginModalOpen:false,
+            isSignUpModalOpen:false,
         }
     }
     handleTabChange=(e,value)=>{
@@ -47,6 +50,18 @@ class NavTop extends React.Component{
         this.setState({tabValue:value});
         let {history}=this.props
         history.push(routes[value])
+    }
+    handleLoginButton=()=>{
+        this.setState({isLoginModalOpen:true})
+    }
+    handleLoginModalClose=()=>{
+        this.setState({isLoginModalOpen:false})
+    }
+    handleSignUpButton=()=>{
+        this.setState({isSignUpModalOpen:true})
+    }
+    handleSignUpModalClose=()=>{
+        this.setState({isSignUpModalOpen:false})
     }
     render(){
         const {classes}=this.props;
@@ -71,8 +86,10 @@ class NavTop extends React.Component{
                                 <Typography>{user.id}</Typography>
                             </div>
                             : <div>
-                                <Button color="inherit">登陆</Button>
-                                <Button color="inherit">注册</Button>
+                                <Button color="inherit" onClick={this.handleLoginButton} >登陆</Button>
+                                <Button color="inherit" onClick={this.handleSignUpButton}>注册</Button>
+                                <LoginModal isOpen={this.state.isLoginModalOpen} handleClose={this.handleLoginModalClose}/>
+                                <SignUpModal isOpen={this.state.isSignUpModalOpen} handleClose={this.handleSignUpModalClose}/>
                             </div>
                         }
                     </TooBar>
