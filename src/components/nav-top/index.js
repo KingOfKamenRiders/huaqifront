@@ -28,6 +28,9 @@ const style={
         marginLeft: -12,
         marginRight: 20,
     },
+    tabLabel:{
+        fontSize:20
+    }
 }
 const theme = createMuiTheme({
     palette: {
@@ -100,10 +103,10 @@ class NavTop extends React.Component{
                         textColor="primary"
                 value={tabValue}
                 onChange={this.handleTabChange}>
-                    <Tab label="首页(实时浏览)"/>
-                    <Tab label="排行榜"/>
-                    <Tab label="交易记录"/>
-                    <Tab label="期权组合"/>
+                    <Tab label="首页(实时浏览)" classes={{label:classes.tabLabel}}/>
+                    <Tab label="排行榜" classes={{label:classes.tabLabel}}/>
+                    <Tab label="交易记录" classes={{label:classes.tabLabel}}/>
+                    <Tab label="期权组合" classes={{label:classes.tabLabel}}/>
                 </Tabs>
                 </Paper>
             </div>

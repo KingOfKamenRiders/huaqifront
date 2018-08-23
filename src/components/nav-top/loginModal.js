@@ -32,7 +32,6 @@ class LoginModal extends Component{
     }
     callLogin=()=>{
         login(this.state.name,this.state.pass,(data)=>{
-
         });
     }
     handleNameChange=(e)=>{
