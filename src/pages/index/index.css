@@ -1,0 +1,80 @@
+.dark-text-theme {
+    color: #46484f;
+}
+
+.cols-bg {
+    background-color: #fff;
+}
+
+.col-padding {
+    padding: 20px;
+}
+
+.col-margin-bot {
+    margin-bottom: 20px;
+}
+
+.col-444 .col {
+    width: 33.33%;
+}
+
+.cols {
+    clear: both;
+    overflow: hidden;
+    margin: 0 -10px 0 -10px;
+}
+.igColumns {
+    display: block;
+}
+
+.section {
+    margin: 0 20px;
+}
+
+.col {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    float: left;
+    padding: 0 10px;
+    min-height: 1px;
+}
+
+.list-wrapper {
+    padding: 20px 20px 16px 20px;
+    margin-bottom: 20px;
+}
+
+.cols .col .white-opaque, .content .white-opaque, .hero-parsys .white-opaque{
+    background-color: #f3f1ed;
+}
+
+.full-width .image, .full-width .text{
+    width: 100%;
+}
+
+.image {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+
+.promo .text {
+    padding: 20px 20px 16px 20px;
+}
+
+.crop-center {
+    background-position: center top;
+    display: block;
+    position: relative;
+}
+
+.theme {
+    background-attachment: scroll;
+    background-position: center top;
+    background-repeat: no-repeat;
+    overflow: hidden;
+}
+
+.clickable {
+    cursor: pointer;
+}
