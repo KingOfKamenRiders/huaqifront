@@ -1,3 +1,9 @@
+.background{
+    padding-top: 20px;
+    background-color: rgb(245,246,247);
+    font-family: 'Avenir Next OT',Arial,sans-serif;
+}
+
 .dark-text-theme {
     color: #46484f;
 }
@@ -81,5 +87,68 @@
 
 .text-col-4{
     width: 300px;
+    text-align: center;
+}
+
+.text-col-6{
+    width: 550px;
+}
+
+
+.livePricesWrapper {
+    color: #555;
+    margin: 0 10px;
+    background: #fff;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.livePricesWrapper table {
+    border: 1px solid #bbb;
+    border-radius: 5px;
+    border-collapse: separate;
+    margin-bottom: 20px;
+}
+
+thead {
+    display: table-header-group;
+    vertical-align: middle;
+    border-top-color: inherit;
+    border-right-color: inherit;
+    border-bottom-color: inherit;
+    border-left-color: inherit;
+}
+
+tr {
+    display: table-row;
+    vertical-align: inherit;
+    border-top-color: inherit;
+    border-right-color: inherit;
+    border-bottom-color: inherit;
+    border-left-color: inherit;
+    height: 40px;
+}
+
+.livePricesWrapper .first {
+    min-width: 100px;
+    padding-left: 10px !important;
+    text-align: left;
+    width: 100%;
+}
+
+.livePricesWrapper th {
+    font-size: 13px !important;
+    min-width: 50px;
+    max-width: 100px;
+    padding: 8px 5px 5px !important;
+    text-align: center;
+    vertical-align: middle;
+    -o-text-overflow: clip;
+    text-overflow: clip;
+    font-weight: 500 !important;
+}
+
+
+.livePricesWrapper tr td {
     text-align: center;
 }

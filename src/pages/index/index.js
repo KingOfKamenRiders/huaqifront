@@ -4,7 +4,119 @@ import styles from './index.css'
 class Index extends Component{
     render(){
         return(
-            <div>
+            <div className="background">
+                <div>
+                    <div className="igColumns section">
+                        <div className="cols-bg white dark-text-theme col-padding col-margin-bot "
+                             data-background-tablet="//a.c-dn.net/c/content/igcom/zh_CN/_jcr_content/content-parsys/columns_2.adaptive.full.high.jpg/1519786000688.jpg"
+                             data-background-mobile="//a.c-dn.net/c/content/igcom/zh_CN/_jcr_content/content-parsys/columns_2.adaptive.full.medium.jpg/1519786000688.jpg"
+                             data-background-desktop-used="//a.c-dn.net/c/content/igcom/zh_CN/_jcr_content/content-parsys/columns_2.adaptive.full.high.jpg/1519786000688.jpg"
+                             style={{opacity: 1, backgroundImage: 'url(https://a.c-dn.net/c/content/igcom/zh_CN/_jcr_content/content-parsys/columns_2.adaptive.full.high.jpg/1519786000688.jpg)'}}>
+                            <div className="cols col-88">
+                                <div className="col col1 parsys">
+                                    <div className="new-content-component section">
+                                        <div className="content content-component">
+                                            <div
+                                                className="theme bg-none image-layout-full-bottom text-position-top max-width-none text-no-image imagesize50 ">
+                                                <div className="text text-content">
+                                                    <h1>领先交易先机</h1>
+                                                    <h3>与全球第一差价合约券商<sup>1</sup>交易上万市场</h3>
+                                                    <h3>尽享卓越交易平台及强大图表功能</h3>
+                                                    <h4 className="text-col-6">差价合约为杠杆产品。差价合约交易未必适合所有人，有可能出现交易损失超出保证金。敬请确认您已完全了解所涉及风险。</h4>
+                                                    <div className="content-cta-wrapper">
+                                                        <div className="cta right cta-sec"><a
+                                                            className=" button button-green js_target"
+                                                            target="_self"> 申请账户 </a></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="new-content-component section">
+                        <div className="content content-component">
+                            <div
+                                className="theme bg-none image-layout-full-bottom text-position-top max-width-none text-no-image imagesize50 js_clickable ">
+                            </div>
+                        </div>
+                    </div>
+                    <div className="igColumns section">
+                        <div className="cols-bg bg-none col-margin-bot ">
+                            <div className="cols col-88">
+                                <div className="col col1 parsys">
+                                    <div className="rich-component section">
+                                        <div className="content content-component">
+                                            <div
+                                                className="theme none-bg dark-text-theme text-layout-full-left text-position-top max-width-none text-no-image imagesize50 js_clickable ">
+                                                <div className="text text-content">
+                                                    <h2 className="heading h2"> 丰富交易产品 窄幅交易点差 </h2>
+                                                    <p className="secondary-standfirst">
+                                                        <strong>交易全世界超过15,000市场的差价合约</strong></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="live-prices section">
+                                        <script
+                                            type="text/javascript">PS.util.jspVars.set("isManualSiteIdOverrideEnabled")("false");</script>
+                                        <div className="livePricesWrapper top50">
+                                            <h2 className="heading">实时价格</h2>
+                                            <table cellPadding="0" cellSpacing="0" className="livePriceTable"
+                                                   data-mobilelinks="true"
+                                                   data-epics="{IX.D.CSI.IFD.IP=, IX.D.XINHUA.IAF.IP=, IX.D.DOW.IFD.IP=, IX.D.HSCHIN.IFD.IP=, IX.D.HANGSENG.IFD.IP=, IX.D.DAX.IFD.IP=, CS.D.AUDUSD.CFD.IP=SCALED, CS.D.EURUSD.CFD.IP=SCALED, CS.D.USDCNH.CFD.IP=SCALED}"
+                                                   data-columns="V2-F-BID,OFR,UTM,CPT"
+                                                   data-lscore="https://a.c-dn.net/b/0wNpa0.js#lightstreamer.6.1.4.min.js"
+                                                   data-time="false"
+                                                   data-streaming="//a.c-dn.net/c/etc/designs/onedomain/clientlibs_ps_part/js/libs/wt-fe-clientstreaming-streaming-with-dependencies.min.js"
+                                                   data-siteid="aum" data-sitecode="zh" data-siteoverrideid=""
+                                                   data-siteoverridecountry="" id="lptable0">
+                                                <thead>
+                                                <tr>
+                                                    <th className="first">市场</th>
+                                                    <th>卖出价</th>
+                                                    <th>买入价</th>
+                                                    <th>更新时间</th>
+                                                    <th className="lastLpColumn">变动值</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr>
+                                                    <td className="first"><a>中国300指数</a></td>
+                                                    <td className="message" colSpan="1" rowSpan="1">
+                                                        <div source="lightstreamer" table="list" data-item="0"
+                                                             data-field="V2-F-BID">3286.2
+                                                        </div>
+                                                    </td>
+                                                    <td className="">
+                                                        <div source="lightstreamer" table="list" data-item="0"
+                                                             data-field="OFR">3298.2
+                                                        </div>
+                                                    </td>
+                                                    <td className="">
+                                                        <div source="lightstreamer" table="list" data-item="0"
+                                                             data-field="UTM">02:30:50
+                                                        </div>
+                                                    </td>
+                                                    <td className="lastLpColumn lsTextUp">
+                                                        <div source="lightstreamer" table="list" data-item="0"
+                                                             data-field="CPT">15.3
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
             <div className="igColumns section">
                 <div className="cols-bg white dark-text-theme col-padding col-margin-bot ">
                     <div className="cols col-444">
