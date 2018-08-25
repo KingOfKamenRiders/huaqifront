@@ -78,3 +78,8 @@
 .clickable {
     cursor: pointer;
 }
+
+.text-col-4{
+    width: 300px;
+    text-align: center;
+}
