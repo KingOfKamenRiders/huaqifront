@@ -10,18 +10,19 @@ import Paper from '@material-ui/core/Paper';
 
 const CustomTableCell = withStyles(theme => ({
     head: {
-        backgroundColor: theme.palette.common.black,
-        color: theme.palette.common.white,
+        backgroundColor: theme.palette.common.white,
+        color: theme.palette.common.black,
         textAlign:'center',
     },
     body: {
         fontSize: 14,
-    },
+    }
 }))(TableCell);
 
 const styles = theme => ({
     root: {
-        width: '100%',
+        width: '134%',
+        marginTop: 10,
     },
     table: {
         minWidth: 700,
@@ -46,7 +47,7 @@ function CustomizedTable(props) {
 
     return (
         <Paper className={classes.root}>
-            <Table className={classes.table}>
+            <Table className={classes.table} style={{ border: '0px'}}>
                 <TableHead>
                     <TableRow>
                         <CustomTableCell colSpan={7}>认购</CustomTableCell>

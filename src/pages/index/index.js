@@ -1,5 +1,6 @@
 import React,{Component} from 'react'
 import styles from './index.css'
+import ETF from '../combination/50ETF.js'
 
 class Index extends Component{
     componentWillMount(){
@@ -63,54 +64,10 @@ class Index extends Component{
                                         </div>
                                     </div>
                                     <div className="live-prices section">
-                                        <script
-                                            type="text/javascript">PS.util.jspVars.set("isManualSiteIdOverrideEnabled")("false");</script>
                                         <div className="livePricesWrapper top50">
-                                            <h2 className="heading">实时价格</h2>
-                                            <table cellPadding="0" cellSpacing="0" className="livePriceTable"
-                                                   data-mobilelinks="true"
-                                                   data-epics="{IX.D.CSI.IFD.IP=, IX.D.XINHUA.IAF.IP=, IX.D.DOW.IFD.IP=, IX.D.HSCHIN.IFD.IP=, IX.D.HANGSENG.IFD.IP=, IX.D.DAX.IFD.IP=, CS.D.AUDUSD.CFD.IP=SCALED, CS.D.EURUSD.CFD.IP=SCALED, CS.D.USDCNH.CFD.IP=SCALED}"
-                                                   data-columns="V2-F-BID,OFR,UTM,CPT"
-                                                   data-lscore="https://a.c-dn.net/b/0wNpa0.js#lightstreamer.6.1.4.min.js"
-                                                   data-time="false"
-                                                   data-streaming="//a.c-dn.net/c/etc/designs/onedomain/clientlibs_ps_part/js/libs/wt-fe-clientstreaming-streaming-with-dependencies.min.js"
-                                                   data-siteid="aum" data-sitecode="zh" data-siteoverrideid=""
-                                                   data-siteoverridecountry="" id="lptable0">
-                                                <thead>
-                                                <tr>
-                                                    <th className="first">市场</th>
-                                                    <th>卖出价</th>
-                                                    <th>买入价</th>
-                                                    <th>更新时间</th>
-                                                    <th className="lastLpColumn">变动值</th>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-                                                <tr>
-                                                    <td className="first"><a>中国300指数</a></td>
-                                                    <td className="message" colSpan="1" rowSpan="1">
-                                                        <div source="lightstreamer" table="list" data-item="0"
-                                                             data-field="V2-F-BID">3286.2
-                                                        </div>
-                                                    </td>
-                                                    <td className="">
-                                                        <div source="lightstreamer" table="list" data-item="0"
-                                                             data-field="OFR">3298.2
-                                                        </div>
-                                                    </td>
-                                                    <td className="">
-                                                        <div source="lightstreamer" table="list" data-item="0"
-                                                             data-field="UTM">02:30:50
-                                                        </div>
-                                                    </td>
-                                                    <td className="lastLpColumn lsTextUp">
-                                                        <div source="lightstreamer" table="list" data-item="0"
-                                                             data-field="CPT">15.3
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                </tbody>
-                                            </table>
+                                            <h2>实时价格</h2>
+                                            <a className="heading-a">50ETF板块</a>
+                                            <ETF></ETF>
                                         </div>
                                     </div>
                                 </div>
