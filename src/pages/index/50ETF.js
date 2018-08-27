@@ -21,7 +21,7 @@ const CustomTableCell = withStyles(theme => ({
 
 const styles = theme => ({
     root: {
-        width: '134%',
+        width: '115%',
         marginTop: 10,
     },
     table: {
@@ -33,6 +33,12 @@ const styles = theme => ({
         },
     },
 });
+
+const specialStyle = {
+    borderLeft: '1px solid gainsboro',
+    borderRight: '1px solid gainsboro',
+    color: '#1a7ad1'
+};
 
 let id = 0;
 function createData(name, calories, fat, carbs, protein) {
@@ -50,25 +56,30 @@ function CustomizedTable(props) {
             <Table className={classes.table} style={{ border: '0px'}}>
                 <TableHead>
                     <TableRow>
-                        <CustomTableCell colSpan={7}>认购</CustomTableCell>
-                        <CustomTableCell colSpan={7}>认沽</CustomTableCell>
+                        <CustomTableCell colSpan={8}>认购</CustomTableCell>
+                        <CustomTableCell colSpan={1}> </CustomTableCell>
+                        <CustomTableCell colSpan={8}>认沽</CustomTableCell>
                     </TableRow>
                     <TableRow>
                         <CustomTableCell>合约代码</CustomTableCell>
-                        <CustomTableCell numeric>最新价</CustomTableCell>
-                        <CustomTableCell numeric>涨跌幅</CustomTableCell>
-                        <CustomTableCell numeric>成交量</CustomTableCell>
-                        <CustomTableCell numeric>隐含波动率</CustomTableCell>
-                        <CustomTableCell numeric>行权价</CustomTableCell>
-                        <CustomTableCell>期权类型</CustomTableCell>
+                        <CustomTableCell numeric>持仓量</CustomTableCell>
+                        <CustomTableCell numeric>卖量</CustomTableCell>
+                        <CustomTableCell numeric>卖价</CustomTableCell>
+                        <CustomTableCell numeric>买量</CustomTableCell>
+                        <CustomTableCell numeric>买价</CustomTableCell>
+                        <CustomTableCell numeric>涨幅%</CustomTableCell>
+                        <CustomTableCell numeric>现价</CustomTableCell>
 
+                        <CustomTableCell style={specialStyle} numeric>行权价</CustomTableCell>
+
+                        <CustomTableCell numeric>现价</CustomTableCell>
+                        <CustomTableCell numeric>涨幅%</CustomTableCell>
+                        <CustomTableCell numeric>买价</CustomTableCell>
+                        <CustomTableCell numeric>买量</CustomTableCell>
+                        <CustomTableCell numeric>卖价</CustomTableCell>
+                        <CustomTableCell numeric>卖量</CustomTableCell>
+                        <CustomTableCell numeric>持仓量</CustomTableCell>
                         <CustomTableCell>合约代码</CustomTableCell>
-                        <CustomTableCell numeric>最新价</CustomTableCell>
-                        <CustomTableCell numeric>涨跌幅</CustomTableCell>
-                        <CustomTableCell numeric>成交量</CustomTableCell>
-                        <CustomTableCell numeric>隐含波动率</CustomTableCell>
-                        <CustomTableCell numeric>行权价</CustomTableCell>
-                        <CustomTableCell>期权类型</CustomTableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
@@ -81,9 +92,11 @@ function CustomizedTable(props) {
                                 <CustomTableCell numeric>1</CustomTableCell>
                                 <CustomTableCell numeric>1</CustomTableCell>
                                 <CustomTableCell numeric>1</CustomTableCell>
-                                <CustomTableCell>1</CustomTableCell>
+                                <CustomTableCell numeric>1</CustomTableCell>
+                                <CustomTableCell numeric>1</CustomTableCell>
 
-                                <CustomTableCell>1</CustomTableCell>
+                                <CustomTableCell numeric>1</CustomTableCell>
+                                <CustomTableCell numeric>1</CustomTableCell>
                                 <CustomTableCell numeric>1</CustomTableCell>
                                 <CustomTableCell numeric>1</CustomTableCell>
                                 <CustomTableCell numeric>1</CustomTableCell>
