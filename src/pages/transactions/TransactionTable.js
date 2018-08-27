@@ -44,6 +44,7 @@ const rows = [
     { id: 'time', numeric: false, disablePadding: false, label: '时间' },
     { id: 'combination', numeric: false, disablePadding: false, label: '期权组合' },
     { id: 'profit', numeric: true, disablePadding: false, label: '盈亏信息' },
+    { id: '', numeric: false, disablePadding: false, label: '' },
 
 ];
 
@@ -179,10 +180,10 @@ EnhancedTableToolbar = withStyles(toolbarStyles)(EnhancedTableToolbar);
 const styles = theme => ({
     root: {
         width: '100%',
-        marginTop: theme.spacing.unit * 3,
+        // marginTop: theme.spacing.unit * 3,
     },
     table: {
-        minWidth: 1020,
+        minWidth: 800,
     },
     tableWrapper: {
         overflowX: 'auto',
@@ -303,6 +304,7 @@ class EnhancedTable extends React.Component {
                                             <TableCell>{n.time}</TableCell>
                                             <TableCell>{n.combination}</TableCell>
                                             <TableCell numeric>{n.profit}</TableCell>
+                                            <TableCell></TableCell>
                                         </TableRow>
                                     );
                                 })}
