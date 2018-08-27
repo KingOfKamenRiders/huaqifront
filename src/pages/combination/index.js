@@ -1,4 +1,5 @@
 import React,{Component} from 'react'
+import ETF from './50ETF.js'
 
 class Combination extends Component{
     componentWillMount(){
@@ -7,7 +8,7 @@ class Combination extends Component{
     render(){
         return(
             <div>
-                this is Combination
+                <ETF></ETF>
             </div>
         )
     }
