@@ -7,7 +7,7 @@ import Dialog from '@material-ui/core/Dialog';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField'
 import {login} from '../../api/login'
-
+import ResultMessage from '../../util/ResultMessage'
 const style=(theme)=>{
     return{
         container:{
@@ -29,10 +29,21 @@ class LoginModal extends Component{
         name:'',
         pass:'',
         invalid:false,
+        inexistence:false
     }
     callLogin=()=>{
-        login(this.state.name,this.state.pass,(data)=>{
-        });
+        const {handleLogin}=this.props
+        login(this.state.name,this.state.pass,(response)=>{
+            if(response.data === ResultMessage.SUCCESS){
+                sessionStorage.setItem("UserId",this.state.name)
+                handleLogin(this.state.name)
+            }else if(response.data === ResultMessage.FAILURE){
+                this.setState({invalid:true})
+            }
+            else if(response.data === ResultMessage.INEXISTENCE){
+                this.setState({inexistence:true})
+            }
+        },(error)=>console.log(error));
     }
     handleNameChange=(e)=>{
         this.setState({name:e.target.value})
@@ -52,6 +63,9 @@ class LoginModal extends Component{
                     <TextField label="用户名" margin="normal" value={this.state.name} onChange={this.handleNameChange} />
                     <TextField label="密码" margin="normal" type="password" value={this.state.pass} onChange={this.handlePassChange}/>
                     {this.state.invalid ? (<Typography variant="caption" color="primary">用户名或密码有误!</Typography>)
+                        : null
+                    }
+                    {this.state.invalid ? (<Typography variant="caption" color="primary">用户不存在!</Typography>)
                         : null
                     }
                     <Button variant="contained" color="primary" className={classes.button} onClick={this.callLogin}>登录</Button>
