@@ -30,6 +30,12 @@ const style={
     },
     tabLabel:{
         fontSize:20
+    },
+    avatarDiv:{
+        display:'flex',
+        alignItems:'center',
+        justifyContent:'center',
+        border:'solid'
     }
 }
 const theme = createMuiTheme({
@@ -66,6 +72,10 @@ class NavTop extends React.Component{
     handleSignUpModalClose=()=>{
         this.setState({isSignUpModalOpen:false})
     }
+    handleLogin=(uid)=>{
+        const {onUserChange}=this.props
+        onUserChange({userId:uid})
+    }
     render(){
         const {classes}=this.props;
         const {user}=this.props;
@@ -82,16 +92,16 @@ class NavTop extends React.Component{
                             LOGO
                         </Typography>
                         {user
-                            ?<div>
+                            ?<div className={classes.avatarDiv}>
                                 <IconButton>
                                     <AccountCircle/>
                                 </IconButton>
-                                <Typography>{user.id}</Typography>
+                                <Typography variant="caption">{user.userId}</Typography>
                             </div>
                             : <div>
                                 <Button color="inherit" onClick={this.handleLoginButton} >登陆</Button>
                                 <Button color="inherit" onClick={this.handleSignUpButton}>注册</Button>
-                                <LoginModal isOpen={this.state.isLoginModalOpen} handleClose={this.handleLoginModalClose}/>
+                                <LoginModal isOpen={this.state.isLoginModalOpen} handleClose={this.handleLoginModalClose} handleLogin={this.handleLogin}/>
                                 <SignUpModal isOpen={this.state.isSignUpModalOpen} handleClose={this.handleSignUpModalClose}/>
                             </div>
                         }

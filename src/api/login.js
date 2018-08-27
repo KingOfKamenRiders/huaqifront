@@ -1,7 +1,8 @@
 import axios from 'axios'
 
 export function login(id,pass,callback,handleError) {
-    axios.get('/api/login',{
+    console.log("in login")
+    axios.get('/UserBl/login',{
         params:{
             username:id,
             password:pass
@@ -10,10 +11,12 @@ export function login(id,pass,callback,handleError) {
 }
 
 export function signUp(id,pass,callback,handleError) {
-    axios.post('/api/signup',{
+    console.log("in signUp")
+    axios.get('/UserBl/signUp',{
         params:{
             username:id,
-            password:pass,
+            firstPassword:pass,
+            repetitiousPassword:pass
         }
     }).then((data)=>callback(data)).catch((error)=>handleError(error))
 }
