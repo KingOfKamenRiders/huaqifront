@@ -2,6 +2,9 @@ import React,{Component} from 'react'
 import styles from './index.css'
 
 class Index extends Component{
+    componentWillMount(){
+        this.props.onRouteChange(0);
+    }
     render(){
         return(
             <div className="background">

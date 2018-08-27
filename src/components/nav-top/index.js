@@ -49,16 +49,17 @@ class NavTop extends React.Component{
         super()
         this.state={
             user:props.user,
-            tabValue:0,
             isLoginModalOpen:false,
             isSignUpModalOpen:false,
         }
     }
+
     handleTabChange=(e,value)=>{
-        console.log(value);
-        this.setState({tabValue:value});
+        this.props.onRouteChange(value)
+       // this.setState({tabValue:value});
         let {history}=this.props
         history.push(routes[value])
+       // console.log(history);
     }
     handleLoginButton=()=>{
         this.setState({isLoginModalOpen:true})
@@ -79,7 +80,6 @@ class NavTop extends React.Component{
     render(){
         const {classes}=this.props;
         const {user}=this.props;
-        const {tabValue}=this.state;
         return(
             <div>
                 <MuiThemeProvider theme={theme}>
@@ -111,7 +111,7 @@ class NavTop extends React.Component{
                 <Paper>
                 <Tabs   indicatorColor="primary"
                         textColor="primary"
-                value={tabValue}
+                value={this.props.tabValue}
                 onChange={this.handleTabChange}>
                     <Tab label="首页(实时浏览)" classes={{label:classes.tabLabel}}/>
                     <Tab label="排行榜" classes={{label:classes.tabLabel}}/>

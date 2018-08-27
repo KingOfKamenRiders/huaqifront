@@ -24,6 +24,9 @@ const style=(theme)=>{
     }
 }
 class Rank extends Component{
+    componentWillMount(){
+        this.props.onRouteChange(1);
+    }
     render(){
         const {classes} =this.props
         return(

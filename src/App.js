@@ -10,18 +10,23 @@ import Combination from './pages/combination'
 class App extends Component {
   state={
     user:null,
+    tabValue:0,
   }
   handleUserChange=(newUser)=>this.setState({user:newUser})
+
+  handleRouteChange=(v)=>{
+     this.setState({tabValue:v})
+  }
   render() {
     const {user} = this.state
     return (
         <Router>
           <div>
-              <NavTop user={user} onUserChange={this.handleUserChange}/>
-              <Route exact path="/" component={Index}/>
-              <Route path="/rank" component={Rank}/>
-              <Route path="/transaction" component={Transaction}/>
-              <Route path="/combination" component={Combination}/>
+              <NavTop user={user} onUserChange={this.handleUserChange} onRouteChange={this.handleRouteChange} tabValue={this.state.tabValue}/>
+              <Route exact path="/"  render={()=>{return <Index onRouteChange={this.handleRouteChange}/>}} />
+              <Route path="/rank"  render={()=>{return <Rank onRouteChange={this.handleRouteChange}/>}}/>
+              <Route path="/transaction"  render={()=>{return <Transaction onRouteChange={this.handleRouteChange}/>}}/>
+              <Route path="/combination"  render={()=>{return <Combination onRouteChange={this.handleRouteChange}/>}}/>
           </div>
 
         </Router>
