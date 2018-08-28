@@ -1,6 +1,6 @@
 import React,{Component} from 'react'
 import styles from './index.css'
-import ETF from '../combination/50ETF.js'
+import ETF from './50ETF.js'
 
 class Index extends Component{
     componentWillMount(){

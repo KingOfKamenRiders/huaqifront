@@ -1,5 +1,5 @@
 import React,{Component} from 'react'
-import ETF from './50ETF.js'
+import ETF from '../index/50ETF'
 
 class Combination extends Component{
     componentWillMount(){

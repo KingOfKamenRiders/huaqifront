@@ -65,9 +65,6 @@ class LoginModal extends Component{
                     {this.state.invalid ? (<Typography variant="caption" color="primary">用户名或密码有误!</Typography>)
                         : null
                     }
-                    {this.state.invalid ? (<Typography variant="caption" color="primary">用户不存在!</Typography>)
-                        : null
-                    }
                     <Button variant="contained" color="primary" className={classes.button} onClick={this.callLogin}>登录</Button>
                 </DialogContent>
             </Dialog>
