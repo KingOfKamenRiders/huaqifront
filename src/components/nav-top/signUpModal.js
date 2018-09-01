@@ -44,7 +44,7 @@ class SignUpModal extends Component{
         }
         signUp(this.state.name,this.state.pass,(response)=>{
             if(response.data===ResultMessage.SUCCESS){
-                this.state.success=true;
+                this.setState({success:true})
                 setTimeout(handleClose,2000)
             }else {
                 this.setState({invalid:true})
