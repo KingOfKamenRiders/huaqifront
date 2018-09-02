@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{Component} from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
@@ -7,6 +7,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import {getTargets} from "../../api/Option"
 
 const CustomTableCell = withStyles(theme => ({
     head: {
@@ -15,17 +16,17 @@ const CustomTableCell = withStyles(theme => ({
         textAlign:'center',
     },
     body: {
-        fontSize: 14,
+       // fontSize: 14,
     }
 }))(TableCell);
 
 const styles = theme => ({
     root: {
-        width: '115%',
+     //   width: '115%',
         marginTop: 10,
     },
     table: {
-        minWidth: 700,
+     //   Width: 700,
     },
     row: {
         '&:nth-of-type(odd)': {
@@ -46,71 +47,84 @@ function createData(name, calories, fat, carbs, protein) {
     return { id, name, calories, fat, carbs, protein };
 }
 
-const rows = [];
 
-function CustomizedTable(props) {
-    const { classes } = props;
+class CustomizedTable extends Component{
 
-    return (
-        <Paper className={classes.root}>
-            <Table className={classes.table} style={{ border: '0px'}}>
-                <TableHead>
-                    <TableRow>
-                        <CustomTableCell colSpan={8}>认购</CustomTableCell>
-                        <CustomTableCell colSpan={1}> </CustomTableCell>
-                        <CustomTableCell colSpan={8}>认沽</CustomTableCell>
-                    </TableRow>
-                    <TableRow>
-                        <CustomTableCell>合约代码</CustomTableCell>
-                        <CustomTableCell numeric>持仓量</CustomTableCell>
-                        <CustomTableCell numeric>卖量</CustomTableCell>
-                        <CustomTableCell numeric>卖价</CustomTableCell>
-                        <CustomTableCell numeric>买量</CustomTableCell>
-                        <CustomTableCell numeric>买价</CustomTableCell>
-                        <CustomTableCell numeric>涨幅%</CustomTableCell>
-                        <CustomTableCell numeric>现价</CustomTableCell>
+    state={
+        rows:[],
+    }
+    componentDidMount(){
+        getTargets((response)=>{this.setState({rows:response.data})})
+    }
 
-                        <CustomTableCell style={specialStyle} numeric>行权价</CustomTableCell>
+    render() {
+        const {classes} = this.props;
+        const {rows} = this.state
+        return (
+            <Paper className={classes.root}>
+                <Table className={classes.table} style={{border: '0px'}}>
+                    <TableHead>
+                        <TableRow>
+                            <CustomTableCell colSpan={8}>认购</CustomTableCell>
+                            <CustomTableCell colSpan={1}> </CustomTableCell>
+                            <CustomTableCell colSpan={8}>认沽</CustomTableCell>
+                        </TableRow>
+                        <TableRow>
+                            <CustomTableCell>合约代码</CustomTableCell>
+                            <CustomTableCell numeric>持仓量</CustomTableCell>
+                            <CustomTableCell numeric>卖量</CustomTableCell>
+                            <CustomTableCell numeric>卖价</CustomTableCell>
+                            <CustomTableCell numeric>买量</CustomTableCell>
+                            <CustomTableCell numeric>买价</CustomTableCell>
+                            <CustomTableCell numeric>涨幅%</CustomTableCell>
+                            <CustomTableCell numeric>现价</CustomTableCell>
 
-                        <CustomTableCell numeric>现价</CustomTableCell>
-                        <CustomTableCell numeric>涨幅%</CustomTableCell>
-                        <CustomTableCell numeric>买价</CustomTableCell>
-                        <CustomTableCell numeric>买量</CustomTableCell>
-                        <CustomTableCell numeric>卖价</CustomTableCell>
-                        <CustomTableCell numeric>卖量</CustomTableCell>
-                        <CustomTableCell numeric>持仓量</CustomTableCell>
-                        <CustomTableCell>合约代码</CustomTableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {rows.map(row => {
-                        return (
-                            <TableRow className={classes.row} key={row.id}>
-                                <CustomTableCell>1</CustomTableCell>
-                                <CustomTableCell numeric>1</CustomTableCell>
-                                <CustomTableCell numeric>1</CustomTableCell>
-                                <CustomTableCell numeric>1</CustomTableCell>
-                                <CustomTableCell numeric>1</CustomTableCell>
-                                <CustomTableCell numeric>1</CustomTableCell>
-                                <CustomTableCell numeric>1</CustomTableCell>
-                                <CustomTableCell numeric>1</CustomTableCell>
+                            <CustomTableCell style={specialStyle} numeric>行权价</CustomTableCell>
 
-                                <CustomTableCell numeric>1</CustomTableCell>
-                                <CustomTableCell numeric>1</CustomTableCell>
-                                <CustomTableCell numeric>1</CustomTableCell>
-                                <CustomTableCell numeric>1</CustomTableCell>
-                                <CustomTableCell numeric>1</CustomTableCell>
-                                <CustomTableCell numeric>1</CustomTableCell>
-                                <CustomTableCell numeric>1</CustomTableCell>
-                                <CustomTableCell>1</CustomTableCell>
+                            <CustomTableCell numeric>现价</CustomTableCell>
+                            <CustomTableCell numeric>涨幅%</CustomTableCell>
+                            <CustomTableCell numeric>买价</CustomTableCell>
+                            <CustomTableCell numeric>买量</CustomTableCell>
+                            <CustomTableCell numeric>卖价</CustomTableCell>
+                            <CustomTableCell numeric>卖量</CustomTableCell>
+                            <CustomTableCell numeric>持仓量</CustomTableCell>
+                            <CustomTableCell>合约代码</CustomTableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {rows.map(row => {
+                            return (
+                                <TableRow className={classes.row} key={row.id}>
+                                    <CustomTableCell>{row.optUp.optionAbbr}</CustomTableCell>
+                                    <CustomTableCell >{row.optUp.position}</CustomTableCell>
+                                    <CustomTableCell >{row.optUp.sellVolume}</CustomTableCell>
+                                    <CustomTableCell >{row.optUp.sellPrice}</CustomTableCell>
+                                    <CustomTableCell >{row.optUp.bidVolume}</CustomTableCell>
+                                    <CustomTableCell >{row.optUp.bidPrice}</CustomTableCell>
+                                    <CustomTableCell >{row.optUp.quoteChange.toFixed(4)}</CustomTableCell>
+                                    <CustomTableCell >{row.optUp.latestPrice}</CustomTableCell>
 
-                            </TableRow>
-                        );
-                    })}
-                </TableBody>
-            </Table>
-        </Paper>
-    );
+                                    <CustomTableCell >{row.execPrice}</CustomTableCell>
+
+                                    <CustomTableCell >{row.optDown.latestPrice}</CustomTableCell>
+                                    <CustomTableCell >{row.optDown.quoteChange.toFixed(4)}</CustomTableCell>
+                                    <CustomTableCell >{row.optDown.bidPrice}</CustomTableCell>
+                                    <CustomTableCell >{row.optDown.bidVolume}</CustomTableCell>
+                                    <CustomTableCell >{row.optDown.sellPrice}</CustomTableCell>
+                                    <CustomTableCell >{row.optDown.sellVolume}</CustomTableCell>
+                                    <CustomTableCell >{row.optDown.position}</CustomTableCell>
+                                    <CustomTableCell>{row.optDown.optionAbbr}</CustomTableCell>
+
+
+
+                                </TableRow>
+                            );
+                        })}
+                    </TableBody>
+                </Table>
+            </Paper>
+        );
+    }
 }
 
 CustomizedTable.propTypes = {

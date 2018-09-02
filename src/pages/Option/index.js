@@ -4,6 +4,7 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import DealChart from './DealChart'
 import RiseFallChart from './RiseFallChart'
+import {getOption} from "../../api/Option"
 
 const style={
     root:{
@@ -14,6 +15,13 @@ const style={
 }
 class Option extends Component{
 
+    state={
+        option:{}
+    }
+    componentDidMount(){
+        getOption(this.props.match.params.id,
+            (response)=>this.setState({option:response.data}))
+    }
     render(){
         let {classes}=this.props
         return(
@@ -27,7 +35,7 @@ class Option extends Component{
                     </Grid>
                     <Grid item >
                         <Paper>
-
+                            {this.state.option.latestPrice}
                         </Paper>
                     </Grid>
                 </Grid>

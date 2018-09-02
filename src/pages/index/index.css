@@ -99,16 +99,16 @@
     color: #555;
     margin: 0 10px;
     background: #fff;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
+    /*-webkit-box-sizing: border-box;*/
+    /*box-sizing: border-box;*/
 }
 
-.livePricesWrapper table {
-    border: 1px solid #bbb;
-    border-radius: 5px;
-    border-collapse: separate;
-    margin-bottom: 20px;
-}
+/*.livePricesWrapper table {*/
+    /*border: 1px solid #bbb;*/
+    /*border-radius: 5px;*/
+    /*border-collapse: separate;*/
+    /*margin-bottom: 20px;*/
+/*}*/
 
 thead {
     display: table-header-group;

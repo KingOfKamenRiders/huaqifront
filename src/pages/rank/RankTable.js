@@ -1,5 +1,6 @@
 import React,{Component} from 'react'
 import {withStyles} from '@material-ui/core/styles'
+import {Link} from 'react-router-dom'
 import Table from '@material-ui/core/Table'
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -78,10 +79,10 @@ class RankTable extends Component {
                             return(
                                 <TableRow key={index+1+(page)*rowsPerPage}>
                                     <CustomTableCell>{index+1+(page)*rowsPerPage}</CustomTableCell>
-                                    <CustomTableCell>{row.optUp1}</CustomTableCell>
-                                    <CustomTableCell>{row.optDown1}</CustomTableCell>
-                                    <CustomTableCell>{row.optUp2}</CustomTableCell>
-                                    <CustomTableCell>{row.optDown2}</CustomTableCell>
+                                    <CustomTableCell><Link to={"/Option/"+row.optUp1}>{row.optUp1}</Link></CustomTableCell>
+                                    <CustomTableCell><Link to={"/Option/"+row.optDown1}>{row.optDown1}</Link></CustomTableCell>
+                                    <CustomTableCell><Link to={"/Option/"+row.optUp2}>{row.optUp2}</Link></CustomTableCell>
+                                    <CustomTableCell><Link to={"/Option/"+row.optDown2}>{row.optDown2}</Link></CustomTableCell>
                                 </TableRow>
                             )
                         })}
