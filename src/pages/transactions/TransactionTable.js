@@ -18,6 +18,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 import DeleteIcon from '@material-ui/icons/Delete';
 import FilterListIcon from '@material-ui/icons/FilterList';
 import { lighten } from '@material-ui/core/styles/colorManipulator';
+import {findAllTransactions} from "../../api/transaction"
 
 let counter = 0;
 function createData(ID, time, combination, profit) {
@@ -40,12 +41,10 @@ function getSorting(order, orderBy) {
 }
 
 const rows = [
-    { id: 'ID', numeric: false, disablePadding: true, label: '交易单号' },
+    { id: 'tid', numeric: false, disablePadding: true, label: '交易单号' },
     { id: 'time', numeric: false, disablePadding: false, label: '时间' },
-    { id: 'combination', numeric: false, disablePadding: false, label: '期权组合' },
+    { id: 'portfolio', numeric: false, disablePadding: false, label: '期权组合' },
     { id: 'profit', numeric: true, disablePadding: false, label: '盈亏信息' },
-    { id: '', numeric: false, disablePadding: false, label: '' },
-
 ];
 
 class EnhancedTableHead extends React.Component {
@@ -195,21 +194,16 @@ class EnhancedTable extends React.Component {
         order: 'asc',
         orderBy: 'calories',
         selected: [],
-        data: [
-            createData('000001', '2018/1/27', '大豆+玉米', 67 ),
-            createData('000002', '2018/1/28', '大豆+玉米', 51),
-            createData('000003', '2018/1/28', '大豆+玉米', 24),
-            createData('000004', '2018/1/28', '大豆+玉米', 49),
-            createData('000005', '2018/1/28', '大豆+玉米', 87),
-            createData('000006', '2018/1/27', '大豆+玉米', 67 ),
-            createData('000007', '2018/1/28', '大豆+玉米', 51),
-            createData('000008', '2018/1/28', '大豆+玉米', 24),
-            createData('000009', '2018/1/28', '大豆+玉米', 49),
-            createData('000010', '2018/1/28', '大豆+玉米', 87),
-        ],
+        trans:[],
         page: 0,
         rowsPerPage: 5,
     };
+
+    componentDidMount(){
+        findAllTransactions((response)=>{
+            this.setState({trans:response.data})
+        },(error)=>console.log(error))
+    }
 
     handleRequestSort = (event, property) => {
         const orderBy = property;
@@ -263,8 +257,8 @@ class EnhancedTable extends React.Component {
 
     render() {
         const { classes } = this.props;
-        const { data, order, orderBy, selected, rowsPerPage, page } = this.state;
-        const emptyRows = rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage);
+        const { trans, order, orderBy, selected, rowsPerPage, page } = this.state;
+        const emptyRows = rowsPerPage - Math.min(rowsPerPage, trans.length - page * rowsPerPage);
 
         return (
             <Paper className={classes.root}>
@@ -277,10 +271,10 @@ class EnhancedTable extends React.Component {
                             orderBy={orderBy}
                             onSelectAllClick={this.handleSelectAllClick}
                             onRequestSort={this.handleRequestSort}
-                            rowCount={data.length}
+                            rowCount={trans.length}
                         />
                         <TableBody>
-                            {data
+                            {trans
                                 .sort(getSorting(order, orderBy))
                                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                 .map(n => {
@@ -299,12 +293,11 @@ class EnhancedTable extends React.Component {
                                                 <Checkbox checked={isSelected} />
                                             </TableCell>
                                             <TableCell component="th" scope="row" padding="none">
-                                                {n.ID}
+                                                {n.data.tid}
                                             </TableCell>
                                             <TableCell>{n.time}</TableCell>
-                                            <TableCell>{n.combination}</TableCell>
+                                            <TableCell>{n.data.profileio}</TableCell>
                                             <TableCell numeric>{n.profit}</TableCell>
-                                            <TableCell></TableCell>
                                         </TableRow>
                                     );
                                 })}
@@ -318,7 +311,7 @@ class EnhancedTable extends React.Component {
                 </div>
                 <TablePagination
                     component="div"
-                    count={data.length}
+                    count={trans.length}
                     rowsPerPage={rowsPerPage}
                     page={page}
                     backIconButtonProps={{

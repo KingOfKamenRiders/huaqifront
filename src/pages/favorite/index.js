@@ -1,5 +1,5 @@
 import React,{Component} from 'react'
-import COM from '../combination/combinationTable'
+import collection from '../combination/combinationTable'
 
 class Combination extends Component{
     componentWillMount(){
@@ -8,8 +8,7 @@ class Combination extends Component{
     render(){
         return(
             <div>
-                <a className="heading-a">当前持有的期权合约</a>
-                <COM></COM>
+                <collection></collection>
             </div>
         )
     }
