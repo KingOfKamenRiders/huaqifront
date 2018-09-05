@@ -11,7 +11,7 @@ const style={
     root:{
         flexGrow: 1,
         marginTop:8,
-
+        padding:10
     }
 }
 class Option extends Component{
@@ -19,24 +19,26 @@ class Option extends Component{
     state={
         option:{}
     }
+
     componentDidMount(){
         getOption(this.props.match.params.id,
             (response)=>this.setState({option:response.data}))
     }
     render(){
         let {classes}=this.props
+        let {option}=this.state
         return(
             <div className={classes.root}>
                 <Grid container spacing={16}>
-                    <Grid item >
+                    <Grid item xs={8}>
                         <Paper>
                             <RiseFallChart/>
                             <DealChart/>
                         </Paper>
                     </Grid>
-                    <Grid item >
+                    <Grid item xs={4}>
                         <Paper>
-                            <OptionInfo/>
+                            <OptionInfo option={option}/>
                         </Paper>
                     </Grid>
                 </Grid>

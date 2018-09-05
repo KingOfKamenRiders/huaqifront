@@ -3,8 +3,6 @@ import {withStyles} from '@material-ui/core/styles'
 
 const styles={
     root:{
-        width:900,
-        height:250,
         border:'solid'
     }
 }

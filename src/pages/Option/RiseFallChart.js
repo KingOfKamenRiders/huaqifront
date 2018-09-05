@@ -1,10 +1,8 @@
 import React,{Component} from 'react'
 import {withStyles} from '@material-ui/core/styles'
-
+import {Chart,Geom,Axis,Tooltip} from 'bizcharts'
 const  style={
     root:{
-        width:900,
-        height:400,
         border:'solid'
     }
 }
@@ -13,9 +11,10 @@ class RiseFallChart extends Component{
     render(){
         let {classes}=this.props
         return(
-            <div className={classes.root}>
-                这里是涨跌图
-            </div>
+            <Chart height={250} forceFit>
+                <Axis name=""/>
+                <Axis name="涨跌幅"/>
+            </Chart>
         )
     }
 }

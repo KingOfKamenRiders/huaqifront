@@ -16,8 +16,10 @@ const style={
 }
 class OptionInfo extends Component{
 
+
     render(){
         let {option}=this.props;
+        let temp=option.amplitude;
         return(
             <div>
                 <Paper>
@@ -54,9 +56,9 @@ class OptionInfo extends Component{
                         </TableRow>
                         <TableRow>
                             <CustomTableCell>涨跌幅</CustomTableCell>
-                            <CustomTableCell>{option.quoteChange.toFixed(4)}</CustomTableCell>
+                            <CustomTableCell>{option.quoteChange===undefined?'':option.quoteChange.toFixed(4)}</CustomTableCell>
                             <CustomTableCell>振幅</CustomTableCell>
-                            <CustomTableCell>{option.amplitude.toFixed(4)}</CustomTableCell>
+                            <CustomTableCell>{option.remindedBusinessDays===undefined?'':option.remindedBusinessDays.toFixed(4)}</CustomTableCell>
                         </TableRow>
                         <TableRow>
                             <CustomTableCell>剩余交易日</CustomTableCell>
