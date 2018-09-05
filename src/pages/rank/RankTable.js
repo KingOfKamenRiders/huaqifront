@@ -10,22 +10,8 @@ import Paper from '@material-ui/core/Paper'
 import TableFooter from '@material-ui/core/TableFooter'
 import TablePagination from '@material-ui/core/TablePagination'
 import {getRankedCombinations} from "../../api/rank"
+import CustomTableCell from '../../components/CustomTableCell'
 
-const CustomTableCell = withStyles(theme => ({
-    root:{
-        textAlign:'center',
-    },
-    head: {
-        backgroundColor: theme.palette.common.black,
-        color: theme.palette.common.white,
-
-        fontSize:28,
-        border:'solid black'
-    },
-    body: {
-        fontSize: 20,
-    },
-}))(TableCell);
 
 class RankTable extends Component {
 

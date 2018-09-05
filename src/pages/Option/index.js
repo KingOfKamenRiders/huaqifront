@@ -5,6 +5,7 @@ import Grid from '@material-ui/core/Grid';
 import DealChart from './DealChart'
 import RiseFallChart from './RiseFallChart'
 import {getOption} from "../../api/Option"
+import OptionInfo from './OptionInfo'
 
 const style={
     root:{
@@ -35,7 +36,7 @@ class Option extends Component{
                     </Grid>
                     <Grid item >
                         <Paper>
-                            {this.state.option.latestPrice}
+                            <OptionInfo/>
                         </Paper>
                     </Grid>
                 </Grid>
