@@ -1,6 +1,7 @@
 import React,{Component} from 'react'
 import TransactionTable from './TransactionTable'
 
+
 class Transaction extends Component{
     componentWillMount(){
         this.props.onRouteChange(2);

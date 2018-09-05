@@ -16,7 +16,7 @@ import {withStyles} from '@material-ui/core/styles'
 import LoginModal from './loginModal'
 import SignUpModal from './signUpModal'
 
-const routes=['/','/rank','/transaction','/combination','/favorite']
+const routes=['/','/rank','/transaction','/combination','/favorite','/news']
 const style={
     root: {
         flexGrow: 1,
@@ -118,6 +118,7 @@ class NavTop extends React.Component{
                     <Tab label="交易记录" classes={{label:classes.tabLabel}}/>
                     <Tab label="期权组合" classes={{label:classes.tabLabel}}/>
                     <Tab label="我的期权池" classes={{label:classes.tabLabel}}/>
+                    <Tab label="新闻" classes={{label:classes.tabLabel}}/>
                 </Tabs>
                 </Paper>
             </div>

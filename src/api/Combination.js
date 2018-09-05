@@ -1,13 +1,21 @@
 import axios from 'axios'
 
-export function getCombination(callback,handleError) {
-    axios.get('/CombinationBl/getCurrentCombinations')
+export function getCombination(userId,callback) {
+    axios.get('/OptionBl/findInterestedTargets',{
+        params:{
+            userId:userId
+        }
+    })
         .then((data)=>callback(data))
-        .catch((error)=>handleError(error))
+        .catch((error)=>console.log(error))
 }
 
-export function getFavorite(callback,handleError) {
-    axios.get('/CombinationBl/findAllTransactions')
+export function getFavorite(userId,callback) {
+    axios.get('/OptionBl/findInterestedTargets',{
+        params:{
+            userId:userId
+        }
+    })
         .then((data)=>callback(data))
-        .catch((error)=>handleError(error))
+        .catch((error)=>console.log(error))
 }

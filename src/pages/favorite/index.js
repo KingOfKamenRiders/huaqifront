@@ -1,5 +1,5 @@
 import React,{Component} from 'react'
-import collection from '../combination/combinationTable'
+import FAV from '../favorite/favoriteCombinationTable'
 
 class Combination extends Component{
     componentWillMount(){
@@ -8,7 +8,7 @@ class Combination extends Component{
     render(){
         return(
             <div>
-                <collection></collection>
+                <FAV></FAV>
             </div>
         )
     }

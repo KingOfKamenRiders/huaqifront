@@ -10,23 +10,27 @@ import Paper from '@material-ui/core/Paper';
 import {getCombination} from "../../api/Combination";
 
 const CustomTableCell = withStyles(theme => ({
+    root:{
+      width:'80%'
+    },
     head: {
         backgroundColor: theme.palette.common.white,
         color: theme.palette.common.black,
         textAlign:'center',
     },
     body: {
-       // fontSize: 14,
+       fontSize: 12,
     }
 }))(TableCell);
 
 const styles = theme => ({
-    root: {
-     //   width: '115%',
+    root:{
+    },
+    head: {
         marginTop: 10,
     },
     table: {
-     //   Width: 700,
+
     },
     row: {
         '&:nth-of-type(odd)': {
@@ -36,8 +40,8 @@ const styles = theme => ({
 });
 
 const specialStyle = {
-    borderLeft: '1px solid gainsboro',
-    borderRight: '1px solid gainsboro',
+    // borderLeft: '1px solid gainsboro',
+    // borderRight: '1px solid gainsboro',
     color: '#1a7ad1'
 };
 
@@ -66,7 +70,7 @@ class CustomizedTable extends Component{
                     <TableHead>
                         <TableRow>
                             <CustomTableCell colSpan={8}>认购</CustomTableCell>
-                            <CustomTableCell colSpan={1}> </CustomTableCell>
+                            {/*<CustomTableCell colSpan={1}> </CustomTableCell>*/}
                             <CustomTableCell colSpan={8}>认沽</CustomTableCell>
                         </TableRow>
                         <TableRow>
@@ -114,8 +118,6 @@ class CustomizedTable extends Component{
                                     <CustomTableCell >{row.optDown.sellVolume}</CustomTableCell>
                                     <CustomTableCell >{row.optDown.position}</CustomTableCell>
                                     <CustomTableCell>{row.optDown.optionAbbr}</CustomTableCell>
-
-
 
                                 </TableRow>
                             );

@@ -20,12 +20,7 @@ import FilterListIcon from '@material-ui/icons/FilterList';
 import { lighten } from '@material-ui/core/styles/colorManipulator';
 import {findAllTransactions} from "../../api/transaction"
 
-let counter = 0;
-function createData(ID, time, combination, profit) {
-    counter += 1;
-    return { id: counter, ID, time, combination, profit };
-}
-
+//排序
 function desc(a, b, orderBy) {
     if (b[orderBy] < a[orderBy]) {
         return -1;
@@ -41,10 +36,14 @@ function getSorting(order, orderBy) {
 }
 
 const rows = [
-    { id: 'tid', numeric: false, disablePadding: true, label: '交易单号' },
-    { id: 'time', numeric: false, disablePadding: false, label: '时间' },
-    { id: 'portfolio', numeric: false, disablePadding: false, label: '期权组合' },
-    { id: 'profit', numeric: true, disablePadding: false, label: '盈亏信息' },
+    { id: 'time', numeric: true, disablePadding: true, label: '时间' },
+    { id: 'name', numeric: false, disablePadding: false, label: '名称' },
+    { id: 'type1', numeric: false, disablePadding: false, label: '交易类型' },
+    { id: 'type2', numeric: false, disablePadding: false, label: '下单类型' },
+    {id:'num', numeric:true, disablePadding:false, label:'成交数量'},
+    {id:'price', numeric:true, disablePadding:false, label:'成交价'},
+    {id:'total', numeric:true, disablePadding:false, label:'成交额'},
+    {id:'charge', numeric:true, disablePadding:false, label:'手续费'},
 ];
 
 class EnhancedTableHead extends React.Component {
@@ -129,6 +128,7 @@ const toolbarStyles = theme => ({
     },
 });
 
+//工具条
 let EnhancedTableToolbar = props => {
     const { numSelected, classes } = props;
 
@@ -175,19 +175,6 @@ EnhancedTableToolbar.propTypes = {
 };
 
 EnhancedTableToolbar = withStyles(toolbarStyles)(EnhancedTableToolbar);
-
-const styles = theme => ({
-    root: {
-        width: '100%',
-        // marginTop: theme.spacing.unit * 3,
-    },
-    table: {
-        minWidth: 800,
-    },
-    tableWrapper: {
-        overflowX: 'auto',
-    },
-});
 
 class EnhancedTable extends React.Component {
     state = {
@@ -292,12 +279,15 @@ class EnhancedTable extends React.Component {
                                             <TableCell padding="checkbox">
                                                 <Checkbox checked={isSelected} />
                                             </TableCell>
-                                            <TableCell component="th" scope="row" padding="none">
-                                                {n.data.tid}
-                                            </TableCell>
-                                            <TableCell>{n.time}</TableCell>
-                                            <TableCell>{n.data.profileio}</TableCell>
-                                            <TableCell numeric>{n.profit}</TableCell>
+
+                                            <TableCell numeric>{n.time}</TableCell>
+                                            <TableCell>{n.name}</TableCell>
+                                            <TableCell>{n.type1}</TableCell>
+                                            <TableCell>{n.type2}</TableCell>
+                                            <TableCell numeric>{n.num}</TableCell>
+                                            <TableCell numeric>{n.price}</TableCell>
+                                            <TableCell numeric>{n.total}</TableCell>
+                                            <TableCell numeric>{n.charge}</TableCell>
                                         </TableRow>
                                     );
                                 })}
@@ -327,6 +317,19 @@ class EnhancedTable extends React.Component {
         );
     }
 }
+
+const styles = theme => ({
+    root: {
+        width: '100%',
+        // marginTop: theme.spacing.unit * 3,
+    },
+    table: {
+        minWidth: 800,
+    },
+    tableWrapper: {
+        overflowX: 'auto',
+    },
+});
 
 EnhancedTable.propTypes = {
     classes: PropTypes.object.isRequired,

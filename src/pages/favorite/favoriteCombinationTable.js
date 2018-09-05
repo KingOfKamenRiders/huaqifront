@@ -16,17 +16,16 @@ const CustomTableCell = withStyles(theme => ({
         textAlign:'center',
     },
     body: {
-       // fontSize: 14,
+       fontSize: 14,
     }
 }))(TableCell);
 
 const styles = theme => ({
     root: {
-     //   width: '115%',
         marginTop: 10,
+        display:'flex',
     },
     table: {
-     //   Width: 700,
     },
     row: {
         '&:nth-of-type(odd)': {
@@ -36,17 +35,12 @@ const styles = theme => ({
 });
 
 const specialStyle = {
-    borderLeft: '1px solid gainsboro',
-    borderRight: '1px solid gainsboro',
+    // borderLeft: '1px solid gainsboro',
+    // borderRight: '1px solid gainsboro',
     color: '#1a7ad1'
 };
 
 let id = 0;
-function createData(name, calories, fat, carbs, protein) {
-    id += 1;
-    return { id, name, calories, fat, carbs, protein };
-}
-
 
 class CustomizedTable extends Component{
 
@@ -61,8 +55,8 @@ class CustomizedTable extends Component{
         const {classes} = this.props;
         const {rows} = this.state
         return (
-            <Paper className={classes.root}>
-                <Table className={classes.table} style={{border: '0px'}}>
+            <Paper>
+                <Table>
                     <TableHead>
                         <TableRow>
                             <CustomTableCell colSpan={8}>认购</CustomTableCell>
@@ -92,30 +86,28 @@ class CustomizedTable extends Component{
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {rows.map(row => {
+                        {rows.map(() => {
                             return (
-                                <TableRow className={classes.row} key={row.id}>
-                                    <CustomTableCell>{row.optUp.optionAbbr}</CustomTableCell>
-                                    <CustomTableCell >{row.optUp.position}</CustomTableCell>
-                                    <CustomTableCell >{row.optUp.sellVolume}</CustomTableCell>
-                                    <CustomTableCell >{row.optUp.sellPrice}</CustomTableCell>
-                                    <CustomTableCell >{row.optUp.bidVolume}</CustomTableCell>
-                                    <CustomTableCell >{row.optUp.bidPrice}</CustomTableCell>
-                                    <CustomTableCell >{row.optUp.quoteChange.toFixed(4)}</CustomTableCell>
-                                    <CustomTableCell >{row.optUp.latestPrice}</CustomTableCell>
+                                <TableRow className={classes.row} key={rows.id}>
+                                    <CustomTableCell>{rows.optUp.optionAbbr}</CustomTableCell>
+                                    <CustomTableCell >{rows.optUp.position}</CustomTableCell>
+                                    <CustomTableCell >{rows.optUp.sellVolume}</CustomTableCell>
+                                    <CustomTableCell >{rows.optUp.sellPrice}</CustomTableCell>
+                                    <CustomTableCell >{rows.optUp.bidVolume}</CustomTableCell>
+                                    <CustomTableCell >{rows.optUp.bidPrice}</CustomTableCell>
+                                    <CustomTableCell >{rows.optUp.quoteChange.toFixed(4)}</CustomTableCell>
+                                    <CustomTableCell >{rows.optUp.latestPrice}</CustomTableCell>
 
-                                    <CustomTableCell >{row.execPrice}</CustomTableCell>
+                                    <CustomTableCell >{rows.execPrice}</CustomTableCell>
 
-                                    <CustomTableCell >{row.optDown.latestPrice}</CustomTableCell>
-                                    <CustomTableCell >{row.optDown.quoteChange.toFixed(4)}</CustomTableCell>
-                                    <CustomTableCell >{row.optDown.bidPrice}</CustomTableCell>
-                                    <CustomTableCell >{row.optDown.bidVolume}</CustomTableCell>
-                                    <CustomTableCell >{row.optDown.sellPrice}</CustomTableCell>
-                                    <CustomTableCell >{row.optDown.sellVolume}</CustomTableCell>
-                                    <CustomTableCell >{row.optDown.position}</CustomTableCell>
-                                    <CustomTableCell>{row.optDown.optionAbbr}</CustomTableCell>
-
-
+                                    <CustomTableCell >{rows.optDown.latestPrice}</CustomTableCell>
+                                    <CustomTableCell >{rows.optDown.quoteChange.toFixed(4)}</CustomTableCell>
+                                    <CustomTableCell >{rows.optDown.bidPrice}</CustomTableCell>
+                                    <CustomTableCell >{rows.optDown.bidVolume}</CustomTableCell>
+                                    <CustomTableCell >{rows.optDown.sellPrice}</CustomTableCell>
+                                    <CustomTableCell >{rows.optDown.sellVolume}</CustomTableCell>
+                                    <CustomTableCell >{rows.optDown.position}</CustomTableCell>
+                                    <CustomTableCell>{rows.optDown.optionAbbr}</CustomTableCell>
 
                                 </TableRow>
                             );
