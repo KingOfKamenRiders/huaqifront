@@ -7,6 +7,8 @@ import Index from './pages/index'
 import Rank from './pages/rank'
 import Transaction from './pages/transactions'
 import Combination from './pages/combination'
+import Favorite from './pages/favorite'
+import News from './pages/news'
 import Option from './pages/Option'
 class App extends Component {
   state={
@@ -28,6 +30,8 @@ class App extends Component {
               <Route path="/rank"  render={()=>{return <Rank onRouteChange={this.handleRouteChange}/>}}/>
               <Route path="/transaction"  render={()=>{return <Transaction onRouteChange={this.handleRouteChange}/>}}/>
               <Route path="/combination"  render={()=>{return <Combination onRouteChange={this.handleRouteChange}/>}}/>
+              <Route path="/favorite"  render={()=>{return <Favorite onRouteChange={this.handleRouteChange}/>}}/>
+              <Route path="/news"  render={()=>{return <News onRouteChange={this.handleRouteChange}/>}}/>
               <Route path="/Option/:id" component={Option}/>
           </div>
 

@@ -18,13 +18,9 @@ import Tooltip from '@material-ui/core/Tooltip';
 import DeleteIcon from '@material-ui/icons/Delete';
 import FilterListIcon from '@material-ui/icons/FilterList';
 import { lighten } from '@material-ui/core/styles/colorManipulator';
+import {findAllTransactions} from "../../api/transaction"
 
-let counter = 0;
-function createData(ID, time, combination, profit) {
-    counter += 1;
-    return { id: counter, ID, time, combination, profit };
-}
-
+//排序
 function desc(a, b, orderBy) {
     if (b[orderBy] < a[orderBy]) {
         return -1;
@@ -40,12 +36,14 @@ function getSorting(order, orderBy) {
 }
 
 const rows = [
-    { id: 'ID', numeric: false, disablePadding: true, label: '交易单号' },
-    { id: 'time', numeric: false, disablePadding: false, label: '时间' },
-    { id: 'combination', numeric: false, disablePadding: false, label: '期权组合' },
-    { id: 'profit', numeric: true, disablePadding: false, label: '盈亏信息' },
-    { id: '', numeric: false, disablePadding: false, label: '' },
-
+    { id: 'time', numeric: true, disablePadding: true, label: '时间' },
+    { id: 'name', numeric: false, disablePadding: false, label: '名称' },
+    { id: 'type1', numeric: false, disablePadding: false, label: '交易类型' },
+    { id: 'type2', numeric: false, disablePadding: false, label: '下单类型' },
+    {id:'num', numeric:true, disablePadding:false, label:'成交数量'},
+    {id:'price', numeric:true, disablePadding:false, label:'成交价'},
+    {id:'total', numeric:true, disablePadding:false, label:'成交额'},
+    {id:'charge', numeric:true, disablePadding:false, label:'手续费'},
 ];
 
 class EnhancedTableHead extends React.Component {
@@ -130,6 +128,7 @@ const toolbarStyles = theme => ({
     },
 });
 
+//工具条
 let EnhancedTableToolbar = props => {
     const { numSelected, classes } = props;
 
@@ -177,39 +176,21 @@ EnhancedTableToolbar.propTypes = {
 
 EnhancedTableToolbar = withStyles(toolbarStyles)(EnhancedTableToolbar);
 
-const styles = theme => ({
-    root: {
-        width: '100%',
-        // marginTop: theme.spacing.unit * 3,
-    },
-    table: {
-        minWidth: 800,
-    },
-    tableWrapper: {
-        overflowX: 'auto',
-    },
-});
-
 class EnhancedTable extends React.Component {
     state = {
         order: 'asc',
         orderBy: 'calories',
         selected: [],
-        data: [
-            createData('000001', '2018/1/27', '大豆+玉米', 67 ),
-            createData('000002', '2018/1/28', '大豆+玉米', 51),
-            createData('000003', '2018/1/28', '大豆+玉米', 24),
-            createData('000004', '2018/1/28', '大豆+玉米', 49),
-            createData('000005', '2018/1/28', '大豆+玉米', 87),
-            createData('000006', '2018/1/27', '大豆+玉米', 67 ),
-            createData('000007', '2018/1/28', '大豆+玉米', 51),
-            createData('000008', '2018/1/28', '大豆+玉米', 24),
-            createData('000009', '2018/1/28', '大豆+玉米', 49),
-            createData('000010', '2018/1/28', '大豆+玉米', 87),
-        ],
+        trans:[],
         page: 0,
         rowsPerPage: 5,
     };
+
+    componentDidMount(){
+        findAllTransactions((response)=>{
+            this.setState({trans:response.data})
+        },(error)=>console.log(error))
+    }
 
     handleRequestSort = (event, property) => {
         const orderBy = property;
@@ -263,8 +244,8 @@ class EnhancedTable extends React.Component {
 
     render() {
         const { classes } = this.props;
-        const { data, order, orderBy, selected, rowsPerPage, page } = this.state;
-        const emptyRows = rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage);
+        const { trans, order, orderBy, selected, rowsPerPage, page } = this.state;
+        const emptyRows = rowsPerPage - Math.min(rowsPerPage, trans.length - page * rowsPerPage);
 
         return (
             <Paper className={classes.root}>
@@ -277,10 +258,10 @@ class EnhancedTable extends React.Component {
                             orderBy={orderBy}
                             onSelectAllClick={this.handleSelectAllClick}
                             onRequestSort={this.handleRequestSort}
-                            rowCount={data.length}
+                            rowCount={trans.length}
                         />
                         <TableBody>
-                            {data
+                            {trans
                                 .sort(getSorting(order, orderBy))
                                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                 .map(n => {
@@ -298,13 +279,15 @@ class EnhancedTable extends React.Component {
                                             <TableCell padding="checkbox">
                                                 <Checkbox checked={isSelected} />
                                             </TableCell>
-                                            <TableCell component="th" scope="row" padding="none">
-                                                {n.ID}
-                                            </TableCell>
-                                            <TableCell>{n.time}</TableCell>
-                                            <TableCell>{n.combination}</TableCell>
-                                            <TableCell numeric>{n.profit}</TableCell>
-                                            <TableCell></TableCell>
+
+                                            <TableCell numeric>{n.time}</TableCell>
+                                            <TableCell>{n.name}</TableCell>
+                                            <TableCell>{n.type1}</TableCell>
+                                            <TableCell>{n.type2}</TableCell>
+                                            <TableCell numeric>{n.num}</TableCell>
+                                            <TableCell numeric>{n.price}</TableCell>
+                                            <TableCell numeric>{n.total}</TableCell>
+                                            <TableCell numeric>{n.charge}</TableCell>
                                         </TableRow>
                                     );
                                 })}
@@ -318,7 +301,7 @@ class EnhancedTable extends React.Component {
                 </div>
                 <TablePagination
                     component="div"
-                    count={data.length}
+                    count={trans.length}
                     rowsPerPage={rowsPerPage}
                     page={page}
                     backIconButtonProps={{
@@ -334,6 +317,19 @@ class EnhancedTable extends React.Component {
         );
     }
 }
+
+const styles = theme => ({
+    root: {
+        width: '100%',
+        // marginTop: theme.spacing.unit * 3,
+    },
+    table: {
+        minWidth: 800,
+    },
+    tableWrapper: {
+        overflowX: 'auto',
+    },
+});
 
 EnhancedTable.propTypes = {
     classes: PropTypes.object.isRequired,
