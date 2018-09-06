@@ -33,7 +33,7 @@ class Option extends Component{
                     <Grid item xs={8}>
                         <Paper>
                             <RiseFallChart/>
-                            <DealChart/>
+                            <RiseFallChart/>
                         </Paper>
                     </Grid>
                     <Grid item xs={4}>

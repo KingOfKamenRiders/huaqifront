@@ -116,7 +116,7 @@ class NavTop extends React.Component{
                     <Tab label="首页(实时浏览)" classes={{label:classes.tabLabel}}/>
                     <Tab label="排行榜" classes={{label:classes.tabLabel}}/>
                     <Tab label="交易记录" classes={{label:classes.tabLabel}}/>
-                    <Tab label="期权组合" classes={{label:classes.tabLabel}}/>
+                    <Tab label="我的期权" classes={{label:classes.tabLabel}}/>
                     <Tab label="我的期权池" classes={{label:classes.tabLabel}}/>
                     <Tab label="新闻" classes={{label:classes.tabLabel}}/>
                 </Tabs>

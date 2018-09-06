@@ -10,24 +10,36 @@ import TableFooter from '@material-ui/core/TableFooter'
 import CustomTableCell from '../../components/CustomTableCell'
 import Button from '@material-ui/core/Button'
 import AddIcon from '@material-ui/icons/AddCircleOutline'
+import CreditCard from '@material-ui/icons/CreditCard'
 
 const style={
-
+    buttonWrapper:{
+        display:'flex',
+        flexDirection:'horizon',
+        justifyContent:'center'
+    },
+    button:{
+        marginTop:20,
+        marginBottom:20,
+        marginLeft:20,
+        marginRight:20,
+    }
 }
 class OptionInfo extends Component{
 
 
     render(){
-        let {option}=this.props;
+        let {option,classes}=this.props;
         let temp=option.amplitude;
         return(
             <div>
-                <Paper>
-                    <Button variant="primary">
+                <Paper className={classes.buttonWrapper}>
+                    <Button variant="contained" color="secondary" className={classes.button}>
                         <AddIcon/>
                         收藏
                     </Button>
-                    <Button variant="primary">
+                    <Button variant="contained" color="secondary" className={classes.button}>
+                        <CreditCard/>
                         购买
                     </Button>
                 </Paper>

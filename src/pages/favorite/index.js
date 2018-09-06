@@ -3,7 +3,7 @@ import FAV from '../favorite/favoriteCombinationTable'
 
 class Combination extends Component{
     componentWillMount(){
-        this.props.onRouteChange(3);
+        this.props.onRouteChange(4);
     }
     render(){
         return(

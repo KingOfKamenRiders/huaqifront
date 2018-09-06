@@ -13,7 +13,7 @@ import Option from './pages/Option'
 class App extends Component {
   state={
     user:null,
-    tabValue:0,
+    tabValue:null,
   }
   handleUserChange=(newUser)=>this.setState({user:newUser})
 
