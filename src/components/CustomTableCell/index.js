@@ -8,12 +8,10 @@ const CustomTableCell = withStyles(theme => ({
     head: {
         backgroundColor: theme.palette.common.black,
         color: theme.palette.common.white,
-
-        fontSize:28,
-        border:'solid black'
+        fontSize:15,
     },
     body: {
-        fontSize: 20,
+       // fontSize: 10,
     },
 }))(TableCell);
 
