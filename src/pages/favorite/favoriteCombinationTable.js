@@ -56,6 +56,7 @@ class CustomizedTable extends Component{
         const {rows} = this.state
         return (
             <Paper>
+                <a>收藏的期权数</a>
                 <Table>
                     <TableHead>
                         <TableRow>

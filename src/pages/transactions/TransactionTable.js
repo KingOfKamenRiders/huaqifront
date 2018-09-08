@@ -19,6 +19,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import FilterListIcon from '@material-ui/icons/FilterList';
 import { lighten } from '@material-ui/core/styles/colorManipulator';
 import {findAllTransactions} from "../../api/transaction"
+import TableFooter from "@material-ui/core/TableFooter/TableFooter";
 
 //排序
 function desc(a, b, orderBy) {
@@ -36,10 +37,10 @@ function getSorting(order, orderBy) {
 }
 
 const rows = [
-    { id: 'time', numeric: true, disablePadding: true, label: '时间' },
-    { id: 'name', numeric: false, disablePadding: false, label: '名称' },
-    { id: 'type1', numeric: false, disablePadding: false, label: '交易类型' },
-    { id: 'type2', numeric: false, disablePadding: false, label: '下单类型' },
+    {id: 'time', numeric: false, disablePadding: true, label: '时间' },
+    {id: 'name', numeric: false, disablePadding: false, label: '名称' },
+    {id: 'type1', numeric: false, disablePadding: false, label: '交易类型' },
+    {id: 'type2', numeric: false, disablePadding: false, label: '下单类型' },
     {id:'num', numeric:true, disablePadding:false, label:'成交数量'},
     {id:'price', numeric:true, disablePadding:false, label:'成交价'},
     {id:'total', numeric:true, disablePadding:false, label:'成交额'},
@@ -55,6 +56,7 @@ class EnhancedTableHead extends React.Component {
         const { onSelectAllClick, order, orderBy, numSelected, rowCount } = this.props;
 
         return (
+
             <TableHead>
                 <TableRow>
                     <TableCell padding="checkbox">
@@ -128,7 +130,7 @@ const toolbarStyles = theme => ({
     },
 });
 
-//工具条
+//顶部工具条
 let EnhancedTableToolbar = props => {
     const { numSelected, classes } = props;
 
@@ -183,11 +185,11 @@ class EnhancedTable extends React.Component {
         selected: [],
         trans:[],
         page: 0,
-        rowsPerPage: 5,
+        rowsPerPage: 9,
     };
 
     componentDidMount(){
-        findAllTransactions((response)=>{
+        findAllTransactions(this.state.uid,(response)=>{
             this.setState({trans:response.data})
         },(error)=>console.log(error))
     }
@@ -234,10 +236,6 @@ class EnhancedTable extends React.Component {
 
     handleChangePage = (event, page) => {
         this.setState({ page });
-    };
-
-    handleChangeRowsPerPage = event => {
-        this.setState({ rowsPerPage: event.target.value });
     };
 
     isSelected = id => this.state.selected.indexOf(id) !== -1;
@@ -297,22 +295,19 @@ class EnhancedTable extends React.Component {
                                 </TableRow>
                             )}
                         </TableBody>
+                        <TableFooter>
+                            <TableRow>
+                                <TablePagination
+                                    count={trans.length}
+                                    rowsPerPage={rowsPerPage}
+                                    page={page}
+                                    rowsPerPageOptions={[]}
+                                    onChangePage={this.handleChangePage}
+                                />
+                            </TableRow>
+                        </TableFooter>
                     </Table>
                 </div>
-                <TablePagination
-                    component="div"
-                    count={trans.length}
-                    rowsPerPage={rowsPerPage}
-                    page={page}
-                    backIconButtonProps={{
-                        'aria-label': 'Previous Page',
-                    }}
-                    nextIconButtonProps={{
-                        'aria-label': 'Next Page',
-                    }}
-                    onChangePage={this.handleChangePage}
-                    onChangeRowsPerPage={this.handleChangeRowsPerPage}
-                />
             </Paper>
         );
     }
@@ -321,10 +316,15 @@ class EnhancedTable extends React.Component {
 const styles = theme => ({
     root: {
         width: '100%',
-        // marginTop: theme.spacing.unit * 3,
+        textAlign:'center',
     },
     table: {
-        minWidth: 800,
+        marginBottom: "0",
+        width: "100%",
+        maxWidth: "100%",
+        backgroundColor: "transparent",
+        borderSpacing: "0",
+        borderCollapse: "collapse"
     },
     tableWrapper: {
         overflowX: 'auto',
