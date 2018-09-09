@@ -19,3 +19,12 @@ export function getFavorite(userId,callback) {
         .then((data)=>callback(data))
         .catch((error)=>console.log(error))
 }
+
+export function getCombinationByID(id,callback) {
+    axios.get('/CombinationBl/findCombinationById',{
+        params:{
+            cid:id
+        }
+    }).then((response)=>callback(response))
+        .catch((error)=>console.log(error))
+}
