@@ -21,7 +21,7 @@ const style=(theme)=>{
             margin:theme.spacing.unit*3
         }
     }
-}
+};
 class LoginModal extends Component{
 
 
@@ -30,13 +30,11 @@ class LoginModal extends Component{
         pass:'',
         invalid:false,
         inexistence:false
-    }
+    };
     callLogin=()=>{
-        const {handleLogin}=this.props
         login(this.state.name,this.state.pass,(response)=>{
             if(response.data === ResultMessage.SUCCESS){
-                sessionStorage.setItem("UserId",this.state.name)
-                handleLogin(this.state.name)
+                sessionStorage.setItem("user",this.state.name)
             }else if(response.data === ResultMessage.FAILURE){
                 this.setState({invalid:true})
             }

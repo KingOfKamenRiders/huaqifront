@@ -46,40 +46,39 @@ const theme = createMuiTheme({
 });
 class NavTop extends React.Component{
     constructor(props){
-        super()
+        super(props);
         this.state={
             user:props.user,
             isLoginModalOpen:false,
             isSignUpModalOpen:false,
-        }
+        };
+        props.getInstance(this);
     }
-
+    setLoginModal = (o)=>{
+      this.setState({isLoginModalOpen:o})
+    };
     handleTabChange=(e,value)=>{
         this.props.onRouteChange(value)
        // this.setState({tabValue:value});
         let {history}=this.props
         history.push(routes[value])
        // console.log(history);
-    }
+    };
     handleLoginButton=()=>{
         this.setState({isLoginModalOpen:true})
-    }
+    };
     handleLoginModalClose=()=>{
         this.setState({isLoginModalOpen:false})
-    }
+    };
     handleSignUpButton=()=>{
         this.setState({isSignUpModalOpen:true})
-    }
+    };
     handleSignUpModalClose=()=>{
         this.setState({isSignUpModalOpen:false})
-    }
-    handleLogin=(uid)=>{
-        const {onUserChange}=this.props
-        onUserChange({userId:uid})
-    }
+    };
     render(){
         const {classes}=this.props;
-        const {user}=this.props;
+        const user=sessionStorage.getItem('user');
         return(
             <div>
                 <MuiThemeProvider theme={theme}>
@@ -96,7 +95,7 @@ class NavTop extends React.Component{
                                 <IconButton>
                                     <AccountCircle/>
                                 </IconButton>
-                                <Typography variant="caption">{user.userId}</Typography>
+                                <Typography variant="caption">{user}</Typography>
                             </div>
                             : <div>
                                 <Button color="inherit" onClick={this.handleLoginButton} >登陆</Button>
@@ -126,5 +125,4 @@ class NavTop extends React.Component{
     }
 
 }
-
 export default withRouter(withStyles(style)(NavTop))
