@@ -11,6 +11,8 @@ class InfoTable extends Component{
 
     render(){
         let {rows} = this.props
+        if(!rows[0])
+            return null;
         return(
             <Table>
                 <TableHead>
@@ -29,28 +31,28 @@ class InfoTable extends Component{
                     {rows.map((row)=>(
                         <TableRow>
                             <CustomTableCell>
-                                {row.OptionType==='UP'?'买入':'卖出'}
+                                {row&&row.OptionType==='UP'?'买入':'卖出'}
                             </CustomTableCell>
                             <CustomTableCell>
-                                {row.optionAbbr}
+                                {row&&row.optionAbbr}
                             </CustomTableCell>
                             <CustomTableCell>
-                                {1}
+                                {row&&1}
                             </CustomTableCell>
                             <CustomTableCell>
-                                {row.latestPrice}
+                                {row&&row.latestPrice}
                             </CustomTableCell>
                             <CustomTableCell>
-                                {row.amplitude}
+                                {row&&row.amplitude.toFixed(4)}
                             </CustomTableCell>
                             <CustomTableCell>
-                                {row.bidVolume}
+                                {row&&row.bidVolume}
                             </CustomTableCell>
                             <CustomTableCell>
-                                {row.bidPrice}
+                                {row&&row.bidPrice}
                             </CustomTableCell>
                             <CustomTableCell>
-                                {row.selltPrice}
+                                {row&&row.sellPrice}
                             </CustomTableCell>
                         </TableRow>
                     ))}

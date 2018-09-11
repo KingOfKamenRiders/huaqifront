@@ -4,7 +4,7 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import InfoTable from './InfoTable'
 import PriceDiffChart from "./PriceDiffChart";
-import {getCombinationByID} from "../../api/Combination";
+import {getOption} from "../../api/Option"
 
 
 const style={};
@@ -12,16 +12,23 @@ const style={};
 class SingleCombination extends Component{
 
     state={
-      combination:null,
+      optUp1:null,
+      optDown1:null,
+      optUp2:null,
+      optDown2:null
     };
 
-    componentDidMount(){
-        getCombinationByID(this.props.match.params.id,
-            (response)=>this.setState({combination:response.data}))
+    componentWillMount(){
+        let {optUp1,optDown1,optUp2,optDown2} = this.props.match.params
+        getOption(optUp1,(response)=>this.setState({optUp1:response.data}));
+        getOption(optDown1,(response)=>this.setState({optDown1:response.data}));
+        getOption(optUp2,(response)=>this.setState({optUp2:response.data}));
+        getOption(optDown2,(response)=>this.setState({optDown2:response.data}));
+
     }
 
     render(){
-        let {combination} = this.state;
+        let {optUp1,optDown1,optUp2,optDown2} = this.state;
         return(
             <Grid container spacing={16}>
                 <Grid item xs={8}>
@@ -31,7 +38,7 @@ class SingleCombination extends Component{
                 </Grid>
                 <Grid item xs={4}>
                     <Paper>
-                        <InfoTable rows={[combination.optUp1,combination.optDown1,combination.optDown2,combination.optUp2]}/>
+                        <InfoTable rows={[optUp1,optDown1,optDown2,optUp2]}/>
                     </Paper>
                 </Grid>
             </Grid>

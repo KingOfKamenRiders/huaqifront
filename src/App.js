@@ -10,6 +10,7 @@ import Favorite from './pages/favorite'
 import News from './pages/news'
 import Option from './pages/Option'
 import SingleCombination from './pages/single-combination'
+import PersonalCenter from './pages/personal-center'
 
 class App extends Component {
 
@@ -53,7 +54,8 @@ class App extends Component {
                   return <Favorite onRouteChange={this.handleRouteChange}/>}}/>
               <Route path="/news"  render={()=>{return <News onRouteChange={this.handleRouteChange}/>}}/>
               <Route path="/option/:id" component={Option}/>
-              <Route path="/single-combination/:id" component={SingleCombination}/>
+              <Route path="/single-combination/:optUp1/:optDown1/:optDown2/:optUp2" component={SingleCombination}/>
+              <Route path="/personal-center" component={PersonalCenter}/>
           </div>
 
         </Router>

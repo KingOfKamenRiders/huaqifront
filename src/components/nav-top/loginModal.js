@@ -34,7 +34,8 @@ class LoginModal extends Component{
     callLogin=()=>{
         login(this.state.name,this.state.pass,(response)=>{
             if(response.data === ResultMessage.SUCCESS){
-                sessionStorage.setItem("user",this.state.name)
+                sessionStorage.setItem("user",this.state.name);
+                this.props.handleClose();
             }else if(response.data === ResultMessage.FAILURE){
                 this.setState({invalid:true})
             }

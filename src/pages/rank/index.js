@@ -3,6 +3,8 @@ import {withStyles}  from '@material-ui/core/styles'
 import RankTable from './RankTable'
 import SideNav from './SideNav'
 import Button from '@material-ui/core/Button'
+import CombinationTable from '../../components/CombinationTable'
+import {getRankedCombinations} from "../../api/rank"
 
 
 const style=(theme)=>{
@@ -24,16 +26,23 @@ const style=(theme)=>{
     }
 }
 class Rank extends Component{
+    state={
+        combs:[],
+    }
     componentWillMount(){
         this.props.onRouteChange(1);
+        getRankedCombinations((response)=>{
+            this.setState({combs:response.data})
+        },(error)=>console.log(error))
     }
     render(){
         const {classes} =this.props
+        let {combs} = this.state
         return(
             <div className={classes.root}>
                 <SideNav/>
                 <main className={classes.content}>
-                    <RankTable/>
+                    <CombinationTable rows={combs}/>
                 </main>
 
             </div>
