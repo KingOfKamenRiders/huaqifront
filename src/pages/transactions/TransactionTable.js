@@ -217,19 +217,19 @@ class EnhancedTable extends React.Component {
 
     handleSelectAllClick = (event, checked) => {
         if (checked) {
-            this.setState(state => ({ selected: state.trans.map(n => n.id) }));
+            this.setState(state => ({ selected: state.trans.map(n => n.tid) }));
             return;
         }
         this.setState({ selected: [] });
     };
 
-    handleClick = (event, id) => {
+    handleClick = (event, tid) => {
         const { selected } = this.state;
-        const selectedIndex = selected.indexOf(id);
+        const selectedIndex = selected.indexOf(tid);
         let newSelected = [];
 
         if (selectedIndex === -1) {
-            newSelected = newSelected.concat(selected, id);
+            newSelected = newSelected.concat(selected, tid);
         } else if (selectedIndex === 0) {
             newSelected = newSelected.concat(selected.slice(1));
         } else if (selectedIndex === selected.length - 1) {
@@ -272,15 +272,15 @@ class EnhancedTable extends React.Component {
                             {stableSort(trans, getSorting(order, orderBy))
                                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                 .map(n => {
-                                    const isSelected = this.isSelected(n.id);
+                                    const isSelected = this.isSelected(n.tid);
                                     return (
                                         <TableRow
                                             hover
-                                            onClick={event => this.handleClick(event, n.id)}
+                                            onClick={event => this.handleClick(event, n.tid)}
                                             role="checkbox"
                                             aria-checked={isSelected}
                                             tabIndex={-1}
-                                            key={n.id}
+                                            key={n.tid}
                                             selected={isSelected}
                                         >
                                             <TableCell padding="checkbox">
@@ -294,10 +294,10 @@ class EnhancedTable extends React.Component {
                                                 {n.optionAbbr}
                                                 </TableCell>
                                             <TableCell>
-                                                {n.transactionType == 'OPEN' ? '开仓' : '平仓'}
-                                                </TableCell>
+                                                { n.transactionDirection == 'SELL' ? '卖' : '买'}
+                                            </TableCell>
                                             <TableCell>
-                                                {n.transactionDirection == 'SELL' ? '卖' : '买'}
+                                                {n.transactionType == 'OPEN' ? '开仓' : '平仓'}{ n.transactionDirection == 'SELL' ? '卖出' : '买入'}
                                             </TableCell>
                                             <TableCell numeric>
                                                 {n.quantity}
