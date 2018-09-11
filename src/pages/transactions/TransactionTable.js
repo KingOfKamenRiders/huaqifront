@@ -32,19 +32,28 @@ function desc(a, b, orderBy) {
     return 0;
 }
 
+function stableSort(array, cmp) {
+    const stabilizedThis = array.map((el, index) => [el, index]);
+    stabilizedThis.sort((a, b) => {
+        const order = cmp(a[0], b[0]);
+        if (order !== 0) return order;
+        return a[1] - b[1];
+    });
+    return stabilizedThis.map(el => el[0]);
+}
+
 function getSorting(order, orderBy) {
     return order === 'desc' ? (a, b) => desc(a, b, orderBy) : (a, b) => -desc(a, b, orderBy);
 }
-
 const rows = [
     {id: 'time', numeric: false, disablePadding: true, label: '时间' },
-    {id: 'name', numeric: false, disablePadding: false, label: '名称' },
-    {id: 'type1', numeric: false, disablePadding: false, label: '交易类型' },
-    {id: 'type2', numeric: false, disablePadding: false, label: '下单类型' },
-    {id:'num', numeric:true, disablePadding:false, label:'成交数量'},
+    {id: 'optionAbbr', numeric: false, disablePadding: false, label: '名称' },
+    {id: 'transactionType', numeric: false, disablePadding: false, label: '交易类型' },
+    {id: 'transactionDirection', numeric: false, disablePadding: false, label: '下单类型' },
+    {id:'quantity', numeric:true, disablePadding:false, label:'成交数量'},
     {id:'price', numeric:true, disablePadding:false, label:'成交价'},
-    {id:'total', numeric:true, disablePadding:false, label:'成交额'},
-    {id:'charge', numeric:true, disablePadding:false, label:'手续费'},
+    {id:'sum', numeric:true, disablePadding:false, label:'成交额'},
+    {id:'fee', numeric:true, disablePadding:false, label:'手续费'},
 ];
 
 class EnhancedTableHead extends React.Component {
@@ -189,7 +198,8 @@ class EnhancedTable extends React.Component {
     };
 
     componentDidMount(){
-        findAllTransactions(this.state.uid,(response)=>{
+        let userId = sessionStorage.getItem('user')
+        findAllTransactions('Default',(response)=>{
             this.setState({trans:response.data})
         },(error)=>console.log(error))
     }
@@ -207,7 +217,7 @@ class EnhancedTable extends React.Component {
 
     handleSelectAllClick = (event, checked) => {
         if (checked) {
-            this.setState(state => ({ selected: state.data.map(n => n.id) }));
+            this.setState(state => ({ selected: state.trans.map(n => n.id) }));
             return;
         }
         this.setState({ selected: [] });
@@ -259,8 +269,7 @@ class EnhancedTable extends React.Component {
                             rowCount={trans.length}
                         />
                         <TableBody>
-                            {trans
-                                .sort(getSorting(order, orderBy))
+                            {stableSort(trans, getSorting(order, orderBy))
                                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                 .map(n => {
                                     const isSelected = this.isSelected(n.id);
@@ -278,14 +287,30 @@ class EnhancedTable extends React.Component {
                                                 <Checkbox checked={isSelected} />
                                             </TableCell>
 
-                                            <TableCell numeric>{n.time}</TableCell>
-                                            <TableCell>{n.name}</TableCell>
-                                            <TableCell>{n.type1}</TableCell>
-                                            <TableCell>{n.type2}</TableCell>
-                                            <TableCell numeric>{n.num}</TableCell>
-                                            <TableCell numeric>{n.price}</TableCell>
-                                            <TableCell numeric>{n.total}</TableCell>
-                                            <TableCell numeric>{n.charge}</TableCell>
+                                            <TableCell component="th" scope="row" padding="none">
+                                                {n.time.replace('T',' ')}
+                                                </TableCell>
+                                            <TableCell>
+                                                {n.optionAbbr}
+                                                </TableCell>
+                                            <TableCell>
+                                                {n.transactionType == 'OPEN' ? '开仓' : '平仓'}
+                                                </TableCell>
+                                            <TableCell>
+                                                {n.transactionDirection == 'SELL' ? '卖' : '买'}
+                                            </TableCell>
+                                            <TableCell numeric>
+                                                {n.quantity}
+                                            </TableCell>
+                                            <TableCell numeric>
+                                                {n.price}
+                                            </TableCell>
+                                            <TableCell numeric>
+                                                {n.sum}
+                                            </TableCell>
+                                            <TableCell numeric>
+                                                {n.fee}
+                                            </TableCell>
                                         </TableRow>
                                     );
                                 })}

@@ -1,14 +1,10 @@
 import axios from 'axios'
 
-export function findAllTransactions(userId) {
+export function findAllTransactions(userId,callback) {
     axios.get('/TransactionBl/findTransactionByUser',{
         params:{
             userId:userId
         }
-    })
-        .then(function(response){
-            console.log(response);//请求正确时执行的代码
-        }).catch(function(response){
-        console.log(response);//发生错误时执行的代码
-    })
+    }).then((response)=>callback(response))
+        .catch((error)=>console.log(error))
 }
