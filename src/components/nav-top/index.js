@@ -12,6 +12,8 @@ import Paper from '@material-ui/core/Paper'
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import red from '@material-ui/core/colors/red';
 import Typography from '@material-ui/core/Typography'
+import Menu from '@material-ui/core/Menu'
+import MenuItem from '@material-ui/core/MenuItem'
 import {withStyles} from '@material-ui/core/styles'
 import LoginModal from './loginModal'
 import SignUpModal from './signUpModal'
@@ -35,7 +37,12 @@ const style={
         display:'flex',
         alignItems:'center',
         justifyContent:'center',
-        border:'solid'
+    },
+    iconButton:{
+        padding:0
+    },
+    icon:{
+        fontSize:40
     }
 }
 const theme = createMuiTheme({
@@ -46,14 +53,24 @@ const theme = createMuiTheme({
 });
 class NavTop extends React.Component{
     constructor(props){
-        super(props);
+        super();
         this.state={
             user:props.user,
             isLoginModalOpen:false,
             isSignUpModalOpen:false,
+            anchorEl:null,
         };
         props.getInstance(this);
+    };
+    handleLogout=()=>{
+        sessionStorage.removeItem('user');
     }
+    handleMenuOpen=(e)=>{
+        this.setState({ anchorEl: e.currentTarget });
+    }
+    handleMenuClose = () => {
+        this.setState({ anchorEl: null });
+    };
     setLoginModal = (o)=>{
       this.setState({isLoginModalOpen:o})
     };
@@ -77,7 +94,9 @@ class NavTop extends React.Component{
         this.setState({isSignUpModalOpen:false})
     };
     render(){
-        const {classes}=this.props;
+        const {classes, history}=this.props;
+        let {anchorEl} = this.state;
+        const open = Boolean(anchorEl);
         const user=sessionStorage.getItem('user');
         return(
             <div>
@@ -92,10 +111,27 @@ class NavTop extends React.Component{
                         </Typography>
                         {user
                             ?<div className={classes.avatarDiv}>
-                                <IconButton>
-                                    <AccountCircle/>
+                                <IconButton className={classes.iconButton} onClick={this.handleMenuOpen}>
+                                    <AccountCircle className={classes.icon}/>
                                 </IconButton>
-                                <Typography variant="caption">{user}</Typography>
+                                <Menu
+                                    id="menu-appbar"
+                                    anchorEl={anchorEl}
+                                    anchorOrigin={{
+                                        vertical: 'top',
+                                        horizontal: 'right',
+                                    }}
+                                    transformOrigin={{
+                                        vertical: 'top',
+                                        horizontal: 'right',
+                                    }}
+                                    open={open}
+                                    onClose={this.handleMenuClose}
+                                >
+                                    <MenuItem onClick={()=>{history.push('/personal-center');this.handleMenuClose();}}>个人中心</MenuItem>
+                                    <MenuItem onClick={()=>{this.handleLogout();this.handleMenuClose();}}>登出</MenuItem>
+                                </Menu>
+                                <Typography variant="title">{user}</Typography>
                             </div>
                             : <div>
                                 <Button color="inherit" onClick={this.handleLoginButton} >登陆</Button>

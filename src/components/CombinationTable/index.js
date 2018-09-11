@@ -25,10 +25,17 @@ const style ={
     }
 }
 
+function detail(props) {
+    return <Link to={"/single-combination/"+props.cid}/>
+}
+
 class CombinationTable extends Component{
     state = {
         page:0,
         rowsPerPage:10
+    };
+    handleChangePage=(e,p)=>{
+        this.setState({page:p})
     };
     render(){
         let {classes, rows}= this.props;
@@ -39,7 +46,7 @@ class CombinationTable extends Component{
                         <TableRow>
                             <CustomTableCell rowSpan={2} colSpan={1} className={classes.bigFont}>组合</CustomTableCell>
                             <CustomTableCell colSpan={8} className={classes.bigFont}>认购</CustomTableCell> <CustomTableCell colSpan={1}> </CustomTableCell><CustomTableCell colSpan={8} className={classes.bigFont}>认沽</CustomTableCell>
-                            <CustomTableCell rowSpan={2} className={classes.bigFont}> term1-term2 </CustomTableCell>
+                            <CustomTableCell rowSpan={2} className={classes.bigFont}>详情</CustomTableCell>
                         </TableRow>
                         <TableRow>
                             <CustomTableCell>合约代码</CustomTableCell> <CustomTableCell>持仓量</CustomTableCell>
@@ -56,12 +63,12 @@ class CombinationTable extends Component{
                         </TableRow>
                 </TableHead>
                 <TableBody>
-                    {rows.map((row,index)=>{
-                        let detail=<Link to={"/single-combination/"+row.cid}/>
+                    {rows.slice((page)*rowsPerPage,(page+1)*rowsPerPage).map((row,index)=>{
+                        let ou1 = row.optUp1.optionAbbr,od1 = row.optDown1.optionAbbr,ou2 = row.optUp2.optionAbbr, od2 = row.optDown2.optionAbbr
                         return([
                             <TableRow>
                                 <CustomTableCell rowSpan={2}> {index+1+(page)*rowsPerPage}</CustomTableCell>
-                                <CustomTableCell>{row.optUp1.optionAbbr}</CustomTableCell> <CustomTableCell>{row.optUp1.position}</CustomTableCell>
+                                <CustomTableCell><Link to={"/Option/"+row.optUp1.optionAbbr}>{row.optUp1.optionAbbr}</Link></CustomTableCell> <CustomTableCell>{row.optUp1.position}</CustomTableCell>
                                 <CustomTableCell>{row.optUp1.sellVolume}</CustomTableCell> <CustomTableCell>{row.optUp1.sellPrice}</CustomTableCell>
                                 <CustomTableCell>{row.optUp1.bidVolume}</CustomTableCell> <CustomTableCell>{row.optUp1.bidPrice}</CustomTableCell>
                                 <CustomTableCell>{row.optUp1.amplitude.toFixed(4)}</CustomTableCell> <CustomTableCell>{row.optUp1.latestPrice}</CustomTableCell>
@@ -71,11 +78,11 @@ class CombinationTable extends Component{
                                 <CustomTableCell>{row.optDown1.latestPrice}</CustomTableCell> <CustomTableCell>{row.optDown1.amplitude.toFixed(4)}</CustomTableCell>
                                 <CustomTableCell>{row.optDown1.bidPrice}</CustomTableCell> <CustomTableCell>{row.optDown1.bidVolume}</CustomTableCell>
                                 <CustomTableCell>{row.optDown1.sellPrice}</CustomTableCell> <CustomTableCell>{row.optDown1.sellVolume}</CustomTableCell>
-                                <CustomTableCell>{row.optDown1.position}</CustomTableCell> <CustomTableCell>{row.optDown1.optionAbbr}</CustomTableCell>
-                                <CustomTableCell rowSpan={2}> <Button color="secondary" variant="contained" component={detail}>详情</Button></CustomTableCell>
+                                <CustomTableCell>{row.optDown1.position}</CustomTableCell> <CustomTableCell><Link to={"/Option/"+row.optDown1.optionAbbr}>{row.optDown1.optionAbbr}</Link></CustomTableCell>
+                                <CustomTableCell rowSpan={2}> <Button color="secondary" variant="contained" component={Link} to={"single-combination/"+ou1+"/"+od1+"/"+od2+"/"+ou2}>详情</Button></CustomTableCell>
                             </TableRow>,
                             <TableRow>
-                                <CustomTableCell>{row.optUp2.optionAbbr}</CustomTableCell> <CustomTableCell>{row.optUp2.position}</CustomTableCell>
+                                <CustomTableCell><Link to={"/Option/"+row.optUp2.optionAbbr}>{row.optUp2.optionAbbr}</Link></CustomTableCell> <CustomTableCell>{row.optUp2.position}</CustomTableCell>
                                 <CustomTableCell>{row.optUp2.sellVolume}</CustomTableCell> <CustomTableCell>{row.optUp2.sellPrice}</CustomTableCell>
                                 <CustomTableCell>{row.optUp2.bidVolume}</CustomTableCell> <CustomTableCell>{row.optUp2.bidPrice}</CustomTableCell>
                                 <CustomTableCell>{row.optUp2.amplitude.toFixed(4)}</CustomTableCell> <CustomTableCell>{row.optUp2.latestPrice}</CustomTableCell>
@@ -85,12 +92,18 @@ class CombinationTable extends Component{
                                 <CustomTableCell>{row.optDown2.latestPrice}</CustomTableCell> <CustomTableCell>{row.optDown2.amplitude.toFixed(4)}</CustomTableCell>
                                 <CustomTableCell>{row.optDown2.bidPrice}</CustomTableCell> <CustomTableCell>{row.optDown2.bidVolume}</CustomTableCell>
                                 <CustomTableCell>{row.optDown2.sellPrice}</CustomTableCell> <CustomTableCell>{row.optDown2.sellVolume}</CustomTableCell>
-                                <CustomTableCell>{row.optDown2.position}</CustomTableCell> <CustomTableCell>{row.optDown2.optionAbbr}</CustomTableCell>
+                                <CustomTableCell>{row.optDown2.position}</CustomTableCell> <CustomTableCell><Link to={"/Option/"+row.optDown2.optionAbbr}>{row.optDown2.optionAbbr}</Link></CustomTableCell>
 
                             </TableRow>
                         ])
                     })}
                 </TableBody>
+                <TableFooter>
+                    <TableRow>
+                        <TablePagination rowsPerPage={rowsPerPage} page={page} count={rows.length} rowsPerPageOptions={[]}
+                                         onChangePage={this.handleChangePage}/>
+                    </TableRow>
+                </TableFooter>
             </Table>
         )
     }

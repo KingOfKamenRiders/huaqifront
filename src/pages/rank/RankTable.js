@@ -26,7 +26,7 @@ class RankTable extends Component {
     }
     handleChangePage=(e,p)=>{
         this.setState({page:p})
-    }
+    };
     render() {
         const {combs,rowsPerPage,page} = this.state
         return (
