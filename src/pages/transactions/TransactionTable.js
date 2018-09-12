@@ -20,6 +20,7 @@ import FilterListIcon from '@material-ui/icons/FilterList';
 import { lighten } from '@material-ui/core/styles/colorManipulator';
 import {findAllTransactions} from "../../api/transaction"
 import TableFooter from "@material-ui/core/TableFooter/TableFooter";
+import {Link} from "react-router-dom";
 
 //排序
 function desc(a, b, orderBy) {
@@ -224,24 +225,42 @@ class EnhancedTable extends React.Component {
     };
 
     handleClick = (event, tid) => {
-        const { selected } = this.state;
+        const {selected} = this.state;
+        console.log(selected);
         const selectedIndex = selected.indexOf(tid);
         let newSelected = [];
 
-        if (selectedIndex === -1) {
-            newSelected = newSelected.concat(selected, tid);
-        } else if (selectedIndex === 0) {
+        if (selectedIndex == -1 && selected.length > 0) {
+            //不存在
+            newSelected = newSelected.concat(selected,tid);
+            // console.log('add ' + newSelected);
+        }
+        else if(selectedIndex == -1 && selected.length == 0){
+            newSelected.push(tid);
+            // console.log('add only ' + newSelected)
+        }
+        //已存在
+        else if(selectedIndex > -1 && selected.length == 1){
             newSelected = newSelected.concat(selected.slice(1));
-        } else if (selectedIndex === selected.length - 1) {
-            newSelected = newSelected.concat(selected.slice(0, -1));
-        } else if (selectedIndex > 0) {
+            // console.log('delete the only')
+        }
+        else if(selectedIndex > -1 && selected.length > 1){
             newSelected = newSelected.concat(
                 selected.slice(0, selectedIndex),
                 selected.slice(selectedIndex + 1),
             );
+            // console.log('deleted ' + newSelected)
         }
 
+        console.log(newSelected)
         this.setState({ selected: newSelected });
+    };
+
+    handleDeleteButton=()=>{
+        this.setState({isDeleteModalOpen:true})
+    };
+    handleDeleteModalClose=()=>{
+        this.setState({isDeleteModalOpen:false})
     };
 
     handleChangePage = (event, page) => {
@@ -291,8 +310,10 @@ class EnhancedTable extends React.Component {
                                                 {n.time.replace('T',' ')}
                                                 </TableCell>
                                             <TableCell>
-                                                {n.optionAbbr}
-                                                </TableCell>
+                                                <Link to={"/Option/"+n.optionAbbr}>
+                                                    {n.optionAbbr}
+                                                </Link>
+                                            </TableCell>
                                             <TableCell>
                                                 { n.transactionDirection == 'SELL' ? '卖' : '买'}
                                             </TableCell>

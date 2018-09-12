@@ -1,6 +1,5 @@
 import React,{Component} from 'react'
 import TransactionTable from './TransactionTable'
-import Trans from './Trans'
 
 
 class Transaction extends Component{
@@ -10,7 +9,6 @@ class Transaction extends Component{
     render(){
         return(
             <div>
-                {/*<Trans/>*/}
                 <TransactionTable></TransactionTable>
             </div>
         )

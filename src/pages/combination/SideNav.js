@@ -5,10 +5,13 @@ import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import List from '@material-ui/core/List';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import ListItemText from "@material-ui/core/ListItemText/ListItemText";
 import ListItem from "@material-ui/core/ListItem/ListItem";
+import StarIcon from '@material-ui/icons/Star';
+import SendIcon from '@material-ui/icons/Send';
 
 const drawerWidth = 240;
 
@@ -34,6 +37,12 @@ class SideNav extends Component {
                 }}
             >
                 <List>
+                    <ListItem button>
+                        <ListItemIcon>
+                            <StarIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="Starred" />
+                    </ListItem>
                     <ListItem button >
                         <ListItemText primary="单个期权" classes={{primary:classes.itemText}}/>
                     </ListItem>
