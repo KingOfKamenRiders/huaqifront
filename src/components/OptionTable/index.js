@@ -11,25 +11,31 @@ import TablePagination from '@material-ui/core/TablePagination'
 import CustomTableCell from '../CustomTableCell'
 
 
-const style ={
-
-}
+const style =(theme)=>({
+    row: {
+        '&:nth-of-type(odd)': {
+            backgroundColor: theme.palette.background.default,
+        },
+    },
+    root:{
+        marginTop:20
+    }
+})
 class OptionTable extends Component{
     state = {
         page:0,
         rowsPerPage:10
     };
-    handlePageChange = (e,p)=>{
+    handleChangePage = (e,p)=>{
         this.setState({page:p})
     };
     render(){
-        let {rows,title} = this.props;
+        let {rows,title,classes} = this.props;
         let {page, rowsPerPage} = this.state;
         return(
-            <Table>
+            <Table className={classes.root}>
                 <TableHead>
                     <TableRow>
-                        <CustomTableCell>{title}</CustomTableCell>
                         <CustomTableCell>合约代码</CustomTableCell>
                         <CustomTableCell>持仓量</CustomTableCell>
                         <CustomTableCell>卖量</CustomTableCell>
@@ -43,8 +49,8 @@ class OptionTable extends Component{
                 </TableHead>
                 <TableBody>
                     {rows.map((row)=>(
-                        <TableRow>
-                            <CustomTableCell>{row.optAbbr}</CustomTableCell>
+                        <TableRow className={classes.row}>
+                            <CustomTableCell>{row.optionAbbr}</CustomTableCell>
                             <CustomTableCell>{row.position}</CustomTableCell>
                             <CustomTableCell>{row.sellVolume}</CustomTableCell>
                             <CustomTableCell>{row.sellPrice}</CustomTableCell>
