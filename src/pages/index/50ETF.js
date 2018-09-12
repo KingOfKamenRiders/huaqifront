@@ -42,6 +42,12 @@ const specialStyle = {
     color: '#1a7ad1'
 };
 
+const tableStyle = {
+    border: '0px',
+    width: '100%',
+    marginBottom: 20
+};
+
 let id = 0;
 function createData(name, calories, fat, carbs, protein) {
     id += 1;
@@ -53,17 +59,17 @@ class CustomizedTable extends Component{
 
     state={
         rows:[],
-    }
+    };
     componentDidMount(){
         getTargets((response)=>{this.setState({rows:response.data})})
     }
 
     render() {
         const {classes} = this.props;
-        const {rows} = this.state
+        const {rows} = this.state;
         return (
             <Paper className={classes.root}>
-                <Table className={classes.table} style={{border: '0px'}}>
+                <Table className={classes.table} style={tableStyle} scroll={{ y: 300 }}>
                     <TableHead>
                         <TableRow>
                             <CustomTableCell colSpan={8}>认购</CustomTableCell>
@@ -115,9 +121,6 @@ class CustomizedTable extends Component{
                                     <CustomTableCell >{row.optDown.sellVolume}</CustomTableCell>
                                     <CustomTableCell >{row.optDown.position}</CustomTableCell>
                                     <CustomTableCell>{row.optDown.optionAbbr}</CustomTableCell>
-
-
-
                                 </TableRow>
                             );
                         })}

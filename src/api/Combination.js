@@ -28,3 +28,26 @@ export function getCombinationByID(id,callback) {
     }).then((response)=>callback(response))
         .catch((error)=>console.log(error))
 }
+
+export function addInterestedComb(ou1,od1,od2,ou2,callback) {
+    axios.get('/CombinationBl/addInterestedCombination',{
+        params:{
+            userId:sessionStorage.getItem('user'),
+            optUp1:ou1,
+            optDown1:od1,
+            optDown2:od2,
+            optUp2:ou2,
+        }
+    }).then((response)=>callback(response))
+        .catch((error)=>console.log(error))
+}
+
+export function getInterestedComb(callback) {
+    axios.get('CombinationBl/getCombinationsByState',{
+        params:{
+            state:'INTERESTED',
+            userId:sessionStorage.getItem('user')
+        }
+    }).then((response)=>callback(response))
+        .catch((error)=>console.log(error))
+}

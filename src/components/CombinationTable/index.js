@@ -11,19 +11,28 @@ import CustomTableCell from '../../components/CustomTableCell'
 import {getOption} from "../../api/Option";
 import Button from '@material-ui/core/Button'
 
-const style ={
+const style = (theme)=>({
     root:{
 
     },
     specialFont:{
-        color:'yellow',
-        fontWeight:'bold'
+        borderLeft: '1px solid gainsboro',
+        borderRight: '1px solid gainsboro',
+        color: '#1a7ad1'
     },
     bigFont:{
         fontSize:18,
         fontWeight:'bold'
-    }
-}
+    },
+    row: {
+        '&:nth-of-type(4n+3)': {
+            backgroundColor: 'white',
+        },
+        '&:nth-of-type(4n+4)': {
+            backgroundColor: 'white',
+        },
+    },
+})
 
 function detail(props) {
     return <Link to={"/single-combination/"+props.cid}/>
@@ -46,6 +55,7 @@ class CombinationTable extends Component{
                         <TableRow>
                             <CustomTableCell rowSpan={2} colSpan={1} className={classes.bigFont}>组合</CustomTableCell>
                             <CustomTableCell colSpan={8} className={classes.bigFont}>认购</CustomTableCell> <CustomTableCell colSpan={1}> </CustomTableCell><CustomTableCell colSpan={8} className={classes.bigFont}>认沽</CustomTableCell>
+                            <CustomTableCell rowSpan={2} className={classes.bigFont}>价差</CustomTableCell>
                             <CustomTableCell rowSpan={2} className={classes.bigFont}>详情</CustomTableCell>
                         </TableRow>
                         <TableRow>
@@ -66,7 +76,7 @@ class CombinationTable extends Component{
                     {rows.slice((page)*rowsPerPage,(page+1)*rowsPerPage).map((row,index)=>{
                         let ou1 = row.optUp1.optionAbbr,od1 = row.optDown1.optionAbbr,ou2 = row.optUp2.optionAbbr, od2 = row.optDown2.optionAbbr
                         return([
-                            <TableRow>
+                            <TableRow className={classes.row}>
                                 <CustomTableCell rowSpan={2}> {index+1+(page)*rowsPerPage}</CustomTableCell>
                                 <CustomTableCell><Link to={"/Option/"+row.optUp1.optionAbbr}>{row.optUp1.optionAbbr}</Link></CustomTableCell> <CustomTableCell>{row.optUp1.position}</CustomTableCell>
                                 <CustomTableCell>{row.optUp1.sellVolume}</CustomTableCell> <CustomTableCell>{row.optUp1.sellPrice}</CustomTableCell>
@@ -79,9 +89,10 @@ class CombinationTable extends Component{
                                 <CustomTableCell>{row.optDown1.bidPrice}</CustomTableCell> <CustomTableCell>{row.optDown1.bidVolume}</CustomTableCell>
                                 <CustomTableCell>{row.optDown1.sellPrice}</CustomTableCell> <CustomTableCell>{row.optDown1.sellVolume}</CustomTableCell>
                                 <CustomTableCell>{row.optDown1.position}</CustomTableCell> <CustomTableCell><Link to={"/Option/"+row.optDown1.optionAbbr}>{row.optDown1.optionAbbr}</Link></CustomTableCell>
+                                <CustomTableCell rowSpan={2}>{row.difference.toFixed(4)} </CustomTableCell>
                                 <CustomTableCell rowSpan={2}> <Button color="secondary" variant="contained" component={Link} to={"single-combination/"+ou1+"/"+od1+"/"+od2+"/"+ou2}>详情</Button></CustomTableCell>
                             </TableRow>,
-                            <TableRow>
+                            <TableRow className={classes.row}>
                                 <CustomTableCell><Link to={"/Option/"+row.optUp2.optionAbbr}>{row.optUp2.optionAbbr}</Link></CustomTableCell> <CustomTableCell>{row.optUp2.position}</CustomTableCell>
                                 <CustomTableCell>{row.optUp2.sellVolume}</CustomTableCell> <CustomTableCell>{row.optUp2.sellPrice}</CustomTableCell>
                                 <CustomTableCell>{row.optUp2.bidVolume}</CustomTableCell> <CustomTableCell>{row.optUp2.bidPrice}</CustomTableCell>

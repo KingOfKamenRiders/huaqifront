@@ -159,3 +159,25 @@ tr {
     font-size: 18px;
 
 }
+
+.block {
+    background-color: #f3f1ed;
+    margin-left: 2.5%;
+    margin-bottom: 20px;
+}
+
+.col-3 .col {
+    width: 30%;
+}
+
+.balances {
+    color: lightcoral;
+}
+
+.account {
+    color: darkred;
+}
+
+.yesterday {
+    color: red;
+}

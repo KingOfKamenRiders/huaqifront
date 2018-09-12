@@ -5,6 +5,7 @@ import Grid from '@material-ui/core/Grid';
 import InfoTable from './InfoTable'
 import PriceDiffChart from "./PriceDiffChart";
 import {getOption} from "../../api/Option"
+import MockTable from '../Option/RiseFallChart'
 
 
 const style={};
@@ -33,7 +34,7 @@ class SingleCombination extends Component{
             <Grid container spacing={16}>
                 <Grid item xs={8}>
                     <Paper>
-                        <PriceDiffChart/>
+                        <MockTable/>
                     </Paper>
                 </Grid>
                 <Grid item xs={4}>

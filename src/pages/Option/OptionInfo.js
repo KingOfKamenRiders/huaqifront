@@ -11,6 +11,7 @@ import CustomTableCell from '../../components/CustomTableCell'
 import Button from '@material-ui/core/Button'
 import AddIcon from '@material-ui/icons/AddCircleOutline'
 import CreditCard from '@material-ui/icons/CreditCard'
+import {addInterestedOption} from "../../api/Option"
 
 const style={
     buttonWrapper:{
@@ -27,6 +28,19 @@ const style={
 }
 class OptionInfo extends Component{
 
+    handleCollect=()=>{
+        if(!sessionStorage.getItem('user')){
+            console.log('请先登陆')
+            return
+        }
+        addInterestedOption(this.props.option.optionAbbr,
+            (response)=>{
+            if(response.data==='SUCCESS')
+                alert('收藏成功')
+            else
+                alert('未能成功收藏')
+            })
+    }
 
     render(){
         let {option,classes}=this.props;
@@ -34,7 +48,7 @@ class OptionInfo extends Component{
         return(
             <div>
                 <Paper className={classes.buttonWrapper}>
-                    <Button variant="contained" color="secondary" className={classes.button}>
+                    <Button variant="contained" color="secondary" className={classes.button} onClick={this.handleCollect}>
                         <AddIcon/>
                         收藏
                     </Button>

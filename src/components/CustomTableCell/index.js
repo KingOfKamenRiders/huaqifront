@@ -6,14 +6,13 @@ const CustomTableCell = withStyles(theme => ({
         textAlign:'center',
     },
     head: {
-        backgroundColor: theme.palette.common.black,
-        color: theme.palette.common.white,
-        fontSize:15,
+        backgroundColor: theme.palette.common.white,
+        color: theme.palette.common.black,
+        textAlign:'center',
         padding:5,
+        fontSize:15,
     },
     body: {
-        backgroundColor: theme.palette.common.black,
-        color: theme.palette.common.white,
         padding:5
     },
 }))(TableCell);
