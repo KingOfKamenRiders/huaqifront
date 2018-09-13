@@ -32,3 +32,11 @@ export function findInterestedOptions(callback) {
     }).then((response)=>callback(response))
         .catch((error)=>console.log(error))
 }
+export function purchaseOption() {
+    axios.get('',{
+        params:{
+
+        }
+    }).then((response)=>{})
+        .catch((error)=>console.log(error))
+}

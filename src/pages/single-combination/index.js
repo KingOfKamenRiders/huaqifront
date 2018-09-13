@@ -8,7 +8,12 @@ import {getOption} from "../../api/Option"
 import MockTable from '../Option/RiseFallChart'
 
 
-const style={};
+const style={
+    root:{
+       // marginLeft:20,
+        marginRight:20,
+    }
+};
 
 class SingleCombination extends Component{
 
@@ -30,8 +35,9 @@ class SingleCombination extends Component{
 
     render(){
         let {optUp1,optDown1,optUp2,optDown2} = this.state;
+        let {classes} = this.props
         return(
-            <Grid container spacing={16}>
+            <Grid container spacing={16} className={classes.root}>
                 <Grid item xs={8}>
                     <Paper>
                         <MockTable/>

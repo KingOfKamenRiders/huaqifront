@@ -51,3 +51,16 @@ export function getInterestedComb(callback) {
     }).then((response)=>callback(response))
         .catch((error)=>console.log(error))
 }
+export function purchaseCombination(ou1,od1,od2,ou2,callback){
+    axios.get('',{
+        params:{
+            userId:sessionStorage.getItem('user'),
+            optUp1:ou1,
+            optDown1:od1,
+            optDown2:od2,
+            optUp2:ou2,
+        }
+    }).then((response)=>callback(response))
+        .catch((error)=>console.log(error))
+
+}
