@@ -1,6 +1,8 @@
 import React,{Component} from 'react'
 import styles from './index.css'
 import ETF from './50ETF.js'
+import IndividualCount from './IndividualCount'
+import axios from "axios/index";
 
 class Index extends Component{
     componentWillMount(){
@@ -40,6 +42,7 @@ class Index extends Component{
                             </div>
                         </div>
                     </div>
+                    <IndividualCount/>
                     <div className="new-content-component section">
                         <div className="content content-component">
                             <div
@@ -67,7 +70,7 @@ class Index extends Component{
                                         <div className="livePricesWrapper top50">
                                             <h2>实时价格</h2>
                                             <a className="heading-a">50ETF板块</a>
-                                            <ETF></ETF>
+                                            <ETF/>
                                         </div>
                                     </div>
                                 </div>
@@ -325,3 +328,4 @@ class Index extends Component{
 }
 
 export default Index
+
