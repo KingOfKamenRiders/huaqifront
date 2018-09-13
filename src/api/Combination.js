@@ -52,7 +52,7 @@ export function getInterestedComb(callback) {
         .catch((error)=>console.log(error))
 }
 export function purchaseCombination(ou1,od1,od2,ou2,callback){
-    axios.get('',{
+    axios.get('/CombinationBl/purchaseCombination',{
         params:{
             userId:sessionStorage.getItem('user'),
             optUp1:ou1,

@@ -10,6 +10,7 @@ import Button from '@material-ui/core/Button'
 import CreditCard from '@material-ui/icons/CreditCard'
 import AddIcon from '@material-ui/icons/AddCircleOutline'
 import {addInterestedComb} from "../../api/Combination"
+import TradeModal from './TradeModal'
 
 const style={
     buttonWrapper:{
@@ -27,6 +28,10 @@ const style={
 
 class InfoTable extends Component{
 
+
+    state = {
+        isTMOpen:false,
+    }
     handleCollect = ()=> {
         let {rows} = this.props
         if (!sessionStorage.getItem('user')) {
@@ -41,10 +46,17 @@ class InfoTable extends Component{
                 alert('未能成功收藏')
             })
     }
+    openTradeModal = ()=>{
+        this.setState((prev,props)=>({isTMOpen:!prev.isTMOpen}))
+    }
+    closeTradeModal = ()=>{
+        this.setState({isTMOpen:false})
+    }
     render(){
         let {rows,classes} = this.props
         if(!rows[0])
             return null;
+        let {isTMOpen} =this.state
         return(
             <div>
                 <Paper className={classes.buttonWrapper}>
@@ -52,10 +64,11 @@ class InfoTable extends Component{
                         <AddIcon/>
                         收藏
                     </Button>
-                    <Button variant="contained" color="secondary" className={classes.button}>
+                    <Button variant="contained" color="secondary" className={classes.button} onClick={this.openTradeModal}>
                         <CreditCard/>
                         购买
                     </Button>
+                    <TradeModal options={this.props.rows} open={isTMOpen} onClose={this.openTradeModal}/>
                 </Paper>
                 <Table>
                     <TableHead>
