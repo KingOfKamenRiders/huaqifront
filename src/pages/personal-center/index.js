@@ -4,7 +4,8 @@ import SideNav from './SideNav'
 import PersonInfo from './PersonInfo'
 import IncomeInfo from './IncomInfo'
 import {withStyles} from '@material-ui/core/styles'
-import Test from './test'
+
+
 const style = {
     root:{
         display:'flex',
