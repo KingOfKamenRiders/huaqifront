@@ -1,4 +1,5 @@
 import React,{Component} from 'react'
+import NewsDemo from './newsDemo'
 
 class News extends Component{
     componentWillMount(){
@@ -7,7 +8,7 @@ class News extends Component{
     render(){
         return(
             <div>
-                这里是新闻
+                <NewsDemo></NewsDemo>
             </div>
         )
     }

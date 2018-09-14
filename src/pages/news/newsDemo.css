@@ -1,0 +1,169 @@
+.headSite
+{
+    font-family:"Arial";
+    font-size:14px;
+    color:#979696;
+    margin-top:60px;
+    margin-left:81px;
+    width:1119px;
+}
+.headSite a
+{
+    color:#979696;
+}
+.headSiteIndex
+{
+    font-family:"Arial";
+    font-size:14px;
+    color:#1c1d1e;
+}
+.news_content
+{
+    margin-left:81px;
+    width:1119px;
+}
+.news_content ul
+{
+    list-style:none;
+    width:100%;
+}
+.news_content ul,.news_content ul li
+{
+    float:left;
+}
+.headNews
+{
+    margin-top:61px;
+    width:100%;
+}
+.headNews .date
+{
+    float:right;
+    font-family:"Arial";
+    font-size:14px;
+    color:#4c4948;
+    margin-top:13px;
+}
+.headNews .headimage,.headNews .headimage image
+{
+    width:224px;
+    height:132px;
+}
+.headNews .headbody
+{
+    width:881px;
+    font-family:"Arial";
+    font-size:14px;
+    line-height:20px;
+    color:#2b2828;
+    height:120px;
+    margin-left:14px;
+}
+.headNews .headbody p {
+    margin:0;
+    padding:0;
+}
+.news_list
+{
+    margin-top:54px;
+    width:100%;
+}
+.news
+{
+    line-height: 25px;
+    width: 100%;
+    font-family:"Arial";
+    font-size:14px;
+    color:#4c4948;
+}
+.news td
+{
+    background-position:0 50%;
+    background-repeat:no-repeat;
+    padding-left:10px;
+    width:100%;
+}
+.news td a
+{
+    cursor:pointer;
+    display:inline-block;
+    width:800px;
+    display:block;
+    overflow:hidden;
+    word-break:keep-all;
+    white-space:nowrap;
+    text-overflow:ellipsis;
+
+}
+.news td a:hover
+{
+    text-decoration:underline;
+}
+.news td .right
+{
+    float:right;
+}
+.news_body_title
+{
+    font-family:"Arial";
+    font-size:22px;
+    padding-left:17px;
+    color:#4c4948;
+    /*background:url(../image/point-red6X6.png) no-repeat scroll 0 10px;*/
+    width:950px;
+    overflow:hidden;
+    word-break:keep-all;
+    white-space:nowrap;
+    text-overflow:ellipsis;
+}
+.news_body_title img
+{
+    vertical-align:top;
+}
+.pager
+{
+    width:446px;
+    margin:auto;
+    margin-bottom:112px;
+    margin-top:63px;
+}
+.pageFirst,.pageLast
+{
+    width:53px;
+    height:22px;
+    line-height:22px;
+    border:1px solid #dcdbdb;
+    color:#4c4948;
+    text-align:center;
+    cursor:pointer;
+}
+.pageLast
+{
+    margin-left:10px;
+}
+.pageNum
+{
+    width:24px;
+    height:22px;
+    line-height:22px;
+    border:1px solid #dcdbdb;
+    color:#4c4948;
+    margin-left:10px;
+    text-align:center;
+    cursor:pointer;
+}
+.select
+{
+    background-color:#cd1b1d;
+    color:#fff;
+    border:1px solid #cd1b1d;
+}
+.grey
+{
+    color:#dcdbdb;
+}
+.ellipsis
+{
+    margin-left:10px;
+}
+
