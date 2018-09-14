@@ -32,8 +32,7 @@ class Option extends Component{
                 <Grid container spacing={16}>
                     <Grid item xs={8}>
                         <Paper>
-                            <RiseFallChart/>
-                            <RiseFallChart/>
+                            <RiseFallChart optionAbbr={this.props.match.params.id}/>
                         </Paper>
                     </Grid>
                     <Grid item xs={4}>

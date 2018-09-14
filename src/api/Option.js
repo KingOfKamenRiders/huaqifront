@@ -44,3 +44,12 @@ export function purchaseOption(opId,type,direction,num,callback) {
     }).then((response)=>callback(response))
         .catch((error)=>console.log(error))
 }
+
+export function getRiseFallChartData(oid,callback) {
+    axios.get('/OptionBl/drawOptionPrice',{
+        params:{
+            optionAbbr:oid,
+        }
+    }).then((response)=>callback(response))
+        .catch((error)=>console.log(error))
+}

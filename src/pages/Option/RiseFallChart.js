@@ -1,16 +1,32 @@
 import React,{Component} from 'react'
 import {withStyles} from '@material-ui/core/styles'
-import {Chart,Geom,Axis,Tooltip,Util}  from 'bizcharts'
-
+import {Chart,Geom,Axis,Tooltip}  from 'bizcharts'
+import {getRiseFallChartData} from "../../api/Option"
+import {axisStyle} from "../../util/ChartStyle"
 
 const  style={
     root:{
         border:'solid'
     }
 }
+
+const scale = {
+    time:{
+        tickCount:10,
+    },
+}
+
 class RiseFallChart extends Component{
 
+    componentWillMount(){
+        let {optionAbbr}  = this.props
+        getRiseFallChartData(optionAbbr,
+            (response)=>{
+            this.setState({data:response.data})
+            })
+    }
     state={
+        data:[],
         mockData:[
             {
                 time:'08:00',
@@ -43,16 +59,16 @@ class RiseFallChart extends Component{
         let {classes}=this.props
         let {mockData} = this.state
         return(
-            <Chart height={350} forceFit data={mockData} theme="dark" padding={['15%','5%']}>
-                <Axis name="time"/>
-                <Axis name="risefall"/>
+            <Chart height={350} forceFit data={this.state.data} padding={['15%','5%']} scale={scale}>
+                <Axis name="time" />
+                <Axis name="value"/>
                 <Tooltip/>
                 <Geom
                     type="line"
-                    position="time*risefall"
+                    position="time*value"
                     size={1}
-                    color="yellow"
-                    shape="smooth"/>
+                    color="red"
+                    shape="hv"/>
             </Chart>
         )
     }

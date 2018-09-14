@@ -35,12 +35,13 @@ class SingleCombination extends Component{
 
     render(){
         let {optUp1,optDown1,optUp2,optDown2} = this.state;
+        let {optUp1 : ou1,optDown1:od1,optUp2:ou2,optDown2:od2} = this.props.match.params
         let {classes} = this.props
         return(
             <Grid container spacing={16} className={classes.root}>
                 <Grid item xs={8}>
                     <Paper>
-                        <MockTable/>
+                        <PriceDiffChart ou1={ou1} od1={od1} ou2={ou2} od2={od2}/>
                     </Paper>
                 </Grid>
                 <Grid item xs={4}>

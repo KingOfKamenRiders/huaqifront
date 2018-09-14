@@ -64,3 +64,14 @@ export function purchaseCombination(ou1,od1,od2,ou2,callback){
         .catch((error)=>console.log(error))
 
 }
+export function getDifferenceChartData(ou1,od1,od2,ou2,callback) {
+    axios.get('/CombinationBl/drawDifference',{
+        params:{
+            optUp1:ou1,
+            optDown1:od1,
+            optDown2:od2,
+            optUp2:ou2,
+        }
+    }).then((response)=>callback(response))
+        .catch((error)=>console.log(error))
+}
