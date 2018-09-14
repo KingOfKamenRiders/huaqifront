@@ -108,7 +108,7 @@ class NavTop extends React.Component{
                             <MenuIcon />
                         </IconButton>
                         <Typography variant="title" color="inherit" className={classes.flex}>
-                            LOGO
+                            THE BOX
                         </Typography>
                         {user
                             ?<div className={classes.avatarDiv}>
