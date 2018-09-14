@@ -2,16 +2,15 @@ import React,{Component} from 'react'
 import {withStyles} from '@material-ui/core/styles'
 import Table from '@material-ui/core/Table'
 import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper'
-import TableFooter from '@material-ui/core/TableFooter'
 import CustomTableCell from '../../components/CustomTableCell'
 import Button from '@material-ui/core/Button'
 import AddIcon from '@material-ui/icons/AddCircleOutline'
 import CreditCard from '@material-ui/icons/CreditCard'
 import {addInterestedOption} from "../../api/Option"
+import TradeModal from './TradeModal'
 
 const style={
     buttonWrapper:{
@@ -27,6 +26,9 @@ const style={
     }
 }
 class OptionInfo extends Component{
+    state = {
+        isTMOpen:false,
+    }
 
     handleCollect=()=>{
         if(!sessionStorage.getItem('user')){
@@ -42,6 +44,9 @@ class OptionInfo extends Component{
             })
     }
 
+    handleTM = ()=>{
+        this.setState((prev)=>({isTMOpen:!prev.isTMOpen}))
+    }
     render(){
         let {option,classes}=this.props;
         let temp=option.amplitude;
@@ -52,10 +57,11 @@ class OptionInfo extends Component{
                         <AddIcon/>
                         收藏
                     </Button>
-                    <Button variant="contained" color="secondary" className={classes.button}>
+                    <Button variant="contained" color="secondary" className={classes.button} onClick={this.handleTM}>
                         <CreditCard/>
                         购买
                     </Button>
+                    <TradeModal open={this.state.isTMOpen} onClose={this.handleTM} optionAbbr={option&&option.optionAbbr}/>
                 </Paper>
                 <Table>
                     <TableHead>

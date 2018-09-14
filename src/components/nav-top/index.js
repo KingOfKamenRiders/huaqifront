@@ -22,6 +22,7 @@ const routes=['/','/rank','/transaction','/combination','/favorite','/news']
 const style={
     root: {
         flexGrow: 1,
+        marginBottom:10
     },
     flex: {
         flexGrow: 1,
@@ -99,7 +100,7 @@ class NavTop extends React.Component{
         const open = Boolean(anchorEl);
         const user=sessionStorage.getItem('user');
         return(
-            <div>
+            <div className={classes.root}>
                 <MuiThemeProvider theme={theme}>
                 <AppBar position="static">
                     <TooBar varient="dense">
