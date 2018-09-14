@@ -1,11 +1,10 @@
 import axios from 'axios'
 
 export function findAllTransactions(userId,callback) {
-    axios.get('/TransactionBl/findAllTransactions',{
+    axios.get('/TransactionBl/findTransactionByUser',{
         params:{
             userId:userId
         }
-    })
-        .then((data)=>callback(data))
+    }).then((response)=>callback(response))
         .catch((error)=>console.log(error))
 }

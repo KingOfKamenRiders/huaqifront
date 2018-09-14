@@ -19,6 +19,10 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import FilterListIcon from '@material-ui/icons/FilterList';
 import { lighten } from '@material-ui/core/styles/colorManipulator';
 import {findAllTransactions} from "../../api/transaction"
+import TableFooter from "@material-ui/core/TableFooter/TableFooter";
+import {Link} from "react-router-dom";
+
+let selectedTids=[];
 
 //排序
 function desc(a, b, orderBy) {
@@ -31,19 +35,34 @@ function desc(a, b, orderBy) {
     return 0;
 }
 
+function stableSort(array, cmp) {
+    const stabilizedThis = array.map((el, index) => [el, index]);
+    stabilizedThis.sort((a, b) => {
+        const order = cmp(a[0], b[0]);
+        if (order !== 0) return order;
+        return a[1] - b[1];
+    });
+    return stabilizedThis.map(el => el[0]);
+}
+
 function getSorting(order, orderBy) {
     return order === 'desc' ? (a, b) => desc(a, b, orderBy) : (a, b) => -desc(a, b, orderBy);
 }
 
+function handleDeleteButton(){
+    console.log('Click');
+    console.log(selectedTids);
+}
+
 const rows = [
-    { id: 'time', numeric: true, disablePadding: true, label: '时间' },
-    { id: 'name', numeric: false, disablePadding: false, label: '名称' },
-    { id: 'type1', numeric: false, disablePadding: false, label: '交易类型' },
-    { id: 'type2', numeric: false, disablePadding: false, label: '下单类型' },
-    {id:'num', numeric:true, disablePadding:false, label:'成交数量'},
+    {id: 'time', numeric: false, disablePadding: true, label: '时间' },
+    {id: 'optionAbbr', numeric: false, disablePadding: false, label: '名称' },
+    {id: 'transactionType', numeric: false, disablePadding: false, label: '交易类型' },
+    {id: 'transactionDirection', numeric: false, disablePadding: false, label: '下单类型' },
+    {id:'quantity', numeric:true, disablePadding:false, label:'成交数量'},
     {id:'price', numeric:true, disablePadding:false, label:'成交价'},
-    {id:'total', numeric:true, disablePadding:false, label:'成交额'},
-    {id:'charge', numeric:true, disablePadding:false, label:'手续费'},
+    {id:'sum', numeric:true, disablePadding:false, label:'成交额'},
+    {id:'fee', numeric:true, disablePadding:false, label:'手续费'},
 ];
 
 class EnhancedTableHead extends React.Component {
@@ -55,15 +74,16 @@ class EnhancedTableHead extends React.Component {
         const { onSelectAllClick, order, orderBy, numSelected, rowCount } = this.props;
 
         return (
+
             <TableHead>
                 <TableRow>
-                    <TableCell padding="checkbox">
-                        <Checkbox
-                            indeterminate={numSelected > 0 && numSelected < rowCount}
-                            checked={numSelected === rowCount}
-                            onChange={onSelectAllClick}
-                        />
-                    </TableCell>
+                    {/*<TableCell padding="checkbox">*/}
+                        {/*<Checkbox*/}
+                            {/*indeterminate={numSelected > 0 && numSelected < rowCount}*/}
+                            {/*checked={numSelected === rowCount}*/}
+                            {/*onChange={onSelectAllClick}*/}
+                        {/*/>*/}
+                    {/*</TableCell>*/}
                     {rows.map(row => {
                         return (
                             <TableCell
@@ -128,7 +148,7 @@ const toolbarStyles = theme => ({
     },
 });
 
-//工具条
+//顶部工具条
 let EnhancedTableToolbar = props => {
     const { numSelected, classes } = props;
 
@@ -149,22 +169,25 @@ let EnhancedTableToolbar = props => {
                     </Typography>
                 )}
             </div>
-            <div className={classes.spacer} />
-            <div className={classes.actions}>
-                {numSelected > 0 ? (
-                    <Tooltip title="Delete">
-                        <IconButton aria-label="Delete">
-                            <DeleteIcon />
-                        </IconButton>
-                    </Tooltip>
-                ) : (
-                    <Tooltip title="Filter list">
-                        <IconButton aria-label="Filter list">
-                            <FilterListIcon />
-                        </IconButton>
-                    </Tooltip>
-                )}
-            </div>
+             <div className={classes.spacer} />
+
+
+             {/*<div className={classes.actions}>*/}
+                 {/*{numSelected > 0 ? (*/}
+                     {/*<Tooltip title="Delete">*/}
+                         {/*<IconButton aria-label="Delete">*/}
+                             {/*<DeleteIcon onClick={handleDeleteButton()}/>*/}
+                         {/*</IconButton>*/}
+                     {/*</Tooltip>*/}
+                {/*) : (*/}
+                    {/*<Tooltip title="Filter list">*/}
+                        {/*<IconButton aria-label="Filter list">*/}
+                            {/*<FilterListIcon />*/}
+                        {/*</IconButton>*/}
+                    {/*</Tooltip>*/}
+                {/*)}*/}
+            {/*</div>*/}
+
         </Toolbar>
     );
 };
@@ -183,11 +206,12 @@ class EnhancedTable extends React.Component {
         selected: [],
         trans:[],
         page: 0,
-        rowsPerPage: 5,
+        rowsPerPage: 9,
     };
 
     componentDidMount(){
-        findAllTransactions((response)=>{
+        let userId = sessionStorage.getItem('user')
+        findAllTransactions('Default',(response)=>{
             this.setState({trans:response.data})
         },(error)=>console.log(error))
     }
@@ -205,42 +229,59 @@ class EnhancedTable extends React.Component {
 
     handleSelectAllClick = (event, checked) => {
         if (checked) {
-            this.setState(state => ({ selected: state.data.map(n => n.id) }));
+            this.setState(state => ({ selected: state.trans.map(n => n.tid) }));
+            selectedTids = this.state.selected;
             return;
         }
         this.setState({ selected: [] });
+        selectedTids = this.state.selected;
     };
 
-    handleClick = (event, id) => {
-        const { selected } = this.state;
-        const selectedIndex = selected.indexOf(id);
+    handleClick = (event, tid) => {
+        const {selected} = this.state;
+        const selectedIndex = selected.indexOf(tid);
         let newSelected = [];
 
-        if (selectedIndex === -1) {
-            newSelected = newSelected.concat(selected, id);
-        } else if (selectedIndex === 0) {
+        if (selectedIndex == -1 && selected.length > 0) {
+            //不存在
+            newSelected = newSelected.concat(selected,tid);
+            // console.log('add ' + newSelected);
+        }
+        else if(selectedIndex == -1 && selected.length == 0){
+            newSelected.push(tid);
+            // console.log('add only ' + newSelected)
+        }
+        //已存在
+        else if(selectedIndex > -1 && selected.length == 1){
             newSelected = newSelected.concat(selected.slice(1));
-        } else if (selectedIndex === selected.length - 1) {
-            newSelected = newSelected.concat(selected.slice(0, -1));
-        } else if (selectedIndex > 0) {
+            // console.log('delete the only')
+        }
+        else if(selectedIndex > -1 && selected.length > 1){
             newSelected = newSelected.concat(
                 selected.slice(0, selectedIndex),
                 selected.slice(selectedIndex + 1),
             );
+            // console.log('deleted ' + newSelected)
         }
 
         this.setState({ selected: newSelected });
+        selectedTids = this.state.selected;
     };
 
     handleChangePage = (event, page) => {
         this.setState({ page });
     };
 
-    handleChangeRowsPerPage = event => {
-        this.setState({ rowsPerPage: event.target.value });
-    };
+    // handleDeleteButton=()=>{
+    //     this.setState({isDeleteModalOpen:true});
+    //     console.log(this.state.selected)
+    // };
+    //
+    // handleDeleteModalClose=()=>{
+    //     this.setState({isDeleteModalOpen:false})
+    // };
 
-    isSelected = id => this.state.selected.indexOf(id) !== -1;
+    isSelected = tid => this.state.selected.indexOf(tid) !== -1;
 
     render() {
         const { classes } = this.props;
@@ -261,33 +302,50 @@ class EnhancedTable extends React.Component {
                             rowCount={trans.length}
                         />
                         <TableBody>
-                            {trans
-                                .sort(getSorting(order, orderBy))
+                            {stableSort(trans, getSorting(order, orderBy))
                                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                 .map(n => {
-                                    const isSelected = this.isSelected(n.id);
+                                    const isSelected = this.isSelected(n.tid);
                                     return (
                                         <TableRow
                                             hover
-                                            onClick={event => this.handleClick(event, n.id)}
+                                            onClick={event => this.handleClick(event, n.tid)}
                                             role="checkbox"
                                             aria-checked={isSelected}
                                             tabIndex={-1}
-                                            key={n.id}
+                                            key={n.tid}
                                             selected={isSelected}
                                         >
-                                            <TableCell padding="checkbox">
-                                                <Checkbox checked={isSelected} />
-                                            </TableCell>
+                                            {/*<TableCell padding="checkbox">*/}
+                                                {/*<Checkbox checked={isSelected} />*/}
+                                            {/*</TableCell>*/}
 
-                                            <TableCell numeric>{n.time}</TableCell>
-                                            <TableCell>{n.name}</TableCell>
-                                            <TableCell>{n.type1}</TableCell>
-                                            <TableCell>{n.type2}</TableCell>
-                                            <TableCell numeric>{n.num}</TableCell>
-                                            <TableCell numeric>{n.price}</TableCell>
-                                            <TableCell numeric>{n.total}</TableCell>
-                                            <TableCell numeric>{n.charge}</TableCell>
+                                            <TableCell component="th" scope="row" padding="none">
+                                                {n.time.replace('T',' ')}
+                                                </TableCell>
+                                            <TableCell>
+                                                <Link to={"/Option/"+n.optionAbbr}>
+                                                    {n.optionAbbr}
+                                                </Link>
+                                            </TableCell>
+                                            <TableCell>
+                                                { n.transactionDirection == 'SELL' ? '卖' : '买'}
+                                            </TableCell>
+                                            <TableCell>
+                                                {n.transactionType == 'OPEN' ? '开仓' : '平仓'}{ n.transactionDirection == 'SELL' ? '卖出' : '买入'}
+                                            </TableCell>
+                                            <TableCell numeric>
+                                                {n.quantity}
+                                            </TableCell>
+                                            <TableCell numeric>
+                                                {n.price}
+                                            </TableCell>
+                                            <TableCell numeric>
+                                                {n.sum}
+                                            </TableCell>
+                                            <TableCell numeric>
+                                                {n.fee}
+                                            </TableCell>
                                         </TableRow>
                                     );
                                 })}
@@ -297,22 +355,19 @@ class EnhancedTable extends React.Component {
                                 </TableRow>
                             )}
                         </TableBody>
+                        <TableFooter>
+                            <TableRow>
+                                <TablePagination
+                                    count={trans.length}
+                                    rowsPerPage={rowsPerPage}
+                                    page={page}
+                                    rowsPerPageOptions={[]}
+                                    onChangePage={this.handleChangePage}
+                                />
+                            </TableRow>
+                        </TableFooter>
                     </Table>
                 </div>
-                <TablePagination
-                    component="div"
-                    count={trans.length}
-                    rowsPerPage={rowsPerPage}
-                    page={page}
-                    backIconButtonProps={{
-                        'aria-label': 'Previous Page',
-                    }}
-                    nextIconButtonProps={{
-                        'aria-label': 'Next Page',
-                    }}
-                    onChangePage={this.handleChangePage}
-                    onChangeRowsPerPage={this.handleChangeRowsPerPage}
-                />
             </Paper>
         );
     }
@@ -321,10 +376,17 @@ class EnhancedTable extends React.Component {
 const styles = theme => ({
     root: {
         width: '100%',
-        // marginTop: theme.spacing.unit * 3,
     },
     table: {
-        minWidth: 800,
+        marginBottom: "0",
+        marginLeft:20,
+        marginRight:20,
+        width: "98%",
+        maxWidth: "100%",
+        backgroundColor: "transparent",
+        borderSpacing: "0",
+        borderCollapse: "collapse",
+        textAlign:'center',
     },
     tableWrapper: {
         overflowX: 'auto',

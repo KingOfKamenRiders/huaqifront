@@ -1,11 +1,16 @@
 import React,{Component} from 'react'
 import OptionTable from '../../components/OptionTable'
 import CombinationTable from '../../components/CombinationTable'
-import {getRankedCombinations} from "../../api/rank";
 import Grid from "@material-ui/core/Grid/Grid";
 import Paper from "@material-ui/core/Paper/Paper";
 import {findInterestedOptions} from "../../api/Option"
 import {getInterestedComb} from "../../api/Combination"
+import List from "@material-ui/core/List/List";
+import ListItem from "@material-ui/core/ListItem/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon/ListItemIcon";
+import StarIcon from "@material-ui/core/SvgIcon/SvgIcon";
+import ListItemText from "@material-ui/core/ListItemText/ListItemText";
+import Divider from "@material-ui/core/Divider/Divider";
 
 class Combination extends Component{
     componentWillMount(){
@@ -17,19 +22,44 @@ class Combination extends Component{
     state={
       combinations:[],
         options:[],
+        single:false,
+        combin:true
+    };
+    showSingle=()=>{
+        this.setState({single:false,combin:true});
+    };
+    showConmbinations=()=>{
+        this.setState({combin:false,single:true});
     };
     render(){
-        let {combinations,options}= this.state;
+        let {classes} = this.props;
+        let {combinations,options,single,combin}= this.state;
         return(
             <Grid container spacing={16}>
-                <Grid item xs={3}>
-                    <Paper>
-
+                <Grid item xs={2}>
+                    <Paper style={{marginTop:20}}>
+                        <List>
+                            <ListItem button onClick={this.showSingle}>
+                                <ListItemIcon>
+                                    <StarIcon/>
+                                </ListItemIcon>
+                                <ListItemText primary="单个期权" />
+                            </ListItem>
+                            <ListItem button onClick={this.showConmbinations}>
+                                <ListItemIcon>
+                                    <StarIcon />
+                                </ListItemIcon>
+                                <ListItemText primary="期权组合"/>
+                            </ListItem>
+                        </List>
+                        <Divider />
                     </Paper>
                 </Grid>
-                <Grid item xs={9}>
-                    <Paper>
+                <Grid item xs={10}>
+                    <Paper hidden={this.state.single}>
                         <OptionTable rows={options}/>
+                    </Paper>
+                    <Paper hidden={this.state.combin} style={{marginTop:20}}>
                         <CombinationTable rows={combinations}/>
                     </Paper>
                 </Grid>
@@ -37,5 +67,6 @@ class Combination extends Component{
         )
     }
 }
+
 
 export default Combination
