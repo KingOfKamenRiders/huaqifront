@@ -51,3 +51,13 @@ export function getInterestedComb(callback) {
     }).then((response)=>callback(response))
         .catch((error)=>console.log(error))
 }
+
+export function getCurrentCombinations(callback) {
+    axios.get('CombinationBl/getCurrentCombinations',{
+        params:{
+            state:'INTERESTED',
+            userId:sessionStorage.getItem('user')
+        }
+    }).then((response)=>callback(response))
+        .catch((error)=>console.log(error))
+}

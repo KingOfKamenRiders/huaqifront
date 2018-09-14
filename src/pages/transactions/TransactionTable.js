@@ -22,6 +22,8 @@ import {findAllTransactions} from "../../api/transaction"
 import TableFooter from "@material-ui/core/TableFooter/TableFooter";
 import {Link} from "react-router-dom";
 
+let selectedTids=[];
+
 //排序
 function desc(a, b, orderBy) {
     if (b[orderBy] < a[orderBy]) {
@@ -46,6 +48,12 @@ function stableSort(array, cmp) {
 function getSorting(order, orderBy) {
     return order === 'desc' ? (a, b) => desc(a, b, orderBy) : (a, b) => -desc(a, b, orderBy);
 }
+
+function handleDeleteButton(){
+    console.log('Click');
+    console.log(selectedTids);
+}
+
 const rows = [
     {id: 'time', numeric: false, disablePadding: true, label: '时间' },
     {id: 'optionAbbr', numeric: false, disablePadding: false, label: '名称' },
@@ -69,13 +77,13 @@ class EnhancedTableHead extends React.Component {
 
             <TableHead>
                 <TableRow>
-                    <TableCell padding="checkbox">
-                        <Checkbox
-                            indeterminate={numSelected > 0 && numSelected < rowCount}
-                            checked={numSelected === rowCount}
-                            onChange={onSelectAllClick}
-                        />
-                    </TableCell>
+                    {/*<TableCell padding="checkbox">*/}
+                        {/*<Checkbox*/}
+                            {/*indeterminate={numSelected > 0 && numSelected < rowCount}*/}
+                            {/*checked={numSelected === rowCount}*/}
+                            {/*onChange={onSelectAllClick}*/}
+                        {/*/>*/}
+                    {/*</TableCell>*/}
                     {rows.map(row => {
                         return (
                             <TableCell
@@ -161,22 +169,25 @@ let EnhancedTableToolbar = props => {
                     </Typography>
                 )}
             </div>
-            <div className={classes.spacer} />
-            <div className={classes.actions}>
-                {numSelected > 0 ? (
-                    <Tooltip title="Delete">
-                        <IconButton aria-label="Delete">
-                            <DeleteIcon />
-                        </IconButton>
-                    </Tooltip>
-                ) : (
-                    <Tooltip title="Filter list">
-                        <IconButton aria-label="Filter list">
-                            <FilterListIcon />
-                        </IconButton>
-                    </Tooltip>
-                )}
-            </div>
+             <div className={classes.spacer} />
+
+
+             {/*<div className={classes.actions}>*/}
+                 {/*{numSelected > 0 ? (*/}
+                     {/*<Tooltip title="Delete">*/}
+                         {/*<IconButton aria-label="Delete">*/}
+                             {/*<DeleteIcon onClick={handleDeleteButton()}/>*/}
+                         {/*</IconButton>*/}
+                     {/*</Tooltip>*/}
+                {/*) : (*/}
+                    {/*<Tooltip title="Filter list">*/}
+                        {/*<IconButton aria-label="Filter list">*/}
+                            {/*<FilterListIcon />*/}
+                        {/*</IconButton>*/}
+                    {/*</Tooltip>*/}
+                {/*)}*/}
+            {/*</div>*/}
+
         </Toolbar>
     );
 };
@@ -219,14 +230,15 @@ class EnhancedTable extends React.Component {
     handleSelectAllClick = (event, checked) => {
         if (checked) {
             this.setState(state => ({ selected: state.trans.map(n => n.tid) }));
+            selectedTids = this.state.selected;
             return;
         }
         this.setState({ selected: [] });
+        selectedTids = this.state.selected;
     };
 
     handleClick = (event, tid) => {
         const {selected} = this.state;
-        console.log(selected);
         const selectedIndex = selected.indexOf(tid);
         let newSelected = [];
 
@@ -252,22 +264,24 @@ class EnhancedTable extends React.Component {
             // console.log('deleted ' + newSelected)
         }
 
-        console.log(newSelected)
         this.setState({ selected: newSelected });
-    };
-
-    handleDeleteButton=()=>{
-        this.setState({isDeleteModalOpen:true})
-    };
-    handleDeleteModalClose=()=>{
-        this.setState({isDeleteModalOpen:false})
+        selectedTids = this.state.selected;
     };
 
     handleChangePage = (event, page) => {
         this.setState({ page });
     };
 
-    isSelected = id => this.state.selected.indexOf(id) !== -1;
+    // handleDeleteButton=()=>{
+    //     this.setState({isDeleteModalOpen:true});
+    //     console.log(this.state.selected)
+    // };
+    //
+    // handleDeleteModalClose=()=>{
+    //     this.setState({isDeleteModalOpen:false})
+    // };
+
+    isSelected = tid => this.state.selected.indexOf(tid) !== -1;
 
     render() {
         const { classes } = this.props;
@@ -302,9 +316,9 @@ class EnhancedTable extends React.Component {
                                             key={n.tid}
                                             selected={isSelected}
                                         >
-                                            <TableCell padding="checkbox">
-                                                <Checkbox checked={isSelected} />
-                                            </TableCell>
+                                            {/*<TableCell padding="checkbox">*/}
+                                                {/*<Checkbox checked={isSelected} />*/}
+                                            {/*</TableCell>*/}
 
                                             <TableCell component="th" scope="row" padding="none">
                                                 {n.time.replace('T',' ')}
@@ -362,15 +376,17 @@ class EnhancedTable extends React.Component {
 const styles = theme => ({
     root: {
         width: '100%',
-        textAlign:'center',
     },
     table: {
         marginBottom: "0",
-        width: "100%",
+        marginLeft:20,
+        marginRight:20,
+        width: "98%",
         maxWidth: "100%",
         backgroundColor: "transparent",
         borderSpacing: "0",
-        borderCollapse: "collapse"
+        borderCollapse: "collapse",
+        textAlign:'center',
     },
     tableWrapper: {
         overflowX: 'auto',

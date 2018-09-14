@@ -41,10 +41,7 @@ class SideNav extends Component {
                         <ListItemIcon>
                             <StarIcon />
                         </ListItemIcon>
-                        <ListItemText primary="Starred" />
-                    </ListItem>
-                    <ListItem button >
-                        <ListItemText primary="单个期权" classes={{primary:classes.itemText}}/>
+                        <ListItemText primary="单个期权" />
                     </ListItem>
                     <ListItem button >
                         <ListItemText primary="期权组合" classes={{primary:classes.itemText}}/>

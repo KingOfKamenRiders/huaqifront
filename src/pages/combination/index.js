@@ -1,43 +1,71 @@
 import React,{Component} from 'react'
-import COM from '../combination/combinationTable'
-import SideNav from '../combination/SideNav'
-import {withStyles} from "@material-ui/core";
-
-const style=(theme)=>{
-    return{
-        content: {
-            flexGrow: 1,
-            backgroundColor: theme.palette.background.default,
-            padding: theme.spacing.unit * 3,
-            minWidth: 0,
-        },
-        root: {
-            paddingTop:theme.spacing.unit * 3,
-            flexGrow: 1,
-            zIndex: 1,
-            overflow: 'hidden',
-            position: 'relative',
-            display: 'flex',
-        },
-    }
-}
+import {getCurrentCombinations} from "../../api/Combination";
+import {findInterestedOptions} from "../../api/Option";
+import Grid from "@material-ui/core/Grid/Grid";
+import Paper from "@material-ui/core/Paper/Paper";
+import List from "@material-ui/core/List/List";
+import ListItem from "@material-ui/core/ListItem/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon/ListItemIcon";
+import StarIcon from "@material-ui/core/SvgIcon/SvgIcon";
+import ListItemText from "@material-ui/core/ListItemText/ListItemText";
+import Divider from "@material-ui/core/Divider/Divider";
+import OptionTable from "../../components/OptionTable";
+import CombinationTable from "../../components/CombinationTable";
 
 class Combination extends Component{
     componentWillMount(){
         this.props.onRouteChange(3);
+        getCurrentCombinations((response)=>this.setState({combinations:response.data})
+            ,(error)=>console.log(error));
+        findInterestedOptions((response)=>this.setState({options:response.data}))
     }
+    state={
+        combinations:[],
+        options:[],
+        single:false,
+        combin:true
+    };
+    showSingle=()=>{
+        this.setState({single:false,combin:true});
+    };
+    showConmbinations=()=>{
+        this.setState({combin:false,single:true});
+    };
     render(){
-        const {classes} =this.props
+        let {classes} = this.props;
+        let {combinations,options,single,combin}= this.state;
         return(
-            <div className={classes.root}>
-                <SideNav/>
-                <main className={classes.content}>
-                    <COM/>
-                </main>
-
-            </div>
+            <Grid container spacing={16}>
+                <Grid item xs={2}>
+                    <Paper style={{marginTop:20}}>
+                        <List>
+                            <ListItem button onClick={this.showSingle}>
+                                <ListItemIcon>
+                                    <StarIcon/>
+                                </ListItemIcon>
+                                <ListItemText primary="单个期权" />
+                            </ListItem>
+                            <ListItem button onClick={this.showConmbinations}>
+                                <ListItemIcon>
+                                    <StarIcon />
+                                </ListItemIcon>
+                                <ListItemText primary="期权组合"/>
+                            </ListItem>
+                        </List>
+                        <Divider />
+                    </Paper>
+                </Grid>
+                <Grid item xs={10}>
+                    <Paper hidden={this.state.single}>
+                        <OptionTable rows={options}/>
+                    </Paper>
+                    <Paper hidden={this.state.combin} style={{marginTop:20}}>
+                        <CombinationTable rows={combinations}/>
+                    </Paper>
+                </Grid>
+            </Grid>
         )
     }
 }
 
-export default withStyles(style)(Combination)
+export default Combination
