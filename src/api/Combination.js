@@ -75,3 +75,7 @@ export function getDifferenceChartData(ou1,od1,od2,ou2,callback) {
     }).then((response)=>callback(response))
         .catch((error)=>console.log(error))
 }
+
+export function getCurrentCombinations() {
+    
+}
