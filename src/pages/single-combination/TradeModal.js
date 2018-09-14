@@ -59,8 +59,8 @@ class TradeModal extends Component{
                             <Grid item container xs={12} key={option&&option.optionAbbr}  justify="center" alignItems="center">
                                 <Grid item xs={4}>
                                     <ButtonGroup>
-                                        <Button color="secondary" outline   active={option&&((isKaiCang&&option.optionType=='UP')||(!isKaiCang&&option.optionType=='DOWN'))}>买</Button>
-                                        <Button color="secondary" outline  active={option&&((isKaiCang&&option.optionType=='DOWN')||(!isKaiCang&&option.optionType=='UP'))}>卖</Button>
+                                        <Button color="secondary" outline   active={option&&((isKaiCang&&option.optionType==='UP')||(!isKaiCang&&option.optionType==='DOWN'))}>买</Button>
+                                        <Button color="secondary" outline  active={option&&((isKaiCang&&option.optionType==='DOWN')||(!isKaiCang&&option.optionType==='UP'))}>卖</Button>
                                     </ButtonGroup>
                                 </Grid>
                                 <Grid item xs={4}>

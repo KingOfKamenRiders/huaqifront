@@ -8,7 +8,6 @@ import TableRow from '@material-ui/core/TableRow';
 import TableFooter from '@material-ui/core/TableFooter'
 import TablePagination from '@material-ui/core/TablePagination'
 import CustomTableCell from '../../components/CustomTableCell'
-import {getOption} from "../../api/Option";
 import Button from '@material-ui/core/Button'
 
 const style = (theme)=>({
@@ -34,9 +33,6 @@ const style = (theme)=>({
     },
 })
 
-function detail(props) {
-    return <Link to={"/single-combination/"+props.cid}/>
-}
 
 class CombinationTable extends Component{
     state = {

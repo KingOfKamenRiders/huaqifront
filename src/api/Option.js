@@ -32,11 +32,15 @@ export function findInterestedOptions(callback) {
     }).then((response)=>callback(response))
         .catch((error)=>console.log(error))
 }
-export function purchaseOption() {
-    axios.get('',{
+export function purchaseOption(opId,type,direction,num,callback) {
+    axios.get('/TransactionBl/purchaseOption',{
         params:{
-
+            optionAbbr:opId,
+            type:type,
+            direction:direction,
+            num:num,
+            userId:sessionStorage.getItem('user')
         }
-    }).then((response)=>{})
+    }).then((response)=>callback(response))
         .catch((error)=>console.log(error))
 }

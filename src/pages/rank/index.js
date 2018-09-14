@@ -1,8 +1,6 @@
 import React,{Component} from 'react'
 import {withStyles}  from '@material-ui/core/styles'
-import RankTable from './RankTable'
 import SideNav from './SideNav'
-import Button from '@material-ui/core/Button'
 import CombinationTable from '../../components/CombinationTable'
 import {getRankedCombinations} from "../../api/rank"
 
