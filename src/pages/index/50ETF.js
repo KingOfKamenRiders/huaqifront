@@ -8,6 +8,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import {getTargets} from "../../api/Option"
+import {Link} from "react-router-dom";
 
 const CustomTableCell = withStyles(theme => ({
     head: {
@@ -102,7 +103,11 @@ class CustomizedTable extends Component{
                         {rows.map(row => {
                             return (
                                 <TableRow className={classes.row} key={row.id}>
-                                    <CustomTableCell>{row.optUp.optionAbbr}</CustomTableCell>
+                                    <CustomTableCell>
+                                        <Link to={"/Option/"+row.optUp.optionAbbr}>
+                                            {row.optUp.optionAbbr}
+                                        </Link>
+                                    </CustomTableCell>
                                     <CustomTableCell >{row.optUp.position}</CustomTableCell>
                                     <CustomTableCell >{row.optUp.sellVolume}</CustomTableCell>
                                     <CustomTableCell >{row.optUp.sellPrice}</CustomTableCell>
@@ -120,7 +125,11 @@ class CustomizedTable extends Component{
                                     <CustomTableCell >{row.optDown.sellPrice}</CustomTableCell>
                                     <CustomTableCell >{row.optDown.sellVolume}</CustomTableCell>
                                     <CustomTableCell >{row.optDown.position}</CustomTableCell>
-                                    <CustomTableCell>{row.optDown.optionAbbr}</CustomTableCell>
+                                    <CustomTableCell>
+                                        <Link to={"/Option/"+row.optDown.optionAbbr}>
+                                            {row.optDown.optionAbbr}
+                                        </Link>
+                                    </CustomTableCell>
                                 </TableRow>
                             );
                         })}

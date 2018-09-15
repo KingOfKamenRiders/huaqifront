@@ -21,6 +21,7 @@ import { lighten } from '@material-ui/core/styles/colorManipulator';
 import {findAllTransactions} from "../../api/transaction"
 import TableFooter from "@material-ui/core/TableFooter/TableFooter";
 import {Link} from "react-router-dom";
+import {findInterestedOptions} from "../../api/Option";
 
 let selectedTids=[];
 
@@ -210,10 +211,7 @@ class EnhancedTable extends React.Component {
     };
 
     componentDidMount(){
-        let userId = sessionStorage.getItem('user')
-        findAllTransactions('Default',(response)=>{
-            this.setState({trans:response.data})
-        },(error)=>console.log(error))
+        findAllTransactions((response)=>this.setState({trans:response.data}))
     }
 
     handleRequestSort = (event, property) => {
@@ -335,16 +333,16 @@ class EnhancedTable extends React.Component {
                                                 {n.transactionType == 'OPEN' ? '开仓' : '平仓'}{ n.transactionDirection == 'SELL' ? '卖出' : '买入'}
                                             </TableCell>
                                             <TableCell numeric>
-                                                {n.quantity}
+                                                {n.quantity.toFixed(4)}
                                             </TableCell>
                                             <TableCell numeric>
-                                                {n.price}
+                                                {n.price.toFixed(4)}
                                             </TableCell>
                                             <TableCell numeric>
-                                                {n.sum}
+                                                {n.sum.toFixed(4)}
                                             </TableCell>
                                             <TableCell numeric>
-                                                {n.fee}
+                                                {n.fee.toFixed(4)}
                                             </TableCell>
                                         </TableRow>
                                     );
@@ -387,6 +385,7 @@ const styles = theme => ({
         borderSpacing: "0",
         borderCollapse: "collapse",
         textAlign:'center',
+        fontSize:18,
     },
     tableWrapper: {
         overflowX: 'auto',

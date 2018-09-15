@@ -7,6 +7,7 @@ import TableRow from '@material-ui/core/TableRow';
 import TableFooter from '@material-ui/core/TableFooter'
 import TablePagination from '@material-ui/core/TablePagination'
 import CustomTableCell from '../CustomTableCell'
+import {Link} from "react-router-dom";
 
 
 const style =(theme)=>({
@@ -48,7 +49,11 @@ class OptionTable extends Component{
                 <TableBody>
                     {rows.map((row)=>(
                         <TableRow className={classes.row}>
-                            <CustomTableCell>{row.optionAbbr}</CustomTableCell>
+                            <CustomTableCell>
+                                <Link to={"/Option/"+row.optionAbbr}>
+                                    {row.optionAbbr}
+                                </Link>
+                            </CustomTableCell>
                             <CustomTableCell>{row.position}</CustomTableCell>
                             <CustomTableCell>{row.sellVolume}</CustomTableCell>
                             <CustomTableCell>{row.sellPrice}</CustomTableCell>

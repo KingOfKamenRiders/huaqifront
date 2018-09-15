@@ -76,6 +76,14 @@ export function getDifferenceChartData(ou1,od1,od2,ou2,callback) {
         .catch((error)=>console.log(error))
 }
 
-export function getCurrentCombinations() {
+export function getCurrentCombinations(callback) {
+    axios.get('/CombinationBl/getCombinationsByState',{
+        params:{
+            state:'PURCHASED',
+            userId:sessionStorage.getItem('user')
+        }
+    }).then((response)=>callback(response))
+        .catch((error)=>console.log(error))
+
     
 }

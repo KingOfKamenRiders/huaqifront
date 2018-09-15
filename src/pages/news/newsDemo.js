@@ -86,6 +86,9 @@ class NewsDemo extends Component{
                                 <div className="pageNum " onClick="pagePNClick(-1)">&lt;</div>
                             </li>
                             <li>
+                                <div className="pageNum select" onClick="pageNumberClick(1)">1</div>
+                            </li>
+                            <li>
                                 <div className="ellipsis">...</div>
                             </li>
                             <li>
@@ -101,7 +104,7 @@ class NewsDemo extends Component{
                                 <div className="pageNum " onClick="pageNumberClick(10)">10</div>
                             </li>
                             <li>
-                                <div className="pageNum select" onClick="pageNumberClick(11)">11</div>
+                                <div className="pageNum" onClick="pageNumberClick(11)">11</div>
                             </li>
                             <li>
                                 <div className="pageNum grey" onClick="pagePNClick(1)">&gt;</div>
