@@ -6,32 +6,46 @@ import {getTargets} from "../../api/Option";
 
 class IndividualCount extends Component{
     state={
-        balance: {},
-        income: {},
-        incomeYesterday: {}
+        balance: Number,
+        income: Number,
+        incomeYesterday: Number,
+        displayName: 'none',
     };
     componentDidMount(){
-        getIndividualCount((response)=>{this.setState({balance: response.data})});
-        getIncome((response)=>{this.setState({income: response.data})});
-        getIncomeYesterday((response)=>{this.setState({incomeYesterday: response.data})})
-    }
+        getIndividualCount((response)=>{this.setState({balance: response.data.balance.toFixed(2)})});
+        getIncome((response)=>{this.setState({income: response.data.toFixed(2)})});
+        getIncomeYesterday((response)=>{this.setState({incomeYesterday: response.data.toFixed(2)})});
+        this.display_name();
+    };
+    display_name() {
+        if (sessionStorage.getItem('user')) {
+            this.setState({
+                displayName: 'block',
+            })
+        } else {
+            this.setState({
+                displayName: 'none',
+            })
+        }
+    };
     render(){
-        const {balance, income, incomeYesterday} = this.state;
+        const {balance, income, incomeYesterday, displayName} = this.state;
         return(
-            <div className="section">
-                <div className="cols col-3">
+            <div className="section" style={{display: displayName}}>
+                <div className="cols col--3">
                     <div className="col col1 block">
-                        <h2 className="heading h2">总收益</h2>
-                        <h3 className="account">{income}元</h3>
+                        <label className="heading">总收益 : <span className="account">{income}元</span></label>
+
                     </div>
                     <div className="col col2 block">
-                        <h2 className="heading h2">昨日收益</h2>
-                        <h3 className="yesterday">{incomeYesterday}元</h3>
+                        <label className="heading">昨日收益 :
+                            <span className="yesterday">{incomeYesterday}元</span>
+                        </label>
                     </div>
                     <div className="col col3 block">
-                        <h2 className="heading h2">账户资产</h2>
-                        <h3 className="balances">元</h3>
-                        <h3 className="balances">{balance.balance}元</h3>
+                        <label className="heading">账户资产 :
+                            <span className="balances">{balance}元</span>
+                        </label>
                     </div>
                 </div>
             </div>
@@ -54,7 +68,7 @@ function getIndividualCount(callback) {
 function getIncome(callback) {
     axios.get('/TransactionBl/calcIncome',{
         params:{
-            username:sessionStorage.getItem('user')
+            userId:sessionStorage.getItem('user')
         }
     })
         .then((response)=>callback(response))
@@ -64,7 +78,7 @@ function getIncome(callback) {
 function getIncomeYesterday(callback) {
     axios.get('/TransactionBl/calcIncomeYesterday',{
         params:{
-            username:sessionStorage.getItem('user')
+            userId:sessionStorage.getItem('user')
         }
     })
         .then((response)=>callback(response))

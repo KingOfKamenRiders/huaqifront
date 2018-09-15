@@ -164,20 +164,32 @@ tr {
     background-color: #f3f1ed;
     margin-left: 2.5%;
     margin-bottom: 20px;
+    padding: 20px;
 }
 
-.col-3 .col {
+.col--3 .col {
     width: 30%;
 }
 
 .balances {
     color: lightcoral;
+    margin-left: 15px;
 }
 
 .account {
     color: darkred;
+    margin-left: 15px;
 }
 
 .yesterday {
     color: red;
+    margin-left: 15px;
+}
+
+.heading {
+    font-size: 18px;
+}
+
+.h3 {
+    padding-top: 20px;
 }

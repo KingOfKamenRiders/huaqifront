@@ -25,15 +25,10 @@ class Index extends Component{
                                             <div
                                                 className="theme bg-none image-layout-full-bottom text-position-top max-width-none text-no-image imagesize50 ">
                                                 <div className="text text-content">
-                                                    <h1>领先交易先机</h1>
-                                                    <h3>与全球第一差价合约券商<sup>1</sup>交易上万市场</h3>
-                                                    <h3>尽享卓越交易平台及强大图表功能</h3>
-                                                    <h4 className="text-col-6">差价合约为杠杆产品。差价合约交易未必适合所有人，有可能出现交易损失超出保证金。敬请确认您已完全了解所涉及风险。</h4>
-                                                    <div className="content-cta-wrapper">
-                                                        <div className="cta right cta-sec"><a
-                                                            className=" button button-green js_target"
-                                                            target="_self"> 申请账户 </a></div>
-                                                    </div>
+                                                    <h3>领先交易先机</h3>
+                                                    <h5>与全球第一差价合约券商<sup>1</sup>交易上万市场</h5>
+                                                    <h5>尽享卓越交易平台及强大图表功能</h5>
+                                                    <h6 className="text-col-6">差价合约为杠杆产品。差价合约交易未必适合所有人，有可能出现交易损失超出保证金。敬请确认您已完全了解所涉及风险。</h6>
                                                 </div>
                                             </div>
                                         </div>
@@ -59,7 +54,7 @@ class Index extends Component{
                                             <div
                                                 className="theme none-bg dark-text-theme text-layout-full-left text-position-top max-width-none text-no-image imagesize50 js_clickable ">
                                                 <div className="text text-content">
-                                                    <h2 className="heading h2"> 丰富交易产品 窄幅交易点差 </h2>
+                                                    <h3 className="heading h3"> 丰富交易产品 窄幅交易点差 </h3>
                                                     <p className="secondary-standfirst">
                                                         <strong>交易全世界超过15,000市场的差价合约</strong></p>
                                                 </div>
@@ -68,7 +63,7 @@ class Index extends Component{
                                     </div>
                                     <div className="live-prices section">
                                         <div className="livePricesWrapper top50">
-                                            <h2>实时价格</h2>
+                                            <h4>实时价格</h4>
                                             <a className="heading-a">50ETF板块</a>
                                             <ETF/>
                                         </div>
