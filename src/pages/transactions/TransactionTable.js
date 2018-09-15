@@ -315,6 +315,7 @@ class EnhancedTable extends React.Component {
                                             tabIndex={-1}
                                             key={n.tid}
                                             selected={isSelected}
+                                            // className={classes.row}
                                         >
                                             {/*<TableCell padding="checkbox">*/}
                                                 {/*<Checkbox checked={isSelected} />*/}
@@ -388,6 +389,11 @@ const styles = theme => ({
         borderCollapse: "collapse",
         textAlign:'center',
         fontSize:18,
+    },
+    row: {
+        '&:nth-of-type(odd)': {
+            backgroundColor: theme.palette.background.default,
+        },
     },
     tableWrapper: {
         overflowX: 'auto',
