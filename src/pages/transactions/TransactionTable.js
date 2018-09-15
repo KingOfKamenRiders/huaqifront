@@ -132,11 +132,11 @@ const toolbarStyles = theme => ({
         theme.palette.type === 'light'
             ? {
                 color: theme.palette.secondary.main,
-                backgroundColor: lighten(theme.palette.secondary.light, 0.85),
+                // backgroundColor: lighten(theme.palette.secondary.light, 0.85),
             }
             : {
                 color: theme.palette.text.primary,
-                backgroundColor: theme.palette.secondary.dark,
+                // backgroundColor: theme.palette.secondary.dark,
             },
     spacer: {
         flex: '1 1 100%',
@@ -160,15 +160,17 @@ let EnhancedTableToolbar = props => {
             })}
         >
             <div className={classes.title}>
-                {numSelected > 0 ? (
-                    <Typography color="inherit" variant="subheading">
-                        已选 {numSelected} 条交易记录
-                    </Typography>
-                ) : (
+                {/*{numSelected > 0 ? (*/}
+                    {/*<Typography color="inherit" variant="subheading">*/}
+                        {/*已选 {numSelected} 条交易记录*/}
+                    {/*</Typography>*/}
+                {/*) : */}
+
                     <Typography variant="title" id="tableTitle">
                         交易记录
                     </Typography>
-                )}
+
+                {/*}*/}
             </div>
              <div className={classes.spacer} />
 
