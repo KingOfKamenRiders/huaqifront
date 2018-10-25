@@ -34,12 +34,19 @@ class IndividualCount extends Component{
             <div className="section" style={{display: displayName}}>
                 <div className="cols col--3">
                     <div className="col col1 block">
-                        <label className="heading">总收益 : <span className="account">{income}元</span></label>
+                        <label className="heading">总收益 :
+                            <span className="account">{income}元</span>
+                            <span className="nums-up" hidden={income < 0.0 ? true:false}>↑</span>
+                            <span className="nums-down" hidden={income > 0.0 ? true:false}>↓</span>
+                        </label>
 
                     </div>
+
                     <div className="col col2 block">
                         <label className="heading">昨日收益 :
                             <span className="yesterday">{incomeYesterday}元</span>
+                            <span className="nums-up" hidden={incomeYesterday > 0 ? false : true}>↑</span>
+                            <span className="nums-down" hidden={incomeYesterday < 0 ? false : true}>↓</span>
                         </label>
                     </div>
                     <div className="col col3 block">

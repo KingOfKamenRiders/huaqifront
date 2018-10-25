@@ -2,6 +2,7 @@ import React,{Component} from 'react'
 import styles from './index.css'
 import ETF from './50ETF.js'
 import IndividualCount from './IndividualCount'
+import CardList from './CardList'
 import axios from "axios/index";
 
 class Index extends Component{
@@ -10,34 +11,10 @@ class Index extends Component{
     }
     render(){
         return(
-            <div className="background">
+            <div>
+                <CardList/>
+
                 <div>
-                    <div className="igColumns section">
-                        <div className="cols-bg white dark-text-theme col-padding col-margin-bot "
-                             data-background-tablet="//a.c-dn.net/c/content/igcom/zh_CN/_jcr_content/content-parsys/columns_2.adaptive.full.high.jpg/1519786000688.jpg"
-                             data-background-mobile="//a.c-dn.net/c/content/igcom/zh_CN/_jcr_content/content-parsys/columns_2.adaptive.full.medium.jpg/1519786000688.jpg"
-                             data-background-desktop-used="//a.c-dn.net/c/content/igcom/zh_CN/_jcr_content/content-parsys/columns_2.adaptive.full.high.jpg/1519786000688.jpg"
-                             style={{opacity: 1, backgroundImage: 'url(https://a.c-dn.net/c/content/igcom/zh_CN/_jcr_content/content-parsys/columns_2.adaptive.full.high.jpg/1519786000688.jpg)'}}>
-                            <div className="cols col-88">
-                                <div className="col col1 parsys">
-                                    <div className="new-content-component section">
-                                        <div className="content content-component">
-                                            <div
-                                                className="theme bg-none image-layout-full-bottom text-position-top max-width-none text-no-image imagesize50 ">
-                                                <div className="text text-content">
-                                                    <h3>领先交易先机</h3>
-                                                    <h5>与全球第一差价合约券商<sup>1</sup>交易上万市场</h5>
-                                                    <h5>尽享卓越交易平台及强大图表功能</h5>
-                                                    <h6 className="text-col-6">差价合约为杠杆产品。差价合约交易未必适合所有人，有可能出现交易损失超出保证金。敬请确认您已完全了解所涉及风险。</h6>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <IndividualCount/>
                     <div className="new-content-component section">
                         <div className="content content-component">
                             <div
@@ -53,11 +30,11 @@ class Index extends Component{
                                         <div className="content content-component">
                                             <div
                                                 className="theme none-bg dark-text-theme text-layout-full-left text-position-top max-width-none text-no-image imagesize50 js_clickable ">
-                                                <div className="text text-content">
-                                                    <h3 className="heading h3"> 丰富交易产品 窄幅交易点差 </h3>
-                                                    <p className="secondary-standfirst">
-                                                        <strong>交易全世界超过15,000市场的差价合约</strong></p>
-                                                </div>
+                                                {/*<div className="text text-content">*/}
+                                                    {/*<h3 className="heading h3"> 丰富交易产品 窄幅交易点差 </h3>*/}
+                                                    {/*<p className="secondary-standfirst">*/}
+                                                        {/*<strong>交易全世界超过15,000市场的差价合约</strong></p>*/}
+                                                {/*</div>*/}
                                             </div>
                                         </div>
                                     </div>
@@ -74,7 +51,31 @@ class Index extends Component{
                     </div>
                 </div>
 
-
+                <div className="igColumns section">
+                    <div className="cols-bg white dark-text-theme col-padding col-margin-bot "
+                         data-background-tablet="//a.c-dn.net/c/content/igcom/zh_CN/_jcr_content/content-parsys/columns_2.adaptive.full.high.jpg/1519786000688.jpg"
+                         data-background-mobile="//a.c-dn.net/c/content/igcom/zh_CN/_jcr_content/content-parsys/columns_2.adaptive.full.medium.jpg/1519786000688.jpg"
+                         data-background-desktop-used="//a.c-dn.net/c/content/igcom/zh_CN/_jcr_content/content-parsys/columns_2.adaptive.full.high.jpg/1519786000688.jpg"
+                         style={{opacity: 1, backgroundImage: 'url(https://a.c-dn.net/c/content/igcom/zh_CN/_jcr_content/content-parsys/columns_2.adaptive.full.high.jpg/1519786000688.jpg)'}}>
+                        <div className="cols col-88">
+                            <div className="col col1 parsys">
+                                <div className="new-content-component section">
+                                    <div className="content content-component">
+                                        <div
+                                            className="theme bg-none image-layout-full-bottom text-position-top max-width-none text-no-image imagesize50 ">
+                                            <div className="text text-content">
+                                                <h3>领先交易先机</h3>
+                                                <h5>与全球第一差价合约券商<sup>1</sup>交易上万市场</h5>
+                                                <h5>尽享卓越交易平台及强大图表功能</h5>
+                                                <h6 className="text-col-6">差价合约为杠杆产品。差价合约交易未必适合所有人，有可能出现交易损失超出保证金。敬请确认您已完全了解所涉及风险。</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             <div className="igColumns section">
                 <div className="cols-bg white dark-text-theme col-padding col-margin-bot ">
                     <div className="cols col-444">
