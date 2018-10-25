@@ -168,7 +168,9 @@ tr {
 }
 
 .col--3 .col {
-    width: 30%;
+    width: 20%;
+    border-width: 2px;
+    border-color: #1a7ad1;
 }
 
 .balances {
@@ -188,6 +190,15 @@ tr {
 
 .heading {
     font-size: 18px;
+}
+.nums-up{
+    color: green;
+    font-size: larger;
+}
+
+.nums-down{
+    color: red;
+    font-size: larger;
 }
 
 .h3 {

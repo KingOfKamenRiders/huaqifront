@@ -22,7 +22,7 @@ const routes=['/','/rank','/transaction','/combination','/favorite','/news']
 const style={
     root: {
         flexGrow: 1,
-        marginBottom:10
+        marginBottom:1,
     },
     flex: {
         flexGrow: 1,
@@ -32,7 +32,7 @@ const style={
         marginRight: 20,
     },
     tabLabel:{
-        fontSize:20
+        fontSize:16
     },
     avatarDiv:{
         display:'flex',
@@ -40,10 +40,16 @@ const style={
         justifyContent:'center',
     },
     iconButton:{
-        padding:0
+        padding:0,
+        color: '#fff',
     },
     icon:{
-        fontSize:40
+        fontSize:30,
+        color: '#fff',
+    },
+    userID:{
+        color: '#fff',
+        marginLeft: '10px',
     }
 }
 const theme = createMuiTheme({
@@ -104,11 +110,13 @@ class NavTop extends React.Component{
                 <MuiThemeProvider theme={theme}>
                 <AppBar position="static">
                     <TooBar varient="dense">
-                        <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
-                            <MenuIcon />
-                        </IconButton>
+                        {/*<IconButton className={classes.menuButton} color="inherit" aria-label="Menu">*/}
+                            {/*<MenuIcon />*/}
+                        {/*</IconButton>*/}
+
+                        <img src={require("./logo.png")} width={48} height={48}/>
                         <Typography variant="title" color="inherit" className={classes.flex}>
-                            THE BOX
+                             THE BOX
                         </Typography>
                         {user
                             ?<div className={classes.avatarDiv}>
@@ -132,7 +140,7 @@ class NavTop extends React.Component{
                                     <MenuItem onClick={()=>{history.push('/personal-center');this.handleMenuClose();}}>个人中心</MenuItem>
                                     <MenuItem onClick={()=>{this.handleLogout();this.handleMenuClose();}}>登出</MenuItem>
                                 </Menu>
-                                <Typography variant="title">{user}</Typography>
+                                <Typography variant="title" className={classes.userID}>{user}</Typography>
                             </div>
                             : <div>
                                 <Button color="inherit" onClick={this.handleLoginButton} >登陆</Button>
