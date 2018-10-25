@@ -89,10 +89,10 @@ class NavTop extends React.Component{
        // console.log(history);
     };
     handleLoginButton=()=>{
-        this.setState({isLoginModalOpen:true})
+        this.setState({isLoginModalOpen:true});
     };
     handleLoginModalClose=()=>{
-        this.setState({isLoginModalOpen:false})
+        this.setState({isLoginModalOpen:false});
     };
     handleSignUpButton=()=>{
         this.setState({isSignUpModalOpen:true})
@@ -138,7 +138,7 @@ class NavTop extends React.Component{
                                     onClose={this.handleMenuClose}
                                 >
                                     <MenuItem onClick={()=>{history.push('/personal-center');this.handleMenuClose();}}>个人中心</MenuItem>
-                                    <MenuItem onClick={()=>{this.handleLogout();this.handleMenuClose();}}>登出</MenuItem>
+                                    <MenuItem onClick={()=>{this.handleLogout();this.handleMenuClose();window.location.reload();}}>登出</MenuItem>
                                 </Menu>
                                 <Typography variant="title" className={classes.userID}>{user}</Typography>
                             </div>

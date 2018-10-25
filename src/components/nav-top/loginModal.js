@@ -42,6 +42,7 @@ class LoginModal extends Component{
             else if(response.data === ResultMessage.INEXISTENCE){
                 this.setState({inexistence:true})
             }
+            window.location.reload();
         },(error)=>console.log(error));
     }
     handleNameChange=(e)=>{
