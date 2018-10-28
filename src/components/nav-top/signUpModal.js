@@ -49,6 +49,7 @@ class SignUpModal extends Component{
             }else {
                 this.setState({invalid:true})
             }
+            window.location.reload();
         },(error)=>console.log(error))
     }
 
