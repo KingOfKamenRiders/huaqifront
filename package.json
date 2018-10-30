@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@antv/data-set": "^0.10.0",
     "@material-ui/core": "^1.4.3",
     "@material-ui/icons": "^2.0.1",
     "axios": "^0.18.0",
@@ -21,5 +22,28 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
-  "proxy": "http://localhost:8080"
+  "proxy": {
+    "/market*": {
+      "target": "https://api-ddc.wallstreetcn.com",
+      "changeOrigon": true
+    },
+    "/sina*": {
+      "target": "http://hq.sinajs.cn",
+      "changeOrigon": true,
+      "pathRewrite": {
+        "^/sina": ""
+      }
+    },
+    "/sse*":{
+      "target":"http://yunhq.sse.com.cn:32041/v1/sh1",
+      "changeOrigin":true,
+      "pathRewrite":{
+        "^/sse":""
+      }
+    },
+    "/*": {
+      "target": "http://localhost:8080",
+      "changeOrigon": true
+    }
+  }
 }
