@@ -31,6 +31,7 @@ class RankTable extends Component {
         const {combs,rowsPerPage,page} = this.state
         return (
             <Paper>
+
                 <Table>
                     <TableHead>
                         <TableRow>

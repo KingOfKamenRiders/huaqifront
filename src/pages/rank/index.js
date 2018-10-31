@@ -3,7 +3,7 @@ import {withStyles}  from '@material-ui/core/styles'
 import SideNav from './SideNav'
 import CombinationTable from '../../components/CombinationTable'
 import {getRankedCombinations} from "../../api/rank"
-
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const style=(theme)=>{
     return{
@@ -21,16 +21,25 @@ const style=(theme)=>{
             position: 'relative',
             display: 'flex',
         },
+        loading:{
+            position:'absolute',
+            left:'50%',
+            top:'20%'
+        }
     }
 }
 class Rank extends Component{
     state={
         combs:[],
+        showLoading:{
+            display:'block'
+        }
     }
     componentWillMount(){
         this.props.onRouteChange(1);
         getRankedCombinations((response)=>{
             this.setState({combs:response.data})
+            this.setState({showLoading:{display:'none'}})
         },(error)=>console.log(error))
     }
     render(){
@@ -40,6 +49,7 @@ class Rank extends Component{
             <div className={classes.root}>
                 <SideNav/>
                 <main className={classes.content}>
+                    <CircularProgress className={classes.loading} size={120} style={this.state.showLoading}/>
                     <CombinationTable rows={combs}/>
                 </main>
 
