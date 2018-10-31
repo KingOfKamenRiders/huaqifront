@@ -12,7 +12,7 @@ import axios from "axios";
 const styles = {
     main: {
         marginRight: '1em',
-        marginTop: '30px',
+        marginTop: '40px',
         marginBottom:'30px',
         width: '25%',
         float: 'left',
