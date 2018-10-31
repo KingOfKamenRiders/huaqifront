@@ -75,8 +75,8 @@ class CardList extends Component{
                         <Typography component="h5" variant="h5">
                             <label className="heading">昨日收益 :
                                 <span className="account">{incomeYesterday}元</span>
-                                <span className="nums-up" hidden={incomeYesterday < 0.0 ? true : false}>↑</span>
-                                <span className="nums-down" hidden={incomeYesterday > 0.0 ? true : false}>↓</span>
+                                <span className="nums-up" hidden={incomeYesterday <= 0.0 ? true : false}>↑</span>
+                                <span className="nums-down" hidden={incomeYesterday >= 0.0 ? true : false}>↓</span>
                             </label>
                         </Typography>
                         <Typography variant="subtitle1" color="textSecondary">
