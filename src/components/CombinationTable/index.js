@@ -50,7 +50,9 @@ class CombinationTable extends Component{
                 <TableHead>
                         <TableRow>
                             <CustomTableCell rowSpan={2} colSpan={1} className={classes.bigFont}>组合</CustomTableCell>
-                            <CustomTableCell colSpan={8} className={classes.bigFont}>认购</CustomTableCell> <CustomTableCell colSpan={1}> </CustomTableCell><CustomTableCell colSpan={8} className={classes.bigFont}>认沽</CustomTableCell>
+                            <CustomTableCell colSpan={8} className={classes.bigFont}>认购</CustomTableCell>
+                            <CustomTableCell colSpan={1}> </CustomTableCell>
+                            <CustomTableCell colSpan={8} className={classes.bigFont}>认沽</CustomTableCell>
                             <CustomTableCell rowSpan={2} className={classes.bigFont}>价差</CustomTableCell>
                             <CustomTableCell rowSpan={2} className={classes.bigFont}>详情</CustomTableCell>
                         </TableRow>
@@ -73,7 +75,7 @@ class CombinationTable extends Component{
                         let ou1 = row.optUp1.optionAbbr,od1 = row.optDown1.optionAbbr,ou2 = row.optUp2.optionAbbr, od2 = row.optDown2.optionAbbr
                         return([
                             <TableRow className={classes.row}>
-                                <CustomTableCell rowSpan={2}> {index+1+(page)*rowsPerPage}</CustomTableCell>
+                                <CustomTableCell rowSpan={2}>{index+1+(page)*rowsPerPage}</CustomTableCell>
                                 <CustomTableCell><Link to={"/Option/"+row.optUp1.optionAbbr}>{row.optUp1.optionAbbr}</Link></CustomTableCell> <CustomTableCell>{row.optUp1.position}</CustomTableCell>
                                 <CustomTableCell>{row.optUp1.sellVolume}</CustomTableCell> <CustomTableCell>{row.optUp1.sellPrice}</CustomTableCell>
                                 <CustomTableCell>{row.optUp1.bidVolume}</CustomTableCell> <CustomTableCell>{row.optUp1.bidPrice}</CustomTableCell>
@@ -100,7 +102,6 @@ class CombinationTable extends Component{
                                 <CustomTableCell>{row.optDown2.bidPrice}</CustomTableCell> <CustomTableCell>{row.optDown2.bidVolume}</CustomTableCell>
                                 <CustomTableCell>{row.optDown2.sellPrice}</CustomTableCell> <CustomTableCell>{row.optDown2.sellVolume}</CustomTableCell>
                                 <CustomTableCell>{row.optDown2.position}</CustomTableCell> <CustomTableCell><Link to={"/Option/"+row.optDown2.optionAbbr}>{row.optDown2.optionAbbr}</Link></CustomTableCell>
-
                             </TableRow>
                         ])
                     })}

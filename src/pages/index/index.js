@@ -3,17 +3,18 @@ import styles from './index.css'
 import ETF from './50ETF.js'
 import IndividualCount from './IndividualCount'
 import CardList from './CardList'
-import axios from "axios/index";
+import HQ from '../../components/50ETFhq'
 
 class Index extends Component{
     componentWillMount(){
         this.props.onRouteChange(0);
+
     }
     render(){
         return(
             <div>
                 <CardList/>
-
+                <HQ/>
                 <div>
                     <div className="new-content-component section">
                         <div className="content content-component">
