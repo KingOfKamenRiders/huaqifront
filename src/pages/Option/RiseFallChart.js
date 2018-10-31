@@ -14,6 +14,11 @@ const scale = {
     time:{
         tickCount:10,
     },
+    value:{
+        alias:'价格',
+        formatter:(v)=>v.toFixed(4),
+        tickCount:10,
+    }
 }
 
 class RiseFallChart extends Component{
@@ -68,7 +73,7 @@ class RiseFallChart extends Component{
                     position="time*value"
                     size={1}
                     color="red"
-                    shape="hv"/>
+                    />
             </Chart>
         )
     }

@@ -11,14 +11,16 @@ export function getSseSnap(callback) {
         .then((response)=>callback(response))
         .catch((error)=>console.log(error))
 }
-export function getHqChartData(callback) {
-    axios.get('/market/kline',{
+export function getKLineData(callback) {
+    axios.get('/sse/dayk/510050')
+        .then((response)=>callback(response))
+        .catch((error)=>console.log(error));
+}
+export function getLine(callback) {
+    axios.get('/sse/line/510050',{
         params:{
-            prod_code :'510050.SS',
-            tick_count:3000,
-            period_type:300,
-            fields:'tick_at,open_px,close_px,high_px,low_px,turnover_volume',
+            select:'time,price,volume'
         }
-    }).then((response)=>callback(response))
+    }).then((res)=>callback(res))
         .catch((error)=>console.log(error));
 }

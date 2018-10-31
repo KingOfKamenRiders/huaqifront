@@ -8,15 +8,14 @@ import TableHead from '@material-ui/core/TableHead'
 import TableBody from '@material-ui/core/TableBody'
 import TableRow from '@material-ui/core/TableRow'
 import TableCell from '@material-ui/core/TableCell'
-import {getSnap,getSseSnap} from "../../api/third_party"
+import {getLine, getSnap, getSseSnap} from "../../api/third_party"
 
 const CTC = withStyles(theme => ({
-    head: {
-        backgroundColor: theme.palette.common.black,
-        color: theme.palette.common.white,
-    },
     body: {
         fontSize: 14,
+        textAlign:'center',
+        padding:0,
+        vAlign:'center',
     },
 }))(TableCell);
 
@@ -26,12 +25,37 @@ const style  = {
         flexDirection:'column',
         justifyContent:"center",
         alignItems:'center',
+        marginBottom:20,
+    },
+    root:{
+        padding:8,
+        maxWidth:900
+    },
+    row:{
+        marginBottom:20
+    },
+    table:{
+        width:'100%',
+    },
+    flex:{
+        display:'flex',
+        justifyContent:'center',
+        alignItems:'center'
+    },
+    red:{
+        color:'red'
+    },
+    green:{
+        color:'green'
+    },
+    tableRow:{
+        borderBottom:'solid #F7148C 2px'
     }
 }
 
 class OverallHq extends Component{
     state = {
-        newestValue:0,
+        latest_px:0,
         turnoverVolume:0,
         turnoverValue:0,
         data:null,
@@ -46,26 +70,29 @@ class OverallHq extends Component{
         status:null,
     }
     componentDidMount(){
-        getSseSnap((response)=>console.log(response.data));
-        getSnap((response)=>{
-            let hq_str_s_sh510050,hq_str_sh510050;
-            eval(response.data);
-            let info_1 = hq_str_s_sh510050.split(',');
-            let info_2 = hq_str_sh510050.split('.');
-            this.setState({newestValue:info_1[1]});
-            this.setState({px_change:info_1[2]});
-            this.setState({px_change_ratio:info_1[3]});
-            this.setState({turnoverValue:info_1[5]});
-            this.setState({open_px:info_2[1]});
-            this.setState({preclose_px:info_2[2]});
-            this.setState({high_px:info_2[4]});
-            this.setState({low_px:info_1[2]});
-            this.setState({turnoverVolume:info_2[8]});
-            for(let i = 10;i<=18;i+=2){
-                this.state.panKou.push({buy_v:info_2[i],buy_p:info_2[i+1],sell_v:info_2[i+10],sell_p:info_2[i+11]});
+        //getLine((response)=>console.log(response.data));
+        getSseSnap((response)=>{
+            console.log(response.data)
+            let {snap,date,time} = response.data;
+            this.setState({preclose_px:snap[1]});
+            this.setState({open_px:snap[2]});
+            this.setState({high_px:snap[3]});
+            this.setState({low_px:snap[4]});
+            this.setState({latest_px:snap[5]});
+            this.setState({px_change:snap[6]});
+            this.setState({px_change_ratio:snap[7]});
+            this.setState({turnoverVolume:snap[8]});
+            this.setState({turnoverValue:snap[9]});
+
+            let pk = [];
+            for(let i=0;i<10;i+=2){
+                pk.push({buy_p:snap[13][i],buy_v:snap[13][i+1],sell_p:snap[14][i],sell_v:snap[14][i+1]})
             }
-            this.setState({date:info_2[info_2.length-3]});
-            this.setState({time:info_2[info_2.length-2]});
+            this.setState({panKou:pk});
+            date = date.toString();
+            time = time.toString();
+            this.setState({date:date.substring(0,4)+'年'+date.substring(4,6)+'月'+date.substring(6)+'日'});
+            this.setState({time:time.substring(0,2)+':'+time.substring(2,4)+':'+time.substring(4)});
             //判断状态
             let now =  new Date();
             let pivots = [];
@@ -101,93 +128,110 @@ class OverallHq extends Component{
                     this.setState({status:'休市'});
                 }
             }
-
         });
     }
     render(){
-        const {flexColumn} = this.props.classes;
+        const {flexColumn,root,row,table,flex,red,green,tableRow} = this.props.classes;
         const {panKou} = this.state;
         return(
-            <Paper>
+            <div className={root}>
                 <Grid container>
                     <Grid item xs={12} className={flexColumn}>
-                        <Typography variant="title">
+                        <Typography variant="display3" gutterBottom>
                             50ETF(510050)
                         </Typography>
                         <div>
-                            <Typography variant="subheading">
+                            <Typography variant="title" gutterBottom>
                                 最新估值
                             </Typography>
-                            <Typography variant="title">
-                                {this.state.newestValue}
-                            </Typography>
-                            <div>
-                                {this.state.px_change}
-                            </div>
-                            <div>
-                                {this.state.px_change_ratio}
+                            <div className={flex}>
+                                <Typography variant="title">
+                                    {this.state.latest_px}
+                                </Typography>
+                                <div style={{marginLeft:10}} className={this.state.px_change>0?red:green}>
+                                    <div>
+                                        {this.state.px_change}
+                                    </div>
+                                    <div>
+                                        {this.state.px_change_ratio}%
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </Grid>
-                    <Grid item xs={12} container spacing={16}>
-                        <Grid xs={3}>
-                            <p>成交量</p>
-                            <Typography>
+                    <Grid item xs={12} container spacing={16} className={row}>
+                        <Grid item xs={3}>
+                            <Typography variant="title">
+                                成交量
+                            </Typography>
+                            <Typography variant="headline">
                                 {this.state.turnoverVolume}手
                             </Typography>
                         </Grid>
-                        <Grid xs={3}>
-                            <p>成交额</p>
-                            <Typography>
+                        <Grid item xs={3}>
+                            <Typography variant="title">
+                                成交额
+                            </Typography>
+                            <Typography variant="headline">
                                 {this.state.turnoverValue}万元
                             </Typography>
                         </Grid>
-                        <Grid xs={3}>
-                            <p>状态</p>
-                            <Typography>
-                                {this.state.state}
+                        <Grid item xs={3}>
+                            <Typography variant="title">
+                                状态
+                            </Typography>
+                            <Typography variant="headline">
+                                {this.state.status}
                             </Typography>
                         </Grid>
-                        <Grid xs={3}>
-                            时间
-                            <Typography>
+                        <Grid item xs={3}>
+                            <Typography variant="title">
+                                时间
+                            </Typography>
+                            <Typography variant="headline">
                                 {this.state.date}
                             </Typography>
-                            <Typography>
+                            <Typography variant="headline">
                                 {this.state.time}
                             </Typography>
                         </Grid>
                     </Grid>
-                    <Grid item xs={12}>
-                        <Table>
-                            <TableHead>
-                                <TableRow>
-                                    <CTC>昨日收盘价</CTC>{this.state.preclose_px}<CTC> </CTC><CTC>今日开盘价</CTC><CTC>{this.state.open_px}</CTC>
+                    <Grid item xs={12} className={row}>
+                        <Table className={table}>
+                            <TableBody>
+                                <TableRow className={tableRow}>
+                                    <CTC><Typography variant="subheading">昨日收盘价</Typography></CTC>
+                                    <CTC><Typography variant="title">{this.state.preclose_px}</Typography></CTC>
+                                    <CTC><Typography variant="subheading">今日开盘价</Typography></CTC>
+                                    <CTC><Typography variant="title">{this.state.open_px}</Typography></CTC>
                                 </TableRow>
-                                <TableRow>
-                                    <CTC>最高价</CTC>{this.state.high_px}<CTC> </CTC><CTC>最低价</CTC><CTC>{this.state.low_px}</CTC>
+                                <TableRow className={tableRow}>
+                                    <CTC><Typography variant="subheading">最高价</Typography></CTC>
+                                    <CTC><Typography variant="title">{this.state.high_px}</Typography></CTC>
+                                    <CTC><Typography variant="subheading">最低价</Typography></CTC>
+                                    <CTC><Typography variant="title">{this.state.low_px}</Typography></CTC>
                                 </TableRow>
-                            </TableHead>
+                            </TableBody>
                         </Table>
                     </Grid>
                     <Grid item xs={12}>
-                        <Table>
+                        <Table className={table}>
                             <TableBody>
                                 {panKou.map((value,index)=>(
-                                    <TableRow>
-                                        <CTC>买{index+1}</CTC>
-                                        <CTC>{value.buy_p}</CTC>
-                                        <CTC>{value.buy_v}</CTC>
-                                        <CTC>卖{index+1}</CTC>
-                                        <CTC>{value.sell_p}</CTC>
-                                        <CTC>{value.sell_v}</CTC>
+                                    <TableRow key={index}>
+                                        <CTC><Typography variant="subheading">买{index+1}</Typography></CTC>
+                                        <CTC><Typography variant="title" className={red}>{value.buy_p}</Typography></CTC>
+                                        <CTC><Typography variant="title">{value.buy_v}</Typography></CTC>
+                                        <CTC><Typography variant="subheading">卖{index+1}</Typography></CTC>
+                                        <CTC><Typography variant="title" className={red}>{value.sell_p}</Typography></CTC>
+                                        <CTC><Typography variant="title">{value.sell_v}</Typography></CTC>
                                     </TableRow>
                                 ))}
                             </TableBody>
                         </Table>
                     </Grid>
                 </Grid>
-            </Paper>
+            </div>
         )
     }
 }

@@ -8,6 +8,9 @@ const scale = {
     time:{
         tickCount:10,
     },
+    value:{
+        alias:'|term1-term2|'
+    }
 }
 class PriceDiffChart extends Component{
 
@@ -33,7 +36,7 @@ class PriceDiffChart extends Component{
                     position="time*value"
                     size={1}
                     color="red"
-                    shape="hv"/>
+                    shape="smooth"/>
             </Chart>
         )
     }

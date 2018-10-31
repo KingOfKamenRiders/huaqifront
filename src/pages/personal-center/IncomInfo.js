@@ -5,6 +5,7 @@ import {Chart,Geom,Axis,Tooltip}  from 'bizcharts'
 import Paper from '@material-ui/core/Paper'
 import {TooltipStyle} from "../../util/ChartStyle"
 import {getIncomeChartData} from "../../api/transaction"
+import DataSet from '@antv/data-set'
 
 const style = {
     root:{
@@ -12,22 +13,38 @@ const style = {
     },
     paper:{
         width:1000,
+        padding:20
     }
 }
 const scale = {
     time:{
         tickCount:10,
     },
+    income:{
+        tickCount:10
+    }
 }
 
 class IncomeInfo extends Component{
 
     state = {
         data : [],
+        dv:[]
     }
     componentDidMount(){
         getIncomeChartData((response)=>{
-            this.setState({data:response.data});
+            const ds = new DataSet();
+            const dv = ds.createView();
+            dv.source(response.data)
+                .transform({
+                    type:'map',
+                    callback:(obj)=>{
+                        obj.income = obj.value
+                        return obj;
+                    }
+                })
+            this.setState({dv:dv});
+            console.log(dv);
         })
         // var today = new Date()
         // for(var i = 365;i>=305;i--){
@@ -53,22 +70,22 @@ class IncomeInfo extends Component{
     }
     render(){
         let {classes} = this.props
-        console.log(this.state.data)
+        let {dv} = this.state;
+
         return(
                 <Grid container className={classes.root}>
                     <Grid item >
                         <Paper className={classes.paper}>
                             <h3>近期收益</h3>
-                            <Chart height={350} forceFit data={this.state.data} padding={['15%','5%']} scale={scale}>
+                            <Chart height={350} forceFit data={dv} padding={['15%','5%']} scale={scale}>
                                 <Axis name="time"/>
                                 <Axis name="income"/>
-                                <Tooltip g2-tooltip={TooltipStyle}/>
+                                <Tooltip />
                                 <Geom
                                     type="line"
                                     position="time*income"
-                                    size={1}
                                     color="red"
-                                    shape="hv"/>
+                                    shape="smooth"/>
                             </Chart>
                         </Paper>
                     </Grid>
