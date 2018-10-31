@@ -11,6 +11,7 @@ import News from './pages/news'
 import Option from './pages/Option'
 import SingleCombination from './pages/single-combination'
 import PersonalCenter from './pages/personal-center'
+import Cover from './pages/cover'
 
 class App extends Component {
 
@@ -30,6 +31,7 @@ class App extends Component {
     const user = sessionStorage.getItem('user');
     return (
         <Router>
+            {/*<Route exact path="/" component={}/>*/}
           <div>
               <NavTop getInstance={(child)=>this.navTopRef=child} user={user}  onRouteChange={this.handleRouteChange} tabValue={this.state.tabValue} openLogin={this.state.openLogin}/>
               <Route exact path="/"  render={()=>{return <Index onRouteChange={this.handleRouteChange}/>}} />
