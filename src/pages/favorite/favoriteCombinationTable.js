@@ -53,7 +53,7 @@ class CustomizedTable extends Component{
 
     render() {
         const {classes} = this.props;
-        const {rows} = this.state
+        const {rows} = this.state;
         return (
             <Paper>
                 <a>收藏的期权数</a>
@@ -61,7 +61,7 @@ class CustomizedTable extends Component{
                     <TableHead>
                         <TableRow>
                             <CustomTableCell colSpan={8}>认购</CustomTableCell>
-                            <CustomTableCell colSpan={1}> </CustomTableCell>
+                            {/*<CustomTableCell colSpan={1}> </CustomTableCell>*/}
                             <CustomTableCell colSpan={8}>认沽</CustomTableCell>
                         </TableRow>
                         <TableRow>
@@ -87,7 +87,7 @@ class CustomizedTable extends Component{
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {rows.map(() => {
+                        {rows.map(row => {
                             return (
                                 <TableRow className={classes.row} key={rows.id}>
                                     <CustomTableCell>{rows.optUp.optionAbbr}</CustomTableCell>
