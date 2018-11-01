@@ -43,7 +43,7 @@ export function addInterestedComb(ou1,od1,od2,ou2,callback) {
 }
 
 export function getInterestedComb(callback) {
-    axios.get('CombinationBl/getCombinationsByState',{
+    axios.get('/CombinationBl/getCombinationsByState',{
         params:{
             state:'INTERESTED',
             userId:sessionStorage.getItem('user')

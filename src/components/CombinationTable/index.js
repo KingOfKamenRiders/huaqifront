@@ -74,7 +74,7 @@ class CombinationTable extends Component{
                     {rows.slice((page)*rowsPerPage,(page+1)*rowsPerPage).map((row,index)=>{
                         let ou1 = row.optUp1.optionAbbr,od1 = row.optDown1.optionAbbr,ou2 = row.optUp2.optionAbbr, od2 = row.optDown2.optionAbbr
                         return([
-                            <TableRow className={classes.row}>
+                            <TableRow className={classes.row} >
                                 <CustomTableCell rowSpan={2}>{index+1+(page)*rowsPerPage}</CustomTableCell>
                                 <CustomTableCell><Link to={"Option/"+row.optUp1.optionAbbr}>{row.optUp1.optionAbbr}</Link></CustomTableCell> <CustomTableCell>{row.optUp1.position}</CustomTableCell>
                                 <CustomTableCell>{row.optUp1.sellVolume}</CustomTableCell> <CustomTableCell>{row.optUp1.sellPrice}</CustomTableCell>
