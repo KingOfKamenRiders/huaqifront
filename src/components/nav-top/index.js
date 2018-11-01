@@ -85,7 +85,7 @@ class NavTop extends React.Component{
         this.props.onRouteChange(value)
        // this.setState({tabValue:value});
         let {history}=this.props
-        history.push(routes[value])
+        history.push(this.props.match.url+routes[value])
        // console.log(history);
     };
     handleLoginButton=()=>{

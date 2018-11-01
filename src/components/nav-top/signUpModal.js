@@ -45,11 +45,14 @@ class SignUpModal extends Component{
         signUp(this.state.name,this.state.pass,(response)=>{
             if(response.data===ResultMessage.SUCCESS){
                 this.setState({success:true})
-                setTimeout(handleClose,2000)
+                setTimeout(()=>{
+                    sessionStorage.setItem("user",this.state.name);
+                    handleClose();
+                    window.location.href="/content";},2000)
             }else {
                 this.setState({invalid:true})
             }
-            window.location.reload();
+
         },(error)=>console.log(error))
     }
 

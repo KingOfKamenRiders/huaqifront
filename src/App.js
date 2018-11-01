@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import {BrowserRouter as Router,Route,Redirect} from  'react-router-dom'
+import {BrowserRouter as Router,Route,Redirect,Switch} from  'react-router-dom'
 import NavTop from './components/nav-top'
 import Index from './pages/index'
 import Rank from './pages/rank'
@@ -31,35 +31,40 @@ class App extends Component {
     const user = sessionStorage.getItem('user');
     return (
         <Router>
-            {/*<Route exact path="/" component={}/>*/}
-          <div>
-              <NavTop getInstance={(child)=>this.navTopRef=child} user={user}  onRouteChange={this.handleRouteChange} tabValue={this.state.tabValue} openLogin={this.state.openLogin}/>
-              <Route path="/cover" component={Cover}/>
-              <Route exact path="/"  render={()=>{return <Index onRouteChange={this.handleRouteChange}/>}} />
-              <Route path="/rank"  render={()=>{return <Rank onRouteChange={this.handleRouteChange}/>}}/>
-              <Route path="/transaction"  render={()=>{
-                  if(!user){
-                      this.navTopRef.setLoginModal(true);
-                      return <Redirect to="/" exact/>
-                  }
-                  return <Transaction onRouteChange={this.handleRouteChange}/>}}/>
-              <Route path="/combination"  render={()=>{
-                  if(!user){
-                      this.navTopRef.setLoginModal(true);
-                      return <Redirect to="/" exact/>
-                  }
-                  return <Combination onRouteChange={this.handleRouteChange}/>}}/>
-              <Route path="/favorite"  render={()=>{
-                  if(!user){
-                      this.navTopRef.setLoginModal(true);
-                      return <Redirect to="/" exact/>
-                  }
-                  return <Favorite onRouteChange={this.handleRouteChange}/>}}/>
-              <Route path="/news"  render={()=>{return <News onRouteChange={this.handleRouteChange}/>}}/>
-              <Route path="/option/:id" component={Option}/>
-              <Route path="/single-combination/:optUp1/:optDown1/:optDown2/:optUp2" component={SingleCombination}/>
-              <Route path="/personal-center" component={PersonalCenter}/>
-          </div>
+            <div>
+            <Route exact path="/" component={Cover}/>
+            <Route path="/content">
+                <div>
+                    <NavTop getInstance={(child)=>this.navTopRef=child} user={user}  onRouteChange={this.handleRouteChange} tabValue={this.state.tabValue} openLogin={this.state.openLogin}/>
+                    <Switch>
+                    <Route exact path="/content/"  render={()=>{return <Index onRouteChange={this.handleRouteChange}/>}} />
+                    <Route path="/content/rank"  render={()=>{return <Rank onRouteChange={this.handleRouteChange}/>}}/>
+                    <Route path="/content/transaction"  render={()=>{
+                        if(!user){
+                            this.navTopRef.setLoginModal(true);
+                            return <Redirect to="/content" exact/>
+                        }
+                        return <Transaction onRouteChange={this.handleRouteChange}/>}}/>
+                    <Route path="/content/combination"  render={()=>{
+                        if(!user){
+                            this.navTopRef.setLoginModal(true);
+                            return <Redirect to="/content" exact/>
+                        }
+                        return <Combination onRouteChange={this.handleRouteChange}/>}}/>
+                    <Route path="/content/favorite"  render={()=>{
+                        if(!user){
+                            this.navTopRef.setLoginModal(true);
+                            return <Redirect to="/content" exact/>
+                        }
+                        return <Favorite onRouteChange={this.handleRouteChange}/>}}/>
+                    <Route path="/content/news"  render={()=>{return <News onRouteChange={this.handleRouteChange}/>}}/>
+                    <Route path="/content/option/:id" component={Option}/>
+                    <Route path="/content/single-combination/:optUp1/:optDown1/:optDown2/:optUp2" component={SingleCombination}/>
+                    <Route path="/content/personal-center" component={PersonalCenter}/>
+                    </Switch>
+                </div>
+            </Route>
+            </div>
 
         </Router>
     );

@@ -36,13 +36,14 @@ class LoginModal extends Component{
             if(response.data === ResultMessage.SUCCESS){
                 sessionStorage.setItem("user",this.state.name);
                 this.props.handleClose();
+                window.location.href="/content";
             }else if(response.data === ResultMessage.FAILURE){
                 this.setState({invalid:true})
             }
             else if(response.data === ResultMessage.INEXISTENCE){
                 this.setState({inexistence:true})
             }
-            window.location.reload();
+
         },(error)=>console.log(error));
     }
     handleNameChange=(e)=>{

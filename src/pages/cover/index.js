@@ -5,6 +5,9 @@ import Cover2 from './coverImg2.png'
 import Cover3 from './coverImg3.png'
 import Cover4 from './coverImg4.png'
 import Cover5 from './coverImg5.png'
+import Button from '@material-ui/core/Button'
+import LoginModal from '../../components/nav-top/loginModal'
+import SignUpMoadl from '../../components/nav-top/signUpModal'
 
 const styles = {
     bt:{
@@ -38,19 +41,53 @@ const styles = {
         position: 'flex',
         marginLeft: '1%',
         color: 'grey'
+    },
+    navButton:{
+        position:'absolute',
+        top:'91%',
+        left:'45%',
+        width:'120px',
+        height:'60px',
+        fontSize:20,
+        padding:5,
+        fontWeight:'bold'
     }
 
 };
 
 class Cover extends Component{
+    state = {
+        isLoginModalOpen:false,
+        isSignUpModalOpen:false,
+    }
+    handleLoginButton=()=>{
+        this.setState({isLoginModalOpen:true});
+    };
+    handleLoginModalClose=()=>{
+        this.setState({isLoginModalOpen:false});
+    };
+    handleSignUpButton=()=>{
+        this.setState({isSignUpModalOpen:true})
+    };
+    handleSignUpModalClose=()=>{
+        this.setState({isSignUpModalOpen:false})
+    };
+    handleStart = ()=>{
+        this.props.history.push('/content');
+    }
     render() {
         const {classes} = this.props;
         return(
             <div>
                 <div>
                     <img src={Cover1} width={'100%'}/>
-                    <button className={classes.bt} style={{right:'140px'}}>登录</button>
-                    <button className={classes.bt} style={{right:'20px'}}>注册</button>
+                    <button onClick={this.handleLoginButton} className={classes.bt} style={{right:'140px'}}>登录</button>
+                    <button onClick={this.handleSignUpButton} className={classes.bt} style={{right:'20px'}}>注册</button>
+                    <LoginModal isOpen={this.state.isLoginModalOpen} handleClose={this.handleLoginModalClose} handleLogin={this.handleLogin}/>
+                    <SignUpMoadl isOpen={this.state.isSignUpModalOpen} handleClose={this.handleSignUpModalClose}/>
+                    <Button variant="contained" color="secondary" className={classes.navButton} size="large" onClick={this.handleStart}>
+                        开始使用
+                    </Button>
                 </div>
                 <div>
                     <img src={Cover2} width={'100%'}/>
