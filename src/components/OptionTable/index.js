@@ -50,7 +50,7 @@ class OptionTable extends Component{
                     {rows.map((row)=>(
                         <TableRow className={classes.row}>
                             <CustomTableCell>
-                                <Link to={"/Option/"+row.optionAbbr}>
+                                <Link to={"Option/"+row.optionAbbr}>
                                     {row.optionAbbr}
                                 </Link>
                             </CustomTableCell>

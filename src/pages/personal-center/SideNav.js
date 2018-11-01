@@ -8,7 +8,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon'
 import AccountCircle from '@material-ui/icons/AccountCircle'
 import Drawer from '@material-ui/core/Drawer'
 
-const routes = ['/personal-center','/personal-center/person-info']
+const routes = ['personal-center','/personal-center/person-info']
 
 const style = {
     drawerPaper:{

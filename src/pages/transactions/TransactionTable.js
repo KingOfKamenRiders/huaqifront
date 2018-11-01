@@ -325,7 +325,7 @@ class EnhancedTable extends React.Component {
                                                 {n.time.replace('T',' ')}
                                                 </TableCell>
                                             <TableCell>
-                                                <Link to={"/Option/"+n.optionAbbr}>
+                                                <Link to={"Option/"+n.optionAbbr}>
                                                     {n.optionAbbr}
                                                 </Link>
                                             </TableCell>
