@@ -8,6 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField'
 import {login} from '../../api/login'
 import ResultMessage from '../../util/ResultMessage'
+import {withRouter} from 'react-router-dom'
 const style=(theme)=>{
     return{
         container:{
@@ -36,7 +37,7 @@ class LoginModal extends Component{
             if(response.data === ResultMessage.SUCCESS){
                 sessionStorage.setItem("user",this.state.name);
                 this.props.handleClose();
-                window.location.href="/content";
+
             }else if(response.data === ResultMessage.FAILURE){
                 this.setState({invalid:true})
             }

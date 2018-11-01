@@ -31,14 +31,13 @@ class App extends Component {
     const user = sessionStorage.getItem('user');
     return (
         <Router>
-            <div>
-            <Route exact path="/" component={Cover}/>
-            <Route path="/content">
+            <Switch>
+            <Route   path="/content">
                 <div>
                     <NavTop getInstance={(child)=>this.navTopRef=child} user={user}  onRouteChange={this.handleRouteChange} tabValue={this.state.tabValue} openLogin={this.state.openLogin}/>
                     <Switch>
-                    <Route exact path="/content/"  render={()=>{return <Index onRouteChange={this.handleRouteChange}/>}} />
-                    <Route path="/content/rank"  render={()=>{return <Rank onRouteChange={this.handleRouteChange}/>}}/>
+
+                    <Route  path="/content/rank"  render={()=>{return <Rank onRouteChange={this.handleRouteChange}/>}}/>
                     <Route path="/content/transaction"  render={()=>{
                         if(!user){
                             this.navTopRef.setLoginModal(true);
@@ -61,10 +60,12 @@ class App extends Component {
                     <Route path="/content/option/:id" component={Option}/>
                     <Route path="/content/single-combination/:optUp1/:optDown1/:optDown2/:optUp2" component={SingleCombination}/>
                     <Route path="/content/personal-center" component={PersonalCenter}/>
+                        <Route  path="/content/"  render={()=>{return <Index onRouteChange={this.handleRouteChange}/>}} />
                     </Switch>
                 </div>
             </Route>
-            </div>
+                <Route exact path="/" component={Cover}/>
+            </Switch>
 
         </Router>
     );

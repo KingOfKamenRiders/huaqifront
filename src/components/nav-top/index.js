@@ -18,7 +18,7 @@ import {withStyles} from '@material-ui/core/styles'
 import LoginModal from './loginModal'
 import SignUpModal from './signUpModal'
 
-const routes=['/','/rank','/transaction','/combination','/favorite','/news']
+const routes=['','/rank','/transaction','/combination','/favorite','/news']
 const style={
     root: {
         flexGrow: 1,
@@ -137,7 +137,7 @@ class NavTop extends React.Component{
                                     open={open}
                                     onClose={this.handleMenuClose}
                                 >
-                                    <MenuItem onClick={()=>{history.push('/personal-center');this.handleMenuClose();}}>个人中心</MenuItem>
+                                    <MenuItem onClick={()=>{history.push('/content/personal-center');this.handleMenuClose();}}>个人中心</MenuItem>
                                     <MenuItem onClick={()=>{this.handleLogout();this.handleMenuClose();window.location.reload();}}>登出</MenuItem>
                                 </Menu>
                                 <Typography variant="title" className={classes.userID}>{user}</Typography>

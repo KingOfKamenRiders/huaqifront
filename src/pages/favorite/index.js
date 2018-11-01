@@ -26,7 +26,9 @@ class Combination extends Component{
     componentWillMount(){
         this.props.onRouteChange(4);
         getInterestedComb((response)=>{
+            console.log(response.data)
             this.setState({combinations:response.data})
+            console.log(this.state.combinations)
             this.setState({hideLoading_combin:true})
             }
         ,(error)=>console.log(error));
@@ -80,7 +82,7 @@ class Combination extends Component{
                     </Paper>
                     <Paper hidden={this.state.combin} style={{marginTop:20}}>
                         <CircularProgress className={classes.loading} size={120} hidden={this.state.hideLoading_combin}/>
-                        <CombinationTable rows={combinations}/>
+                        <CombinationTable rows={combinations?combinations:[]}/>
                     </Paper>
                 </Grid>
             </Grid>

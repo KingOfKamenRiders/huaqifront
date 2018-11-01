@@ -173,7 +173,7 @@ class OverallHq extends Component{
                                 成交额
                             </Typography>
                             <Typography variant="headline">
-                                {this.state.turnoverValue}万元
+                                {Math.round(this.state.turnoverValue/10000)}万元
                             </Typography>
                         </Grid>
                         <Grid item xs={3}>

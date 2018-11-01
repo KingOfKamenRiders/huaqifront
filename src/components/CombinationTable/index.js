@@ -74,9 +74,9 @@ class CombinationTable extends Component{
                     {rows.slice((page)*rowsPerPage,(page+1)*rowsPerPage).map((row,index)=>{
                         let ou1 = row.optUp1.optionAbbr,od1 = row.optDown1.optionAbbr,ou2 = row.optUp2.optionAbbr, od2 = row.optDown2.optionAbbr
                         return([
-                            <TableRow className={classes.row}>
+                            <TableRow className={classes.row} >
                                 <CustomTableCell rowSpan={2}>{index+1+(page)*rowsPerPage}</CustomTableCell>
-                                <CustomTableCell><Link to={"/Option/"+row.optUp1.optionAbbr}>{row.optUp1.optionAbbr}</Link></CustomTableCell> <CustomTableCell>{row.optUp1.position}</CustomTableCell>
+                                <CustomTableCell><Link to={"Option/"+row.optUp1.optionAbbr}>{row.optUp1.optionAbbr}</Link></CustomTableCell> <CustomTableCell>{row.optUp1.position}</CustomTableCell>
                                 <CustomTableCell>{row.optUp1.sellVolume}</CustomTableCell> <CustomTableCell>{row.optUp1.sellPrice}</CustomTableCell>
                                 <CustomTableCell>{row.optUp1.bidVolume}</CustomTableCell> <CustomTableCell>{row.optUp1.bidPrice}</CustomTableCell>
                                 <CustomTableCell>{row.optUp1.amplitude.toFixed(4)}</CustomTableCell> <CustomTableCell>{row.optUp1.latestPrice}</CustomTableCell>
@@ -86,12 +86,12 @@ class CombinationTable extends Component{
                                 <CustomTableCell>{row.optDown1.latestPrice}</CustomTableCell> <CustomTableCell>{row.optDown1.amplitude.toFixed(4)}</CustomTableCell>
                                 <CustomTableCell>{row.optDown1.bidPrice}</CustomTableCell> <CustomTableCell>{row.optDown1.bidVolume}</CustomTableCell>
                                 <CustomTableCell>{row.optDown1.sellPrice}</CustomTableCell> <CustomTableCell>{row.optDown1.sellVolume}</CustomTableCell>
-                                <CustomTableCell>{row.optDown1.position}</CustomTableCell> <CustomTableCell><Link to={"/Option/"+row.optDown1.optionAbbr}>{row.optDown1.optionAbbr}</Link></CustomTableCell>
+                                <CustomTableCell>{row.optDown1.position}</CustomTableCell> <CustomTableCell><Link to={"Option/"+row.optDown1.optionAbbr}>{row.optDown1.optionAbbr}</Link></CustomTableCell>
                                 <CustomTableCell rowSpan={2}>{row.difference.toFixed(4)} </CustomTableCell>
                                 <CustomTableCell rowSpan={2}> <Button color="secondary" variant="contained" component={Link} to={"single-combination/"+ou1+"/"+od1+"/"+od2+"/"+ou2}>详情</Button></CustomTableCell>
                             </TableRow>,
                             <TableRow className={classes.row}>
-                                <CustomTableCell><Link to={"/Option/"+row.optUp2.optionAbbr}>{row.optUp2.optionAbbr}</Link></CustomTableCell> <CustomTableCell>{row.optUp2.position}</CustomTableCell>
+                                <CustomTableCell><Link to={"Option/"+row.optUp2.optionAbbr}>{row.optUp2.optionAbbr}</Link></CustomTableCell> <CustomTableCell>{row.optUp2.position}</CustomTableCell>
                                 <CustomTableCell>{row.optUp2.sellVolume}</CustomTableCell> <CustomTableCell>{row.optUp2.sellPrice}</CustomTableCell>
                                 <CustomTableCell>{row.optUp2.bidVolume}</CustomTableCell> <CustomTableCell>{row.optUp2.bidPrice}</CustomTableCell>
                                 <CustomTableCell>{row.optUp2.amplitude.toFixed(4)}</CustomTableCell> <CustomTableCell>{row.optUp2.latestPrice}</CustomTableCell>
@@ -101,7 +101,7 @@ class CombinationTable extends Component{
                                 <CustomTableCell>{row.optDown2.latestPrice}</CustomTableCell> <CustomTableCell>{row.optDown2.amplitude.toFixed(4)}</CustomTableCell>
                                 <CustomTableCell>{row.optDown2.bidPrice}</CustomTableCell> <CustomTableCell>{row.optDown2.bidVolume}</CustomTableCell>
                                 <CustomTableCell>{row.optDown2.sellPrice}</CustomTableCell> <CustomTableCell>{row.optDown2.sellVolume}</CustomTableCell>
-                                <CustomTableCell>{row.optDown2.position}</CustomTableCell> <CustomTableCell><Link to={"/Option/"+row.optDown2.optionAbbr}>{row.optDown2.optionAbbr}</Link></CustomTableCell>
+                                <CustomTableCell>{row.optDown2.position}</CustomTableCell> <CustomTableCell><Link to={"Option/"+row.optDown2.optionAbbr}>{row.optDown2.optionAbbr}</Link></CustomTableCell>
                             </TableRow>
                         ])
                     })}

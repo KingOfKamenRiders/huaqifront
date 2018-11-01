@@ -81,8 +81,8 @@ class Cover extends Component{
             <div>
                 <div>
                     <img src={Cover1} width={'100%'}/>
-                    <button onClick={this.handleLoginButton} className={classes.bt} style={{right:'140px'}}>登录</button>
-                    <button onClick={this.handleSignUpButton} className={classes.bt} style={{right:'20px'}}>注册</button>
+                    <button onClick={this.handleLoginButton} className={classes.bt} style={{right:'140px'}} hidden={sessionStorage.getItem('user')}>登录</button>
+                    <button onClick={this.handleSignUpButton} className={classes.bt} style={{right:'20px'}} hidden={sessionStorage.getItem('user')}>注册</button>
                     <LoginModal isOpen={this.state.isLoginModalOpen} handleClose={this.handleLoginModalClose} handleLogin={this.handleLogin}/>
                     <SignUpMoadl isOpen={this.state.isSignUpModalOpen} handleClose={this.handleSignUpModalClose}/>
                     <Button variant="contained" color="secondary" className={classes.navButton} size="large" onClick={this.handleStart}>

@@ -104,7 +104,7 @@ class CustomizedTable extends Component{
                             return (
                                 <TableRow className={classes.row} key={row.id}>
                                     <CustomTableCell>
-                                        <Link to={"/Option/"+row.optUp.optionAbbr}>
+                                        <Link to={"/content/Option/"+row.optUp.optionAbbr}>
                                             {row.optUp.optionAbbr}
                                         </Link>
                                     </CustomTableCell>
@@ -126,7 +126,7 @@ class CustomizedTable extends Component{
                                     <CustomTableCell >{row.optDown.sellVolume}</CustomTableCell>
                                     <CustomTableCell >{row.optDown.position}</CustomTableCell>
                                     <CustomTableCell>
-                                        <Link to={"/Option/"+row.optDown.optionAbbr}>
+                                        <Link to={"/content/Option/"+row.optDown.optionAbbr}>
                                             {row.optDown.optionAbbr}
                                         </Link>
                                     </CustomTableCell>
