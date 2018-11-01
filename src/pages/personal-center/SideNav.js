@@ -40,12 +40,12 @@ class SideNav extends Component{
                     <ListItem button selected={true} onClick={e=>this.handleRouting(e,0)} classes={{selected:classes.selected}}>
                         <ListItemText primary="收益情况"/>
                     </ListItem>
-                    <ListItem button selected={this.state.index === 1} onClick={e=>this.handleRouting(e,1)}>
-                        <ListItemIcon>
-                            <AccountCircle/>
-                        </ListItemIcon>
-                        <ListItemText primary="个人信息"/>
-                    </ListItem>
+                    {/*<ListItem button selected={this.state.index === 1} onClick={e=>this.handleRouting(e,1)}>*/}
+                        {/*<ListItemIcon>*/}
+                            {/*<AccountCircle/>*/}
+                        {/*</ListItemIcon>*/}
+                        {/*<ListItemText primary="个人信息"/>*/}
+                    {/*</ListItem>*/}
                 </List>
             </Drawer>
         )

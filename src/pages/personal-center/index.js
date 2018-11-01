@@ -26,7 +26,7 @@ class PersonalCenter extends Component{
                 <SideNav/>
                 <main className={classes.main}>
                     <Route path={match.url} exact component={IncomeInfo}/>
-                    <Route path={match.url+'/person-info'} component={PersonInfo}/>
+                    {/*<Route path={match.url+'/person-info'} component={PersonInfo}/>*/}
                 </main>
 
             </div>

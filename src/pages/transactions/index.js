@@ -1,7 +1,10 @@
 import React,{Component} from 'react'
+import {withStyles}  from '@material-ui/core/styles'
 import TransactionTable from './TransactionTable'
 
+const style = {
 
+}
 class Transaction extends Component{
     componentWillMount(){
         this.props.onRouteChange(2);
@@ -9,10 +12,10 @@ class Transaction extends Component{
     render(){
         return(
             <div>
-                <TransactionTable></TransactionTable>
+                <TransactionTable/>
             </div>
         )
     }
 }
 
-export default Transaction
+export default withStyles(style)(Transaction)

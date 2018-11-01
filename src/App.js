@@ -34,6 +34,7 @@ class App extends Component {
             {/*<Route exact path="/" component={}/>*/}
           <div>
               <NavTop getInstance={(child)=>this.navTopRef=child} user={user}  onRouteChange={this.handleRouteChange} tabValue={this.state.tabValue} openLogin={this.state.openLogin}/>
+              <Route path="/cover" component={Cover}/>
               <Route exact path="/"  render={()=>{return <Index onRouteChange={this.handleRouteChange}/>}} />
               <Route path="/rank"  render={()=>{return <Rank onRouteChange={this.handleRouteChange}/>}}/>
               <Route path="/transaction"  render={()=>{

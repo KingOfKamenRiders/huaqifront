@@ -12,16 +12,11 @@ import TableSortLabel from '@material-ui/core/TableSortLabel';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
-import Checkbox from '@material-ui/core/Checkbox';
-import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
-import DeleteIcon from '@material-ui/icons/Delete';
-import FilterListIcon from '@material-ui/icons/FilterList';
-import { lighten } from '@material-ui/core/styles/colorManipulator';
 import {findAllTransactions} from "../../api/transaction"
 import TableFooter from "@material-ui/core/TableFooter/TableFooter";
 import {Link} from "react-router-dom";
-import {findInterestedOptions} from "../../api/Option";
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 let selectedTids=[];
 
@@ -210,10 +205,14 @@ class EnhancedTable extends React.Component {
         trans:[],
         page: 0,
         rowsPerPage: 9,
+        hideLoading:false,
     };
 
     componentDidMount(){
-        findAllTransactions((response)=>this.setState({trans:response.data}))
+        findAllTransactions((response)=>{
+            this.setState({trans:response.data})
+            this.setState({hideLoading:true})
+        })
     }
 
     handleRequestSort = (event, property) => {
@@ -290,6 +289,7 @@ class EnhancedTable extends React.Component {
 
         return (
             <Paper className={classes.root}>
+                <CircularProgress className={classes.loading} size={120} hidden={this.state.hideLoading}/>
                 <EnhancedTableToolbar numSelected={selected.length} />
                 <div className={classes.tableWrapper}>
                     <Table className={classes.table} aria-labelledby="tableTitle">
@@ -398,6 +398,11 @@ const styles = theme => ({
     tableWrapper: {
         overflowX: 'auto',
     },
+    loading:{
+        position:'absolute',
+        left:'50%',
+        top:'40%'
+    }
 });
 
 EnhancedTable.propTypes = {

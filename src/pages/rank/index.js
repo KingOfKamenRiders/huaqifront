@@ -33,13 +33,14 @@ class Rank extends Component{
         combs:[],
         showLoading:{
             display:'block'
-        }
+        },
+        hideLoading:false,
     }
     componentWillMount(){
         this.props.onRouteChange(1);
         getRankedCombinations((response)=>{
             this.setState({combs:response.data})
-            this.setState({showLoading:{display:'none'}})
+            this.setState({hideLoading:true})
         },(error)=>console.log(error))
     }
     render(){
@@ -49,7 +50,7 @@ class Rank extends Component{
             <div className={classes.root}>
                 <SideNav/>
                 <main className={classes.content}>
-                    <CircularProgress className={classes.loading} size={120} style={this.state.showLoading}/>
+                    <CircularProgress className={classes.loading} size={120} hidden={this.state.hideLoading}/>
                     <CombinationTable rows={combs}/>
                 </main>
 
